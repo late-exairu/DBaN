@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import Header from "@/_components/Header";
+import Providers from "@/utils/providers";
 
 import { Inter } from "next/font/google";
 
@@ -22,8 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans ${inter.variable}`}>
-        <Header />
-        {children}
+        <Providers>
+          <Header />
+          {children}
+        </Providers>
       </body>
     </html>
   );

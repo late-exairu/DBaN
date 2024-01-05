@@ -1,8 +1,10 @@
-export default function HomePage() {
+import Cards from "@/components/Cards";
+
+export default async function HomePage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center">
-      <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-        Hello
+    <main className="flex min-h-screen flex-col">
+      <div className="container flex flex-col gap-12 py-16 ">
+        <Cards />
       </div>
     </main>
   );
