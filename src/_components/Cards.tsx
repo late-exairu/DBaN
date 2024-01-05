@@ -1,8 +1,9 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
+
+import Link from "next/link";
 import Image from "next/image";
-import axios from "axios";
 import MetacriticScore from "@/components/ui/metacriticScore";
+import getAboveRateGames from "@/utils/getAboveRateGames";
 
 type Game = {
   slug: string;
@@ -10,16 +11,11 @@ type Game = {
   body: string;
   background_image: string;
   metacritic: number;
+  id: number;
 };
 
 export default function Cards() {
-  const { data, isLoading } = useQuery({
-    queryKey: ["posts"],
-    queryFn: () =>
-      axios.get(
-        "https://api.rawg.io/api/games?key=ebdbda7ab7dd4812a327a511ec96ad1e&metacritic=95,100&platforms=4",
-      ),
-  });
+  const { data, isLoading } = getAboveRateGames();
 
   const games = data?.data.results;
 
@@ -45,7 +41,9 @@ export default function Cards() {
           <MetacriticScore score={game.metacritic} />
 
           <div className="relative mt-auto text-white">
-            <h3 className="text-xl font-bold">{game.name}</h3>
+            <Link href={`/game/${game.id}`}>
+              <h3 className="text-xl font-bold">{game.name}</h3>
+            </Link>
           </div>
         </div>
       ))}
