@@ -1,6 +1,7 @@
 "use client";
 
 import useGetAboveRateGames from "@/utils/useGetAboveRateGames";
+import Preloader from "@/components/Preloader";
 import GameCard from "@/components/GameCard";
 import { type GameData, type ResponseData } from "@/types";
 
@@ -10,8 +11,8 @@ export default function Cards() {
     isLoading: boolean;
   };
 
+  if (isLoading) return <Preloader />;
   if (!data) return <div>No games</div>;
-  if (isLoading) return <div>Loading...</div>;
 
   const games = data?.data.results;
 
