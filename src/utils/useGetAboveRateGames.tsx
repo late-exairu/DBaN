@@ -10,7 +10,7 @@ export default function useGetAboveRateGames() {
     queryKey: ["aboveRateGamesData"],
     queryFn: () =>
       axios.get(
-        `https://api.rawg.io/api/games&metacritic=90,100&platforms=4?key=${API_KEY}`,
+        `https://api.rawg.io/api/games?metacritic=90,100&platforms=4&key=${API_KEY}`,
       ),
     staleTime: 600000, // 10 minutes
   });

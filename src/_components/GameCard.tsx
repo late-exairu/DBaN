@@ -14,7 +14,7 @@ export default function GameCard(props: GameData) {
       <Image
         className="absolute inset-0 object-cover object-center brightness-50"
         fill={true}
-        sizes="[100, 100]"
+        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
         loading="lazy"
         src={background_image}
         alt={name}
