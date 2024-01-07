@@ -10,6 +10,11 @@ type GameData = {
   background_image: string;
   metacritic: number;
   id: number;
+  released: string;
+  genres: {
+    name: string;
+    id: number;
+  }[];
 };
 
 export type { ResponseData, GameData };

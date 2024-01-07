@@ -1,18 +1,49 @@
+import { useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import MetacriticScore from "@/components/ui/metacriticScore";
 import { type GameData } from "@/types";
 
 export default function GameCard(props: GameData) {
-  const { name, background_image, metacritic, id } = props;
+  const { name, background_image, metacritic, id, released, genres } = props;
+  const infoRef = useRef<HTMLDivElement>(null);
+  const descriptionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    handleMouseLeave();
+  }, []);
+
+  const handleMouseOver = () => {
+    if (descriptionRef.current && infoRef.current) {
+      infoRef.current.style.transform = `translateY(-8px)`;
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (descriptionRef.current && infoRef.current) {
+      infoRef.current.style.transform = `translateY(${descriptionRef.current.clientHeight}px)`;
+    }
+  };
+
+  const dateOptions: Intl.DateTimeFormatOptions = {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  };
+  const releaseDate = new Date(Date.parse(released)).toLocaleDateString(
+    undefined,
+    dateOptions,
+  );
 
   return (
     <Link
+      onMouseOver={() => handleMouseOver()}
+      onMouseLeave={() => handleMouseLeave()}
       href={`/game/${id}`}
-      className="group relative flex aspect-video overflow-clip rounded-lg bg-white bg-cover bg-center px-4 py-4 text-sm leading-6 shadow-md"
+      className="group relative flex aspect-video overflow-clip rounded-lg bg-white bg-cover bg-center px-5 py-4 text-sm leading-6 shadow-md transition-[border-radius]"
     >
       <Image
-        className="absolute inset-0 scale-[101%] object-cover object-center brightness-50 transition duration-300 ease-in-out will-change-transform group-hover:scale-110 group-hover:brightness-75"
+        className="absolute inset-0 scale-[101%] object-cover object-center brightness-50 duration-300 ease-in-out will-change-transform group-hover:scale-110 group-hover:brightness-75"
         fill={true}
         sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
         loading="lazy"
@@ -22,8 +53,33 @@ export default function GameCard(props: GameData) {
 
       <MetacriticScore score={metacritic} />
 
-      <div className="relative mt-auto text-white">
-        <h3 className="text-xl font-bold">{name}</h3>
+      <div
+        ref={infoRef}
+        className="relative mt-auto w-full text-white transition-transform duration-300 ease-in-out will-change-transform"
+      >
+        <h3 className="text-lg font-bold sm:text-xl">{name}</h3>
+
+        <div
+          ref={descriptionRef}
+          className="relative top-2 text-xs opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"
+        >
+          <div className="flex gap-1 py-0.5">
+            <span className="">Released:</span>
+            <span className="">{releaseDate}</span>
+          </div>
+
+          <div className="flex gap-1 py-0.5">
+            <span className="">Genres:</span>
+            <span className="">
+              {genres.map((genre) => (
+                <span key={genre.id} className="">
+                  {genre.name}
+                  {genre !== genres[genres.length - 1] ? ", " : null}
+                </span>
+              ))}
+            </span>
+          </div>
+        </div>
       </div>
     </Link>
   );
