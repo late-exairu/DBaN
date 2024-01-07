@@ -21,9 +21,7 @@ export default async function Page({ params }: { params: { id: number } }) {
     <HydrationBoundary state={dehydrate(queryClient)}>
       <GameBg id={id} />
       <main className="relative z-10 flex min-h-screen flex-col">
-        <div className="container flex flex-col gap-12 py-16 ">
-          <Game id={id} />
-        </div>
+        <Game id={id} />
       </main>
     </HydrationBoundary>
   );

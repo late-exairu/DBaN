@@ -24,7 +24,7 @@ export default function Game(props: GameProps) {
 
   return (
     <div className="">
-      <h1 className="text-2xl font-bold md:text-4xl xl:text-5xl">
+      <h1 className="text-2xl font-black md:text-4xl xl:text-5xl">
         {data.name}
       </h1>
       <div
