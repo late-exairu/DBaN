@@ -40,7 +40,7 @@ export default function GameCard(props: GameData) {
       onMouseOver={() => handleMouseOver()}
       onMouseLeave={() => handleMouseLeave()}
       href={`/game/${id}`}
-      className="group relative flex aspect-video overflow-clip rounded-lg bg-white bg-cover bg-center px-5 py-4 text-sm leading-6 shadow-md transition-[border-radius]"
+      className="group relative flex aspect-video overflow-clip rounded-lg bg-white px-5 py-4 text-sm leading-6 shadow-md transition-[border-radius]"
     >
       <Image
         className="absolute inset-0 scale-[101%] object-cover object-center brightness-50 duration-300 ease-in-out will-change-transform group-hover:scale-110 group-hover:brightness-75"
