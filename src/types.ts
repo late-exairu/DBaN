@@ -3,6 +3,7 @@ type ResponseData = {
 };
 
 type GameData = {
+  description: string | TrustedHTML;
   slug: string;
   name: string;
   body: string;

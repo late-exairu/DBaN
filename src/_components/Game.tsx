@@ -1,27 +1,22 @@
 "use client";
 
-import useGetGameData from "@/utils/useGetGameData";
 import Preloader from "@/components/Preloader";
+import { useQuery } from "@tanstack/react-query";
+import getGameData from "@/utils/getGameData";
+import { type GameData } from "@/types";
 
 type GameProps = {
   id: number;
 };
 
-type GameData = {
-  name: string;
-  description: string;
-};
-
 export default function Game(props: GameProps) {
   const { id } = props;
 
-  const { data, isLoading } = useGetGameData(id) as {
-    data: { data: GameData };
-    isLoading: boolean;
-  };
-
-  const gameData = data?.data;
-  console.log(data);
+  const { data, isLoading } = useQuery<GameData>({
+    queryKey: ["gameData", id],
+    queryFn: () => getGameData(id),
+    staleTime: 600000, // 10 minutes
+  });
 
   if (isLoading) return <Preloader />;
   if (!data) return <div>No game</div>;
@@ -29,13 +24,12 @@ export default function Game(props: GameProps) {
   return (
     <div className="">
       <h1 className="text-2xl font-bold md:text-4xl xl:text-5xl">
-        {gameData.name}
+        {data.name}
       </h1>
-
       <div
         className="prose mt-2 max-w-none md:mt-4 xl:mt-5"
-        dangerouslySetInnerHTML={{ __html: gameData.description }}
-      ></div>
+        dangerouslySetInnerHTML={{ __html: data.description }}
+      />
     </div>
   );
 }
