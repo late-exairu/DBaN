@@ -11,13 +11,11 @@ export default async function Page({ params }: { params: { id: number } }) {
   const { id } = params;
   const queryClient = new QueryClient();
 
-  const data = await queryClient.prefetchQuery({
+  await queryClient.prefetchQuery({
     queryKey: ["gameData", id],
     queryFn: () => getGameData(id),
     staleTime: 600000, // 10 minutes
   });
-
-  console.log({ data });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

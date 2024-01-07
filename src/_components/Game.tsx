@@ -12,13 +12,14 @@ type GameProps = {
 export default function Game(props: GameProps) {
   const { id } = props;
 
-  const { data, isLoading } = useQuery<GameData>({
+  const { data, isLoading, error } = useQuery<GameData>({
     queryKey: ["gameData", id],
     queryFn: () => getGameData(id),
     staleTime: 600000, // 10 minutes
   });
 
   if (isLoading) return <Preloader />;
+  if (error) return <div>{`Error: ${error.message}`}</div>;
   if (!data) return <div>No game</div>;
 
   return (
