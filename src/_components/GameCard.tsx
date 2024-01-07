@@ -4,7 +4,7 @@ import MetacriticScore from "@/components/ui/metacriticScore";
 import { type GameData } from "@/types";
 
 export default function GameCard(props: GameData) {
-  const { slug, name, background_image, metacritic, id } = props;
+  const { name, background_image, metacritic, id } = props;
 
   return (
     <Link
