@@ -140,7 +140,7 @@ type IconProps = {
 type IconsSet = Record<string, (props: IconsProps) => JSX.Element>;
 
 const platformIconsSet: IconsSet = {
-  pc: WindowsIcon,
+  windows: WindowsIcon,
   playstation: PlaystationIcon,
   xbox: XboxIcon,
   switch: SwitchIcon,
@@ -185,8 +185,6 @@ export default function Platforms(props: PlatformsProps) {
                   })
                 : null;
   }
-
-  console.log(platformsMap);
 
   const platformsArray = Array.from(platformsMap);
 
