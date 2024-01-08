@@ -18,11 +18,22 @@ export default function Cards() {
 
   const games = data?.data.results;
 
+  const handleCardStyleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const target = e.target as HTMLButtonElement;
+    localStorage.setItem("cardStyle", target.innerText.toLowerCase());
+  };
+
+  const cardStyle = localStorage.getItem("cardStyle") ?? "grid";
+
   return (
-    <Tabs className="flex flex-col" defaultValue="grid">
+    <Tabs className="flex flex-col" defaultValue={cardStyle}>
       <TabsList className="mb-4 ml-auto">
-        <TabsTrigger value="grid">Grid</TabsTrigger>
-        <TabsTrigger value="line">Line</TabsTrigger>
+        <TabsTrigger onClick={(e) => handleCardStyleClick(e)} value="grid">
+          Grid
+        </TabsTrigger>
+        <TabsTrigger onClick={(e) => handleCardStyleClick(e)} value="line">
+          Line
+        </TabsTrigger>
       </TabsList>
       <TabsContent className="m-0" value="grid">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">

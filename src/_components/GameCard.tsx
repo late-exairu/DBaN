@@ -4,7 +4,6 @@ import Image from "next/image";
 import MetacriticScore from "@/components/ui/metacriticScore";
 import Platforms from "@/components/Platforms";
 import { type GameData } from "@/types";
-import { info } from "console";
 
 export default function GameCard(props: GameData) {
   const {
