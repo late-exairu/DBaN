@@ -4,6 +4,7 @@ import Image from "next/image";
 import MetacriticScore from "@/components/ui/metacriticScore";
 import Platforms from "@/components/Platforms";
 import { type GameData } from "@/types";
+import { info } from "console";
 
 export default function GameCard(props: GameData) {
   const {
@@ -25,6 +26,7 @@ export default function GameCard(props: GameData) {
   const handleMouseOver = () => {
     if (descriptionRef.current && infoRef.current) {
       infoRef.current.style.transform = `translateY(-8px)`;
+      infoRef.current.classList.add("transition-transform", "duration-300");
     }
   };
 
@@ -64,7 +66,7 @@ export default function GameCard(props: GameData) {
 
       <div
         ref={infoRef}
-        className="relative mt-auto w-full text-white transition-transform duration-300 ease-in-out will-change-transform"
+        className="relative mt-auto w-full text-white ease-in-out will-change-transform"
       >
         <Platforms className="mb-2" platforms={platforms} />
         <h3 className="text-lg font-bold sm:text-xl">{name}</h3>
