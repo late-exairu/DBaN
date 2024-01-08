@@ -18,14 +18,14 @@ type GameData = {
   }[];
 };
 
-type Platform = {
-  id: number;
-  name: string;
-  slug: string;
-};
-
 type PlatformList = {
   platform: Platform;
-}[];
+};
 
-export type { ResponseData, GameData, PlatformList };
+type Platform = {
+  id: number;
+  slug: string;
+  name: string;
+};
+
+export type { ResponseData, GameData, PlatformList, Platform };
