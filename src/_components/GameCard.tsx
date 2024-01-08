@@ -2,10 +2,19 @@ import { useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import MetacriticScore from "@/components/ui/metacriticScore";
+import Platforms from "@/components/Platforms";
 import { type GameData } from "@/types";
 
 export default function GameCard(props: GameData) {
-  const { name, background_image, metacritic, id, released, genres } = props;
+  const {
+    name,
+    background_image,
+    metacritic,
+    id,
+    released,
+    genres,
+    platforms,
+  } = props;
   const infoRef = useRef<HTMLDivElement>(null);
   const descriptionRef = useRef<HTMLDivElement>(null);
 
@@ -57,6 +66,7 @@ export default function GameCard(props: GameData) {
         ref={infoRef}
         className="relative mt-auto w-full text-white transition-transform duration-300 ease-in-out will-change-transform"
       >
+        <Platforms className="mb-2" platforms={platforms} />
         <h3 className="text-lg font-bold sm:text-xl">{name}</h3>
 
         <div

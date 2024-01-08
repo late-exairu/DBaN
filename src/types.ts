@@ -11,10 +11,21 @@ type GameData = {
   metacritic: number;
   id: number;
   released: string;
+  platforms: PlatformList[];
   genres: {
     name: string;
     id: number;
   }[];
 };
 
-export type { ResponseData, GameData };
+type Platform = {
+  id: number;
+  name: string;
+  slug: string;
+};
+
+type PlatformList = {
+  platform: Platform;
+}[];
+
+export type { ResponseData, GameData, PlatformList };
