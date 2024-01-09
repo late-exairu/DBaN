@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import useGetAboveRateGames from "@/utils/useGetAboveRateGames";
+import getAboveRateGames from "@/utils/getAboveRateGames";
 import Preloader from "@/components/Preloader";
 import GameCard from "@/components/GameCard";
 import GameCardLine from "@/components/GameCardLine";
@@ -14,13 +14,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { type GameData, type ResponseData } from "@/types";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Cards() {
   const [orderBy, setOrderBy] = useState("metacritic");
 
   const handleOrderChange = (value: string) => {
     setOrderBy(value);
-    sortGames(value, games);
+    games && sortGames(value, games);
   };
 
   const handleCardStyleChange = (value: string) => {
@@ -41,12 +42,11 @@ export default function Cards() {
     }
   };
 
-  const { data, isLoading } = useGetAboveRateGames() as {
-    data: { data: ResponseData };
-    isLoading: boolean;
-  };
-
-  const games = data?.data.results;
+  const { data, isLoading, error } = useQuery<ResponseData>({
+    queryKey: ["aboveRateGames"],
+    queryFn: () => getAboveRateGames(),
+    staleTime: 600000, // 10 minutes
+  });
 
   const cardStyle =
     typeof localStorage !== "undefined"
@@ -54,9 +54,11 @@ export default function Cards() {
       : "grid";
 
   if (isLoading) return <Preloader />;
+  if (error) return <div>{`Error: ${error.message}`}</div>;
   if (!data) return <div>No games</div>;
 
-  sortGames(orderBy, games);
+  const games = data?.results;
+  games && sortGames(orderBy, games);
 
   return (
     <Tabs
