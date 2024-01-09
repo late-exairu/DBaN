@@ -80,7 +80,7 @@ const SwitchIcon = (props: IconProps) => {
     </svg>
   );
 };
-const IosIcon = (props: IconProps) => {
+const MacosIcon = (props: IconProps) => {
   const { className, title } = props;
 
   return (
@@ -144,7 +144,7 @@ const platformIconsSet: IconsSet = {
   playstation: PlaystationIcon,
   xbox: XboxIcon,
   switch: SwitchIcon,
-  ios: IosIcon,
+  macos: MacosIcon,
   android: AndroidIcon,
 };
 
@@ -176,8 +176,8 @@ export default function Platforms(props: PlatformsProps) {
           ? platformsMap.set("xbox", { title: "Xbox", icon: "xbox" })
           : platform.platform.slug.includes("switch")
             ? platformsMap.set("switch", { title: "Switch", icon: "switch" })
-            : platform.platform.slug.includes("ios")
-              ? platformsMap.set("ios", { title: "iOS", icon: "ios" })
+            : platform.platform.slug.includes("macos")
+              ? platformsMap.set("macos", { title: "macOS", icon: "macos" })
               : platform.platform.slug.includes("android")
                 ? platformsMap.set("android", {
                     title: "Android",
