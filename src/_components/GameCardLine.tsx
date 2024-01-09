@@ -34,7 +34,7 @@ export default function GameCard(props: GameData) {
         className="absolute inset-x-0 inset-y-0 scale-[101%] object-cover object-center duration-300 ease-in-out will-change-transform group-hover:scale-110 sm:top-[-100px]"
         width={1100}
         height={400}
-        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 70vw, 60vw"
         loading="lazy"
         src={background_image}
         alt={name}
