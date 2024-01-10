@@ -12,10 +12,11 @@ type GameData = {
   id: number;
   released: string;
   platforms: PlatformList[];
-  genres: {
-    name: string;
-    id: number;
-  }[];
+  stores: Store[];
+  developers: Developer[];
+  genres: Genre[];
+  tags: Tag[];
+  publishers: Publisher[];
 };
 
 type PlatformList = {
@@ -26,6 +27,52 @@ type Platform = {
   id: number;
   slug: string;
   name: string;
+};
+
+type Developer = {
+  id: number;
+  name: string;
+  slug: string;
+  games_count: number;
+  image_background: string;
+};
+
+type Tag = {
+  id: number;
+  name: string;
+  slug: string;
+  language: string;
+  games_count: number;
+  image_background: string;
+};
+
+type Publisher = {
+  id: number;
+  name: string;
+  slug: string;
+  games_count: number;
+  image_background: string;
+};
+
+type Genre = {
+  id: number;
+  name: string;
+  slug: string;
+  games_count: number;
+  image_background: string;
+};
+
+type Store = {
+  id: number;
+  url: string;
+  store: {
+    id: number;
+    name: string;
+    slug: string;
+    domain: string;
+    games_count: number;
+    image_background: string;
+  };
 };
 
 export type { ResponseData, GameData, PlatformList, Platform };

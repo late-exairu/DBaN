@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import MetacriticScore from "@/components/ui/metacriticScore";
 import Platforms from "@/components/Platforms";
+import formatDate from "@/utils/formatDate";
 import { type GameData } from "@/types";
 
 export default function GameCard(props: GameData) {
@@ -15,15 +16,7 @@ export default function GameCard(props: GameData) {
     platforms,
   } = props;
 
-  const dateOptions: Intl.DateTimeFormatOptions = {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  };
-  const releaseDate = new Date(Date.parse(released)).toLocaleDateString(
-    undefined,
-    dateOptions,
-  );
+  const releaseDate = formatDate(released);
 
   return (
     <Link
