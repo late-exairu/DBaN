@@ -1,28 +1,4 @@
-type ResponseData = {
-  results: GameData[];
-};
-
-type GameData = {
-  description: string | TrustedHTML;
-  slug: string;
-  name: string;
-  body: string;
-  background_image: string;
-  metacritic: number;
-  id: number;
-  released: string;
-  platforms: PlatformList[];
-  stores: Store[];
-  developers: Developer[];
-  genres: Genre[];
-  tags: Tag[];
-  publishers: Publisher[];
-};
-
-type PlatformList = {
-  platform: Platform;
-};
-
+// Basic Types
 type Platform = {
   id: number;
   slug: string;
@@ -75,4 +51,47 @@ type Store = {
   };
 };
 
-export type { ResponseData, GameData, PlatformList, Platform };
+type Screenshot = {
+  id: number;
+  image: string;
+  width: number;
+  height: number;
+  is_deleted: boolean;
+};
+
+// Data Structures
+type PlatformList = {
+  platform: Platform;
+};
+
+type GameScreenshots = {
+  count: number;
+  next: null;
+  previous: null;
+  results: Screenshot[];
+};
+
+// Game Data
+type GameData = {
+  description: string | TrustedHTML;
+  slug: string;
+  name: string;
+  body: string;
+  background_image: string;
+  metacritic: number;
+  id: number;
+  released: string;
+  platforms: PlatformList[];
+  stores: Store[];
+  developers: Developer[];
+  genres: Genre[];
+  tags: Tag[];
+  publishers: Publisher[];
+};
+
+// API Responses
+type ResponseData = {
+  results: GameData[];
+};
+
+export type { ResponseData, GameData, PlatformList, Platform, GameScreenshots };
