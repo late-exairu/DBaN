@@ -2,11 +2,13 @@
 
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
+import Link from "next/link";
 import getGameData from "@/utils/getGameData";
 import getGameScreenshots from "@/utils/getGameScreenshots";
 import formatDate from "@/utils/formatDate";
 import Preloader from "@/components/Preloader";
 import { type GameData, type GameScreenshots } from "@/types";
+import { buttonVariants } from "@/components/ui/button";
 
 type GameProps = {
   id: number;
@@ -44,6 +46,7 @@ export default function Game(props: GameProps) {
           <p className="lx:text-2xl mt-2 text-lg font-black md:mt-4 md:text-xl xl:mt-5">
             About
           </p>
+
           <div
             className="prose mt-2 max-w-none"
             dangerouslySetInnerHTML={{ __html: data.description }}
@@ -137,12 +140,17 @@ export default function Game(props: GameProps) {
               </ul>
             </div>
           </div>
+
+          <p className="lx:text-2xl mt-2 text-lg font-black md:mt-4 md:text-xl xl:mt-5">
+            System Requirements
+          </p>
         </div>
 
         <div className="min-w-[300px] flex-1">
           <p className="lx:text-2xl mt-2 text-lg font-black md:mt-4 md:text-xl xl:mt-5">
             Screenshots
           </p>
+
           <div className="mt-2 grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-2">
             {gameScreenshots.data?.results?.map((screenshot) => (
               <Image
@@ -153,6 +161,24 @@ export default function Game(props: GameProps) {
                 src={screenshot.image}
                 alt={data.name}
               />
+            ))}
+          </div>
+
+          <p className="lx:text-2xl mt-2 text-lg font-black md:mt-4 md:text-xl xl:mt-5">
+            Stores
+          </p>
+
+          <div className="mt-2 grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-2">
+            {data.stores.map((store) => (
+              <Link
+                key={store.store.id}
+                href={store.url}
+                target="_blank"
+                rel="noreferrer"
+                className={buttonVariants({ variant: "outline" })}
+              >
+                {store.store.name}
+              </Link>
             ))}
           </div>
         </div>
