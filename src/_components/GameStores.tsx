@@ -18,10 +18,7 @@ type GameStoresProps = {
 export default function GameStores(props: GameStoresProps) {
   const { stores, gameData } = props;
 
-  console.log({ gameData }, { stores });
-
   const storeMap = new Map(stores.map((store) => [store.id, store]));
-
   const mergedData = gameData
     .filter((game) => storeMap.has(game.id))
     .map((game) => {
@@ -31,8 +28,6 @@ export default function GameStores(props: GameStoresProps) {
         url: store.url,
       };
     });
-
-  console.log({ mergedData });
 
   return (
     <ul className="grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-2">

@@ -40,11 +40,17 @@ export default function Game(props: GameProps) {
     staleTime: 600000, // 10 minutes
   });
 
+  const isRequirementsEmpty = gameData.data?.platforms.every(
+    (platform) => JSON.stringify(platform.requirements) === "{}",
+  );
+
   if (gameData.isLoading) return <Preloader />;
   if (gameData.error) return <div>{`Error: ${gameData.error.message}`}</div>;
   if (!gameData.data) return <div>No game</div>;
 
   const data = gameData.data;
+
+  console.log(isRequirementsEmpty);
 
   return (
     <div className="mt-2 sm:mt-3 lg:mt-5">
@@ -152,11 +158,14 @@ export default function Game(props: GameProps) {
             </div>
           </div>
 
-          <p className="lx:text-2xl mt-2 text-lg font-black md:mt-4 md:text-xl xl:mt-5">
-            System Requirements
-          </p>
-
-          <SystemRequirements platforms={data.platforms} />
+          {!isRequirementsEmpty ? (
+            <>
+              <p className="lx:text-2xl mt-2 text-lg font-black md:mt-4 md:text-xl xl:mt-5">
+                System Requirements
+              </p>
+              <SystemRequirements platforms={data.platforms} />
+            </>
+          ) : null}
         </div>
 
         <div className="min-w-[300px] flex-1">
