@@ -62,6 +62,10 @@ type Screenshot = {
 // Data Structures
 type PlatformList = {
   platform: Platform;
+  requirements: {
+    minimum?: string;
+    recommended?: string;
+  };
 };
 
 type GameScreenshots = {
@@ -89,9 +93,20 @@ type GameData = {
   publishers: Publisher[];
 };
 
+type GameRequirements = {
+  platforms: PlatformList[];
+};
+
 // API Responses
 type ResponseData = {
   results: GameData[];
 };
 
-export type { ResponseData, GameData, PlatformList, Platform, GameScreenshots };
+export type {
+  ResponseData,
+  GameData,
+  PlatformList,
+  Platform,
+  GameScreenshots,
+  GameRequirements,
+};

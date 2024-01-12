@@ -9,6 +9,7 @@ import formatDate from "@/utils/formatDate";
 import Preloader from "@/components/Preloader";
 import { type GameData, type GameScreenshots } from "@/types";
 import { buttonVariants } from "@/components/ui/button";
+import SystemRequirements from "./SystemRequirements";
 
 type GameProps = {
   id: number;
@@ -144,6 +145,8 @@ export default function Game(props: GameProps) {
           <p className="lx:text-2xl mt-2 text-lg font-black md:mt-4 md:text-xl xl:mt-5">
             System Requirements
           </p>
+
+          <SystemRequirements platforms={data.platforms} />
         </div>
 
         <div className="min-w-[300px] flex-1">
