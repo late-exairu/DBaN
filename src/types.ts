@@ -75,6 +75,13 @@ type GameScreenshots = {
   results: Screenshot[];
 };
 
+type GameStoresRes = {
+  count: number;
+  next: null;
+  previous: null;
+  results: Store[];
+};
+
 // Game Data
 type GameData = {
   description: string | TrustedHTML;
@@ -109,4 +116,5 @@ export type {
   Platform,
   GameScreenshots,
   GameRequirements,
+  GameStoresRes,
 };

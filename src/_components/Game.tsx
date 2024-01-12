@@ -2,14 +2,18 @@
 
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
-import Link from "next/link";
 import getGameData from "@/utils/getGameData";
 import getGameScreenshots from "@/utils/getGameScreenshots";
+import getGameStores from "@/utils/getGameStores";
 import formatDate from "@/utils/formatDate";
 import Preloader from "@/components/Preloader";
-import { type GameData, type GameScreenshots } from "@/types";
-import { buttonVariants } from "@/components/ui/button";
-import SystemRequirements from "./SystemRequirements";
+import SystemRequirements from "@/components/SystemRequirements";
+import GameStores from "@/components/GameStores";
+import {
+  type GameData,
+  type GameScreenshots,
+  type GameStoresRes,
+} from "@/types";
 
 type GameProps = {
   id: number;
@@ -27,6 +31,12 @@ export default function Game(props: GameProps) {
   const gameScreenshots = useQuery<GameScreenshots>({
     queryKey: ["gameScreenshots", id],
     queryFn: () => getGameScreenshots(id),
+    staleTime: 600000, // 10 minutes
+  });
+
+  const gameStores = useQuery<GameStoresRes>({
+    queryKey: ["gameStores", id],
+    queryFn: () => getGameStores(id),
     staleTime: 600000, // 10 minutes
   });
 
@@ -171,18 +181,13 @@ export default function Game(props: GameProps) {
             Stores
           </p>
 
-          <div className="mt-2 grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-2">
-            {data.stores.map((store) => (
-              <Link
-                key={store.store.id}
-                href={store.url}
-                target="_blank"
-                rel="noreferrer"
-                className={buttonVariants({ variant: "outline" })}
-              >
-                {store.store.name}
-              </Link>
-            ))}
+          <div className="mt-2">
+            {gameStores.isSuccess ? (
+              <GameStores
+                gameData={data.stores}
+                stores={gameStores.data?.results}
+              />
+            ) : null}
           </div>
         </div>
       </div>
