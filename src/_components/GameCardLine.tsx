@@ -21,7 +21,7 @@ export default function GameCard(props: GameData) {
   return (
     <Link
       href={`/game/${id}`}
-      className="group relative flex overflow-clip rounded-lg bg-slate-950 px-4 py-3 text-sm leading-6 shadow-md transition-[border-radius] sm:px-5 sm:py-4"
+      className="group relative flex overflow-clip rounded-lg bg-foreground px-4 py-3 text-sm leading-6 shadow-md transition-[border-radius] sm:px-5 sm:py-4"
     >
       <Image
         className="absolute inset-x-0 inset-y-0 scale-[101%] object-cover object-center duration-300 ease-in-out will-change-transform group-hover:scale-110 sm:top-[-100px]"
@@ -33,7 +33,7 @@ export default function GameCard(props: GameData) {
         alt={name}
       />
 
-      <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/20 opacity-100 transition-opacity group-hover:opacity-75" />
+      <div className="absolute inset-0 bg-gradient-to-r from-foreground/70 to-foreground/20 opacity-100 transition-opacity group-hover:opacity-75" />
 
       <MetacriticScore className="absolute right-4 top-4" score={metacritic} />
 

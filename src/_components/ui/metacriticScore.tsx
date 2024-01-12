@@ -20,7 +20,7 @@ export default function MetacriticScore({
   return (
     <div
       className={twMerge(
-        `absolute right-2 top-2 flex w-12 items-center gap-1 rounded-sm bg-slate-100 px-1 text-center font-bold text-slate-900`,
+        `absolute right-2 top-2 flex w-12 items-center gap-1 rounded-sm bg-background px-1 text-center font-bold`,
         className,
       )}
     >

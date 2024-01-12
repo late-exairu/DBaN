@@ -31,7 +31,7 @@ export default function GameBg(props: GameProps) {
         fill={true}
         alt={data.name}
       />
-      <div className="absolute inset-x-0 bottom-0 top-1/3 bg-gradient-to-t from-white to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 top-1/3 bg-gradient-to-t from-background to-transparent" />
     </div>
   );
 }
