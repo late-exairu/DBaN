@@ -19,7 +19,7 @@ export default function SystemRequirements(props: GameRequirements) {
 
   return (
     <Tabs defaultValue={platformsArray[0]?.slug} className="my-4">
-      <TabsList className="mb-4">
+      <TabsList className="mb-2">
         {platformsArray.map((platform) => (
           <TabsTrigger key={platform.id} value={platform.slug}>
             {platform.name}
