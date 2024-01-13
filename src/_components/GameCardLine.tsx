@@ -20,7 +20,7 @@ export default function GameCard(props: GameData) {
 
   return (
     <Link
-      href={`/game/${id}`}
+      href={`/games/${id}`}
       className="group relative flex overflow-clip rounded-lg bg-foreground px-4 py-3 text-sm leading-6 shadow-md transition-[border-radius] sm:px-5 sm:py-4"
     >
       <Image

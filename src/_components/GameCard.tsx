@@ -49,7 +49,7 @@ export default function GameCard(props: GameData) {
     <Link
       onMouseOver={() => handleMouseOver()}
       onMouseLeave={() => handleMouseLeave()}
-      href={`/game/${id}`}
+      href={`/games/${id}`}
       className="group relative flex aspect-video overflow-clip rounded-lg bg-background px-5 py-4 text-sm leading-6 shadow-md transition-[border-radius]"
     >
       <Image

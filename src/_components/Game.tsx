@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import SystemRequirements from "@/components/SystemRequirements";
 import Preloader from "@/components/Preloader";
 import GameStores from "@/components/GameStores";
+import Breadcrumb from "@/components/Breadcrumbs";
 import getGameData from "@/utils/getGameData";
 import getGameScreenshots from "@/utils/getGameScreenshots";
 import getGameStores from "@/utils/getGameStores";
@@ -52,6 +53,12 @@ export default function Game(props: GameProps) {
 
   return (
     <div className="mt-2 sm:mt-3 lg:mt-5">
+      <Breadcrumb
+        className="flex py-2 text-xs font-medium uppercase"
+        homeElement={"Home"}
+        separator={<span className="mx-1"> / </span>}
+        listClasses="hover:underline"
+      />
       <h1 className="text-2xl font-black md:text-4xl xl:text-5xl">
         {game.name}
       </h1>

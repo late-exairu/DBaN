@@ -1,3 +1,4 @@
+import { type Metadata } from "next";
 import {
   dehydrate,
   HydrationBoundary,
@@ -6,6 +7,16 @@ import {
 import Game from "@/_components/Game";
 import GameBg from "@/components/GameBg";
 import getGameData from "@/utils/getGameData";
+
+type Props = {
+  params: { id: string };
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  return {
+    title: `DBaN - ${params.id}`,
+  };
+}
 
 export default async function Page({ params }: { params: { id: number } }) {
   const { id } = params;
