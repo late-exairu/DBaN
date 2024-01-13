@@ -1,19 +1,19 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import Image from "next/image";
+import SystemRequirements from "@/components/SystemRequirements";
+import Preloader from "@/components/Preloader";
+import GameStores from "@/components/GameStores";
 import getGameData from "@/utils/getGameData";
 import getGameScreenshots from "@/utils/getGameScreenshots";
 import getGameStores from "@/utils/getGameStores";
 import formatDate from "@/utils/formatDate";
-import Preloader from "@/components/Preloader";
-import SystemRequirements from "@/components/SystemRequirements";
-import GameStores from "@/components/GameStores";
 import {
   type GameData,
-  type GameScreenshots,
+  type GameScreenshotsRes,
   type GameStoresRes,
 } from "@/types";
+import GameScreenshots from "@/components/GameScreenshots";
 
 type GameProps = {
   id: number;
@@ -28,7 +28,7 @@ export default function Game(props: GameProps) {
     staleTime: 600000, // 10 minutes
   });
 
-  const gameScreenshots = useQuery<GameScreenshots>({
+  const gameScreenshots = useQuery<GameScreenshotsRes>({
     queryKey: ["gameScreenshots", id],
     queryFn: () => getGameScreenshots(id),
     staleTime: 600000, // 10 minutes
@@ -48,14 +48,12 @@ export default function Game(props: GameProps) {
   if (gameData.error) return <div>{`Error: ${gameData.error.message}`}</div>;
   if (!gameData.data) return <div>No game</div>;
 
-  const data = gameData.data;
-
-  console.log(isRequirementsEmpty);
+  const game = gameData.data;
 
   return (
     <div className="mt-2 sm:mt-3 lg:mt-5">
       <h1 className="text-2xl font-black md:text-4xl xl:text-5xl">
-        {data.name}
+        {game.name}
       </h1>
 
       <div className="flex flex-col gap-6 md:flex-row">
@@ -66,17 +64,17 @@ export default function Game(props: GameProps) {
 
           <div
             className="prose mt-2 max-w-none"
-            dangerouslySetInnerHTML={{ __html: data.description }}
+            dangerouslySetInnerHTML={{ __html: game.description }}
           />
 
           <div className="my-5 grid grid-cols-2 gap-x-4 gap-y-5 text-sm leading-relaxed">
             <div className="">
               <p className="text-sm font-bold text-slate-600">Platforms</p>
               <ul className="">
-                {data.platforms.map((platform) => (
+                {game.platforms.map((platform) => (
                   <li key={platform.platform.id} className="inline-block">
                     {platform.platform.name}
-                    {platform !== data.platforms[data.platforms.length - 1]
+                    {platform !== game.platforms[game.platforms.length - 1]
                       ? ", "
                       : null}
                   </li>
@@ -87,10 +85,10 @@ export default function Game(props: GameProps) {
             <div className="">
               <p className="text-sm font-bold text-slate-600">Genres</p>
               <ul className="">
-                {data.genres.map((genre) => (
+                {game.genres.map((genre) => (
                   <li key={genre.id} className="inline-block">
                     {genre.name}
-                    {genre !== data.genres[data.genres.length - 1]
+                    {genre !== game.genres[game.genres.length - 1]
                       ? ", "
                       : null}
                   </li>
@@ -101,10 +99,10 @@ export default function Game(props: GameProps) {
             <div className="">
               <p className="text-sm font-bold text-slate-600">Developers</p>
               <ul className="">
-                {data.developers.map((developer) => (
+                {game.developers.map((developer) => (
                   <li key={developer.id} className="inline-block">
                     {developer.name}
-                    {developer !== data.developers[data.developers.length - 1]
+                    {developer !== game.developers[game.developers.length - 1]
                       ? ", "
                       : null}
                   </li>
@@ -115,10 +113,10 @@ export default function Game(props: GameProps) {
             <div className="">
               <p className="text-sm font-bold text-slate-600">Publishers</p>
               <ul className="">
-                {data.publishers.map((publisher) => (
+                {game.publishers.map((publisher) => (
                   <li key={publisher.id} className="inline-block">
                     {publisher.name}
-                    {publisher !== data.publishers[data.publishers.length - 1]
+                    {publisher !== game.publishers[game.publishers.length - 1]
                       ? ", "
                       : null}
                   </li>
@@ -129,10 +127,10 @@ export default function Game(props: GameProps) {
             <div className="">
               <p className="text-sm font-bold text-slate-600">Stores</p>
               <ul className="">
-                {data.stores.map((store) => (
+                {game.stores.map((store) => (
                   <li key={store.store.id} className="inline-block">
                     {store.store.name}
-                    {store !== data.stores[data.stores.length - 1]
+                    {store !== game.stores[game.stores.length - 1]
                       ? ", "
                       : null}
                   </li>
@@ -142,16 +140,16 @@ export default function Game(props: GameProps) {
 
             <div className="">
               <p className="text-sm font-bold text-slate-600">Release Date</p>
-              <p className="">{formatDate(data.released)}</p>
+              <p className="">{formatDate(game.released)}</p>
             </div>
 
             <div className="col-span-2">
               <p className="text-sm font-bold text-slate-600">Tags</p>
               <ul className="">
-                {data.tags.map((tag) => (
+                {game.tags.map((tag) => (
                   <li key={tag.id} className="inline-block">
                     {tag.name}
-                    {tag !== data.tags[data.tags.length - 1] ? ", " : null}
+                    {tag !== game.tags[game.tags.length - 1] ? ", " : null}
                   </li>
                 ))}
               </ul>
@@ -163,7 +161,7 @@ export default function Game(props: GameProps) {
               <p className="lx:text-2xl mt-2 text-lg font-black md:mt-4 md:text-xl xl:mt-5">
                 System Requirements
               </p>
-              <SystemRequirements platforms={data.platforms} />
+              <SystemRequirements platforms={game.platforms} />
             </>
           ) : null}
         </div>
@@ -173,17 +171,10 @@ export default function Game(props: GameProps) {
             Screenshots
           </p>
 
-          <div className="mt-2 grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-2">
-            {gameScreenshots.data?.results?.map((screenshot) => (
-              <Image
-                key={screenshot.id}
-                className={`h-full w-full rounded-md object-cover object-center`}
-                width={300}
-                height={169}
-                src={screenshot.image}
-                alt={data.name}
-              />
-            ))}
+          <div className="mt-2">
+            {gameScreenshots.isSuccess ? (
+              <GameScreenshots screenshots={gameScreenshots.data?.results} />
+            ) : null}
           </div>
 
           <p className="lx:text-2xl mt-2 text-lg font-black md:mt-4 md:text-xl xl:mt-5">
@@ -193,7 +184,7 @@ export default function Game(props: GameProps) {
           <div className="mt-2">
             {gameStores.isSuccess ? (
               <GameStores
-                gameData={data.stores}
+                gameData={game.stores}
                 stores={gameStores.data?.results}
               />
             ) : null}

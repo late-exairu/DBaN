@@ -68,20 +68,6 @@ type PlatformList = {
   };
 };
 
-type GameScreenshots = {
-  count: number;
-  next: null;
-  previous: null;
-  results: Screenshot[];
-};
-
-type GameStoresRes = {
-  count: number;
-  next: null;
-  previous: null;
-  results: Store[];
-};
-
 // Game Data
 type GameData = {
   description: string | TrustedHTML;
@@ -105,16 +91,24 @@ type GameRequirements = {
 };
 
 // API Responses
-type ResponseData = {
-  results: GameData[];
+
+type ApiResponse<T> = {
+  count: number;
+  next: null;
+  previous: null;
+  results: T[];
 };
+type ResponseData = ApiResponse<GameData>;
+type GameScreenshotsRes = ApiResponse<Screenshot>;
+type GameStoresRes = ApiResponse<Store>;
 
 export type {
   ResponseData,
   GameData,
   PlatformList,
   Platform,
-  GameScreenshots,
+  GameScreenshotsRes,
   GameRequirements,
   GameStoresRes,
+  Screenshot,
 };
