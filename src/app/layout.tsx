@@ -27,7 +27,7 @@ export default function RootLayout({
         <Providers>
           <Header />
 
-          <div className="container flex min-h-screen gap-6 py-16">
+          <div className="container flex gap-6 pb-10 pt-16">
             <SideNav />
             {children}
           </div>

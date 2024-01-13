@@ -20,7 +20,7 @@ export default async function Page({ params }: { params: { id: number } }) {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <GameBg id={id} />
-      <main className="relative z-10 flex min-h-screen flex-col">
+      <main className="relative flex flex-col">
         <Game id={id} />
       </main>
     </HydrationBoundary>
