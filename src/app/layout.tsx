@@ -2,7 +2,7 @@ import "@/styles/globals.css";
 import Header from "@/_components/Header";
 import Providers from "@/utils/providers";
 import SideNav from "@/components/SideNav";
-
+import Footer from "@/components/Footer";
 import { Inter } from "next/font/google";
 
 const inter = Inter({
@@ -25,11 +25,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={`font-sans ${inter.variable}`}>
         <Providers>
+          <Header />
+
           <div className="container flex min-h-screen gap-6 py-16">
-            <Header />
             <SideNav />
             {children}
           </div>
+
+          <Footer />
         </Providers>
       </body>
     </html>

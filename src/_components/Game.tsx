@@ -58,7 +58,7 @@ export default function Game(props: GameProps) {
         {data.name}
       </h1>
 
-      <div className="flex flex-col gap-5 md:flex-row">
+      <div className="flex flex-col gap-6 md:flex-row">
         <div className="">
           <p className="lx:text-2xl mt-2 text-lg font-black md:mt-4 md:text-xl xl:mt-5">
             About
