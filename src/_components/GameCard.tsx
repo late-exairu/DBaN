@@ -61,7 +61,7 @@ export default function GameCard(props: GameData) {
         alt={name}
       />
 
-      <MetacriticScore score={metacritic} />
+      <MetacriticScore className="absolute right-2 top-2" score={metacritic} />
 
       <div
         ref={infoRef}

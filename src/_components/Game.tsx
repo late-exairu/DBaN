@@ -15,6 +15,7 @@ import {
   type GameStoresRes,
 } from "@/types";
 import GameScreenshots from "@/components/GameScreenshots";
+import MetacriticScore from "@/components/ui/metacriticScore";
 
 type GameProps = {
   id: number;
@@ -65,9 +66,18 @@ export default function Game(props: GameProps) {
       </div>
 
       <div className="my-2 flex flex-wrap items-center gap-2 text-xs font-medium uppercase leading-relaxed md:my-4">
-        <div className="-ml-2 flex items-center justify-center rounded-sm border border-input bg-background px-2 py-0.5">
+        <div
+          className="-ml-2 flex items-center justify-center rounded-sm border border-input bg-background px-2"
+          title="Release date"
+        >
           {formatDate(game.released)}
         </div>
+        {game.metacritic && (
+          <MetacriticScore
+            className="border border-input"
+            score={game.metacritic}
+          />
+        )}
         {game.playtime && (
           <div>
             Average playtime: <span>{game.playtime}</span> hours

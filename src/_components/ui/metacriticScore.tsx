@@ -20,9 +20,10 @@ export default function MetacriticScore({
   return (
     <div
       className={twMerge(
-        `absolute right-2 top-2 flex w-12 items-center gap-1 rounded-sm bg-background px-1 text-center font-bold`,
+        `flex w-12 items-center gap-1 rounded-sm bg-background px-1 text-center font-bold`,
         className,
       )}
+      title="Metacritic score"
     >
       <Image
         className="h-4 w-4"
