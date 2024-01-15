@@ -77,6 +77,7 @@ type GameData = {
   background_image: string;
   metacritic: number;
   id: number;
+  playtime: number;
   released: string;
   platforms: PlatformList[];
   stores: Store[];

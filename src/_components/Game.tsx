@@ -53,14 +53,28 @@ export default function Game(props: GameProps) {
 
   return (
     <div className="mt-2 sm:mt-3 lg:mt-5">
-      <Breadcrumb
-        id={id}
-        gameName={gameData.data.name}
-        className="flex py-2 text-xs font-medium uppercase"
-        homeElement={"Home"}
-        separator={<span className="mx-1"> / </span>}
-        listClasses="hover:underline"
-      />
+      <div className="my-2 md:mb-4 md:mt-2">
+        <Breadcrumb
+          id={id}
+          gameName={gameData.data.name}
+          className=" flex text-xs font-medium uppercase leading-relaxed"
+          homeElement={"Home"}
+          separator={<span className="mx-1"> / </span>}
+          listClasses="hover:underline"
+        />
+      </div>
+
+      <div className="my-2 flex flex-wrap items-center gap-2 text-xs font-medium uppercase leading-relaxed md:my-4">
+        <div className="-ml-2 flex items-center justify-center rounded-sm border border-input bg-background px-2 py-0.5">
+          {formatDate(game.released)}
+        </div>
+        {game.playtime && (
+          <div>
+            Average playtime: <span>{game.playtime}</span> hours
+          </div>
+        )}
+      </div>
+
       <h1 className="text-2xl font-black md:text-4xl xl:text-5xl">
         {game.name}
       </h1>

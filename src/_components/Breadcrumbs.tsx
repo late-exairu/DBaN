@@ -32,7 +32,7 @@ const Breadcrumb = ({
 
   return (
     <div>
-      <ul className={className}>
+      <ul className={`${className} flex-wrap`}>
         <li className={listClasses}>
           <Link href={"/"}>{homeElement}</Link>
         </li>
