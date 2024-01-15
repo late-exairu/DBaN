@@ -15,7 +15,7 @@ import {
   type GameStoresRes,
 } from "@/types";
 import GameScreenshots from "@/components/GameScreenshots";
-import MetacriticScore from "@/components/ui/metacriticScore";
+import MetacriticScore from "@/components/MetacriticScore";
 
 type GameProps = {
   id: number;

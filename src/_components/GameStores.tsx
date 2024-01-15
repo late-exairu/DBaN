@@ -37,7 +37,9 @@ export default function GameStores(props: GameStoresProps) {
             href={store.url}
             target="_blank"
             rel="noreferrer"
-            className={`${buttonVariants({ variant: "outline" })} w-full`}
+            className={`${buttonVariants({
+              variant: "outline",
+            })} w-full text-sm`}
           >
             {store.store.name}
           </Link>

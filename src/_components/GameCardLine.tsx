@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import MetacriticScore from "@/components/ui/metacriticScore";
+import MetacriticScore from "@/components/MetacriticScore";
 import Platforms from "@/components/Platforms";
 import formatDate from "@/utils/formatDate";
 import { type GameData } from "@/types";
