@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 type TBreadCrumbProps = {
+  id: number;
+  gameName: string;
   homeElement: ReactNode;
   separator: ReactNode;
   className?: string;
@@ -13,7 +15,9 @@ type TBreadCrumbProps = {
   activeClasses?: string;
 };
 
-const NextBreadcrumb = ({
+const Breadcrumb = ({
+  id,
+  gameName,
   homeElement,
   separator,
   className,
@@ -21,7 +25,10 @@ const NextBreadcrumb = ({
   activeClasses,
 }: TBreadCrumbProps) => {
   const paths = usePathname();
-  const pathNames = paths.split("/").filter((path) => path);
+  const pathLinks = paths.split("/").filter((path) => path);
+  const pathNames = pathLinks.map((path) => {
+    return path === id.toString() ? gameName : path;
+  });
 
   return (
     <div>
@@ -29,18 +36,17 @@ const NextBreadcrumb = ({
         <li className={listClasses}>
           <Link href={"/"}>{homeElement}</Link>
         </li>
-        {pathNames.length > 0 && separator}
-        {pathNames.map((link, index) => {
-          const href = `/${pathNames.slice(0, index + 1).join("/")}`;
+        {pathLinks.length > 0 && separator}
+        {pathLinks.map((link, index) => {
+          const href = `/${pathLinks.slice(0, index + 1).join("/")}`;
           const itemClasses =
             paths === href ? `${listClasses} ${activeClasses}` : listClasses;
-          const itemLink = link;
           return (
             <React.Fragment key={index}>
               <li className={itemClasses}>
-                <Link href={href}>{itemLink}</Link>
+                <Link href={href}>{pathNames[index]}</Link>
               </li>
-              {pathNames.length !== index + 1 && separator}
+              {pathLinks.length !== index + 1 && separator}
             </React.Fragment>
           );
         })}
@@ -49,4 +55,4 @@ const NextBreadcrumb = ({
   );
 };
 
-export default NextBreadcrumb;
+export default Breadcrumb;

@@ -7,25 +7,44 @@ import {
 import Game from "@/_components/Game";
 import GameBg from "@/components/GameBg";
 import getGameData from "@/utils/getGameData";
+import getGameScreenshots from "@/utils/getGameScreenshots";
+import getGameStores from "@/utils/getGameStores";
 
 type Props = {
-  params: { id: string };
+  params: { id: string; name: string };
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const data = await getGameData(parseInt(params.id));
+
   return {
-    title: `DBaN - ${params.id}`,
+    title: `DBaN - ${data.name}`,
   };
 }
 
 export default async function Page({ params }: { params: { id: number } }) {
   const { id } = params;
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 600000, // 10 minutes
+      },
+    },
+  });
 
-  await queryClient.prefetchQuery({
+  await queryClient.fetchQuery({
     queryKey: ["gameData", id],
     queryFn: () => getGameData(id),
-    staleTime: 600000, // 10 minutes
+  });
+
+  await queryClient.prefetchQuery({
+    queryKey: ["gameScreenshots", id],
+    queryFn: () => getGameScreenshots(id),
+  });
+
+  await queryClient.prefetchQuery({
+    queryKey: ["gameStores", id],
+    queryFn: () => getGameStores(id),
   });
 
   return (

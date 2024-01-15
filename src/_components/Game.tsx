@@ -54,6 +54,8 @@ export default function Game(props: GameProps) {
   return (
     <div className="mt-2 sm:mt-3 lg:mt-5">
       <Breadcrumb
+        id={id}
+        gameName={gameData.data.name}
         className="flex py-2 text-xs font-medium uppercase"
         homeElement={"Home"}
         separator={<span className="mx-1"> / </span>}
