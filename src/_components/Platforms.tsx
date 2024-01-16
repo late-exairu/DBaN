@@ -131,6 +131,7 @@ type IconsProps = {
   icon: string;
   title?: string;
   className?: string;
+  size?: "small" | "large";
 };
 
 type IconProps = {
