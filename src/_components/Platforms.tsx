@@ -124,6 +124,7 @@ const AndroidIcon = (props: IconProps) => {
 type PlatformsProps = {
   platforms: PlatformList[];
   className?: string;
+  size?: "small" | "large";
 };
 
 type IconsProps = {
@@ -149,7 +150,7 @@ const platformIconsSet: IconsSet = {
 };
 
 function Platform(props: IconsProps) {
-  const { icon, className, title } = props;
+  const { icon, className, title, size } = props;
   const Icon = platformIconsSet[icon];
 
   if (!Icon) {
@@ -157,12 +158,18 @@ function Platform(props: IconsProps) {
   }
 
   return (
-    <Icon className={`${className} h-3 w-[14px]`} title={title} icon={""} />
+    <Icon
+      className={`${className} ${
+        size === "large" ? "h-4 w-[18px]" : "h-3 w-[14px]"
+      }`}
+      title={title}
+      icon={""}
+    />
   );
 }
 
 export default function Platforms(props: PlatformsProps) {
-  const { platforms, className } = props;
+  const { platforms, className, size } = props;
 
   const platformsMap = new Map<string, IconsProps>();
 
@@ -194,7 +201,7 @@ export default function Platforms(props: PlatformsProps) {
     <ul className={`${className} flex gap-1`}>
       {platformsArray.map(([key, value]) => (
         <li key={key}>
-          <Platform icon={value.icon} title={value.title} />
+          <Platform size={size} icon={value.icon} title={value.title} />
         </li>
       ))}
     </ul>

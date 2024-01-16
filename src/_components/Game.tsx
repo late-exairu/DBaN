@@ -16,6 +16,7 @@ import {
 } from "@/types";
 import GameScreenshots from "@/components/GameScreenshots";
 import MetacriticScore from "@/components/MetacriticScore";
+import Platforms from "@/components/Platforms";
 
 type GameProps = {
   id: number;
@@ -77,6 +78,9 @@ export default function Game(props: GameProps) {
             className="border border-input"
             score={game.metacritic}
           />
+        )}
+        {game.platforms && (
+          <Platforms size="large" platforms={game.platforms} />
         )}
         {game.playtime && (
           <div>
