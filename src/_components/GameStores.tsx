@@ -224,7 +224,7 @@ export default function GameStores(props: GameStoresProps) {
             rel="noreferrer"
             className={`${buttonVariants({
               variant: "outline",
-            })} h-auto min-h-9 w-full flex-col flex-wrap gap-1 text-xs`}
+            })} h-full w-full flex-col flex-wrap gap-1 text-wrap text-center text-xs`}
           >
             {store.store.slug && <StoreIcon icon={store.store.slug} />}
             {store.store.name}
