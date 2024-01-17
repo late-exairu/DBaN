@@ -10,6 +10,7 @@ import getGameSeries from "@/utils/getGameSeries";
 import getGameScreenshots from "@/utils/getGameScreenshots";
 import getGameStores from "@/utils/getGameStores";
 import formatDate from "@/utils/formatDate";
+import GameSeries from "@/components/GameSeries";
 import {
   type GameData,
   type GameScreenshotsRes,
@@ -19,7 +20,6 @@ import {
 import GameScreenshots from "@/components/GameScreenshots";
 import MetacriticScore from "@/components/MetacriticScore";
 import Platforms from "@/components/Platforms";
-import GameCardSeries from "./GameCardSeries";
 
 type GameProps = {
   id: number;
@@ -247,7 +247,7 @@ export default function Game(props: GameProps) {
 
               <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-1">
                 {series.map((game: GameData) => (
-                  <GameCardSeries key={game.id} {...game} />
+                  <GameSeries key={game.id} {...game} />
                 ))}
               </div>
             </>

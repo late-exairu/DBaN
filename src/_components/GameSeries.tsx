@@ -22,7 +22,9 @@ export default function GameCardSeries(props: GameData) {
         />
       </div>
       <div className="flex flex-col">
-        <p className="text-sm font-medium">{name}</p>
+        <p className="mb-1 text-sm font-medium md:text-base md:leading-tight">
+          {name}
+        </p>
         <p className="text-xs text-gray-500">
           {released ? formatDate(released) : "No release date"}
         </p>

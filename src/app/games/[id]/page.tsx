@@ -9,6 +9,7 @@ import GameBg from "@/components/GameBg";
 import getGameData from "@/utils/getGameData";
 import getGameScreenshots from "@/utils/getGameScreenshots";
 import getGameStores from "@/utils/getGameStores";
+import getGameSeries from "@/utils/getGameSeries";
 
 type Props = {
   params: { id: string; name: string };
@@ -45,6 +46,11 @@ export default async function Page({ params }: { params: { id: number } }) {
   await queryClient.prefetchQuery({
     queryKey: ["gameStores", id],
     queryFn: () => getGameStores(id),
+  });
+
+  await queryClient.prefetchQuery({
+    queryKey: ["gameSeries", id],
+    queryFn: () => getGameSeries(id),
   });
 
   return (
