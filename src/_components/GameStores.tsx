@@ -148,6 +148,27 @@ const AppStoreIcon = (props: IconProps) => {
   );
 };
 
+const NintendoIcon = (props: IconProps) => {
+  const { className, title } = props;
+
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      stroke="currentColor"
+      strokeWidth={0}
+      viewBox="0 0 24 24"
+    >
+      {title && <title>{title}</title>}
+      <path
+        stroke="none"
+        d="M0 .6h7.1l9.85 15.9V.6H24v22.8h-7.04L7.06 7.5v15.9H0V.6"
+      />
+    </svg>
+  );
+};
+
 type GameStoresProps = {
   stores: Array<{
     id: number;
@@ -185,6 +206,7 @@ const storeIconsSet: IconsSet = {
   "xbox-store": XboxIcon,
   xbox360: XboxIcon,
   "apple-appstore": AppStoreIcon,
+  nintendo: NintendoIcon,
 };
 
 function StoreIcon(props: IconsProps) {
