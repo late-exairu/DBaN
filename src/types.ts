@@ -102,6 +102,7 @@ type ApiResponse<T> = {
 type ResponseData = ApiResponse<GameData>;
 type GameScreenshotsRes = ApiResponse<Screenshot>;
 type GameStoresRes = ApiResponse<Store>;
+type GameSeriesRes = ApiResponse<GameData>;
 
 export type {
   ResponseData,
@@ -111,5 +112,6 @@ export type {
   GameScreenshotsRes,
   GameRequirements,
   GameStoresRes,
+  GameSeriesRes,
   Screenshot,
 };

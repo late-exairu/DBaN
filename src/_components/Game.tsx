@@ -6,6 +6,7 @@ import Preloader from "@/components/Preloader";
 import GameStores from "@/components/GameStores";
 import Breadcrumb from "@/components/Breadcrumbs";
 import getGameData from "@/utils/getGameData";
+import getGameSeries from "@/utils/getGameSeries";
 import getGameScreenshots from "@/utils/getGameScreenshots";
 import getGameStores from "@/utils/getGameStores";
 import formatDate from "@/utils/formatDate";
@@ -13,10 +14,12 @@ import {
   type GameData,
   type GameScreenshotsRes,
   type GameStoresRes,
+  type GameSeriesRes,
 } from "@/types";
 import GameScreenshots from "@/components/GameScreenshots";
 import MetacriticScore from "@/components/MetacriticScore";
 import Platforms from "@/components/Platforms";
+import GameCardSeries from "./GameCardSeries";
 
 type GameProps = {
   id: number;
@@ -43,6 +46,14 @@ export default function Game(props: GameProps) {
     staleTime: 600000, // 10 minutes
   });
 
+  const gameSeries = useQuery<GameSeriesRes>({
+    queryKey: ["gameSeries", id],
+    queryFn: () => getGameSeries(id),
+    staleTime: 600000, // 10 minutes
+  });
+
+  console.log(gameSeries);
+
   const isRequirementsEmpty = gameData.data?.platforms.every(
     (platform) => JSON.stringify(platform.requirements) === "{}",
   );
@@ -52,6 +63,7 @@ export default function Game(props: GameProps) {
   if (!gameData.data) return <div>No game</div>;
 
   const game = gameData.data;
+  const series = gameSeries.data?.results;
 
   return (
     <div className="mt-2 sm:mt-3 lg:mt-5">
@@ -226,6 +238,20 @@ export default function Game(props: GameProps) {
               />
             ) : null}
           </div>
+
+          {series && (
+            <>
+              <p className="lx:text-2xl mt-2 text-lg font-black md:mt-4 md:text-xl xl:mt-5">
+                More of the series
+              </p>
+
+              <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-1">
+                {series.map((game: GameData) => (
+                  <GameCardSeries key={game.id} {...game} />
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
