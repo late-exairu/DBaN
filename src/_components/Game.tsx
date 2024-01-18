@@ -240,13 +240,15 @@ export default function Game(props: GameProps) {
           {gameSeries.isFetching ? (
             <Preloader />
           ) : (
-            <>
-              <p className="lx:text-2xl mt-2 text-lg font-black md:mt-4 md:text-xl xl:mt-5">
-                More of the series
-              </p>
-
-              {series && <GameSeries series={series} />}
-            </>
+            series &&
+            series.length > 0 && (
+              <>
+                <p className="lx:text-2xl mt-2 text-lg font-black md:mt-4 md:text-xl xl:mt-5">
+                  More of the series
+                </p>
+                {series && <GameSeries series={series} />}
+              </>
+            )
           )}
         </div>
       </div>
