@@ -52,8 +52,6 @@ export default function Game(props: GameProps) {
     staleTime: 600000, // 10 minutes
   });
 
-  console.log(gameSeries);
-
   const isRequirementsEmpty = gameData.data?.platforms.every(
     (platform) => JSON.stringify(platform.requirements) === "{}",
   );
@@ -239,17 +237,15 @@ export default function Game(props: GameProps) {
             ) : null}
           </div>
 
-          {series && (
+          {gameSeries.isFetching ? (
+            <Preloader />
+          ) : (
             <>
               <p className="lx:text-2xl mt-2 text-lg font-black md:mt-4 md:text-xl xl:mt-5">
                 More of the series
               </p>
 
-              <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-1">
-                {series.map((game: GameData) => (
-                  <GameSeries key={game.id} {...game} />
-                ))}
-              </div>
+              {series && <GameSeries series={series} />}
             </>
           )}
         </div>
