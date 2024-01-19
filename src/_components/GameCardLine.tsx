@@ -33,7 +33,7 @@ export default function GameCard(props: GameData) {
         alt={name}
       />
 
-      <div className="absolute inset-0 bg-gradient-to-r from-foreground/70 to-foreground/20 opacity-100 transition-opacity group-hover:opacity-75" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/20 opacity-100 transition-opacity group-hover:opacity-75" />
 
       <MetacriticScore className="absolute right-4 top-4" score={metacritic} />
 
