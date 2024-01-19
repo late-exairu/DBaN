@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import getAboveRateGames from "@/utils/getAboveRateGames";
+import { useQuery } from "@tanstack/react-query";
+import { getAboveRateGames } from "@/utils/apiUtils";
 import Preloader from "@/components/Preloader";
 import GameCard from "@/components/GameCard";
 import GameCardLine from "@/components/GameCardLine";
@@ -14,7 +15,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { type GameData, type ResponseData } from "@/types";
-import { useQuery } from "@tanstack/react-query";
 
 export default function Cards() {
   const [orderBy, setOrderBy] = useState("metacritic");

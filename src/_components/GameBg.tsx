@@ -3,7 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Preloader from "@/components/Preloader";
-import getGameData from "@/utils/getGameData";
+import { getGameData } from "@/utils/apiUtils";
 import { type GameData } from "@/types";
 
 type GameProps = {

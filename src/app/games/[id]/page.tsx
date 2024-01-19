@@ -4,11 +4,13 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import Game from "@/_components/Game";
+import Game from "@/components/Game";
 import GameBg from "@/components/GameBg";
-import getGameData from "@/utils/getGameData";
-import getGameScreenshots from "@/utils/getGameScreenshots";
-import getGameStores from "@/utils/getGameStores";
+import {
+  getGameData,
+  getGameScreenshots,
+  getGameStores,
+} from "@/utils/apiUtils";
 
 type Props = {
   params: { id: string; name: string };

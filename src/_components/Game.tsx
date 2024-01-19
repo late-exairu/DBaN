@@ -5,21 +5,23 @@ import SystemRequirements from "@/components/SystemRequirements";
 import Preloader from "@/components/Preloader";
 import GameStores from "@/components/GameStores";
 import Breadcrumb from "@/components/Breadcrumbs";
-import getGameData from "@/utils/getGameData";
-import getGameSeries from "@/utils/getGameSeries";
-import getGameScreenshots from "@/utils/getGameScreenshots";
-import getGameStores from "@/utils/getGameStores";
-import formatDate from "@/utils/formatDate";
+import GameScreenshots from "@/components/GameScreenshots";
+import MetacriticScore from "@/components/MetacriticScore";
 import GameSeries from "@/components/GameSeries";
+import Platforms from "@/components/Platforms";
+import {
+  getGameData,
+  getGameScreenshots,
+  getGameStores,
+  getGameSeries,
+} from "@/utils/apiUtils";
+import formatDate from "@/utils/formatDate";
 import {
   type GameData,
   type GameScreenshotsRes,
   type GameStoresRes,
   type GameSeriesRes,
 } from "@/types";
-import GameScreenshots from "@/components/GameScreenshots";
-import MetacriticScore from "@/components/MetacriticScore";
-import Platforms from "@/components/Platforms";
 
 type GameProps = {
   id: number;
