@@ -93,6 +93,14 @@ type GameRequirements = {
 
 // API Responses
 
+type ReactQueryResponse<T> = {
+  data: T | undefined;
+  isLoading?: boolean;
+  isError?: boolean;
+  isSuccess?: boolean;
+  error?: { message: string } | null;
+};
+
 type ApiResponse<T> = {
   count: number;
   next: null;
@@ -105,6 +113,7 @@ type GameStoresRes = ApiResponse<Store>;
 type GameSeriesRes = ApiResponse<GameData>;
 
 export type {
+  ReactQueryResponse,
   ResponseData,
   GameData,
   PlatformList,

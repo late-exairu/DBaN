@@ -19,6 +19,14 @@ const getAboveRateGames = async () => {
     });
 };
 
+const getAllTimeTopGames = async () => {
+  return axios
+    .get(`https://api.rawg.io/api/games?ordering=metacritic&key=${API_KEY}`)
+    .then((res) => {
+      return res.data as ResponseData;
+    });
+};
+
 const getGameData = (id: number): Promise<GameData> => {
   return axios
     .get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
@@ -53,6 +61,7 @@ const getGameStores = (id: number): Promise<GameStoresRes> => {
 
 export {
   getAboveRateGames,
+  getAllTimeTopGames,
   getGameData,
   getGameScreenshots,
   getGameSeries,

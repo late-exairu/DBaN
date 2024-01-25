@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { getAboveRateGames } from "@/utils/apiUtils";
 import Preloader from "@/components/Preloader";
 import GameCard from "@/components/GameCard";
 import GameCardLine from "@/components/GameCardLine";
@@ -14,9 +12,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { type GameData, type ResponseData } from "@/types";
+import {
+  type GameData,
+  type ResponseData,
+  type ReactQueryResponse,
+} from "@/types";
 
-export default function Cards() {
+export default function Cards(props: ReactQueryResponse<ResponseData>) {
+  const { isLoading, error, data } = props;
   const [orderBy, setOrderBy] = useState("metacritic");
 
   const handleOrderChange = (value: string) => {
@@ -41,12 +44,6 @@ export default function Cards() {
       return games;
     }
   };
-
-  const { data, isLoading, error } = useQuery<ResponseData>({
-    queryKey: ["aboveRateGames"],
-    queryFn: () => getAboveRateGames(),
-    staleTime: 600000, // 10 minutes
-  });
 
   const cardStyle =
     typeof localStorage !== "undefined"
