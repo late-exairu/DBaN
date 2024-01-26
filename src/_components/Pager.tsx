@@ -37,15 +37,18 @@ export default function Pager(props: PagerProps) {
   return (
     <Pagination className="mt-5">
       <PaginationContent>
-        <PaginationItem>
-          <PaginationPrevious
-            onClick={() => handlePageChange(prevPage)}
-            href={{
-              pathname: "./",
-              query: { page: prevPage },
-            }}
-          />
-        </PaginationItem>
+        {currentPage - 1 > 0 && (
+          <PaginationItem>
+            <PaginationPrevious
+              onClick={() => handlePageChange(prevPage)}
+              href={{
+                pathname: "./",
+                query: { page: prevPage },
+              }}
+            />
+          </PaginationItem>
+        )}
+
         {currentPage - 2 > 1 && (
           <PaginationItem>
             <PaginationEllipsis />
@@ -70,15 +73,17 @@ export default function Pager(props: PagerProps) {
             <PaginationEllipsis />
           </PaginationItem>
         )}
-        <PaginationItem>
-          <PaginationNext
-            onClick={() => handlePageChange(nextPage)}
-            href={{
-              pathname: "./",
-              query: { page: nextPage },
-            }}
-          />
-        </PaginationItem>
+        {currentPage + 1 <= pagesCount && (
+          <PaginationItem>
+            <PaginationNext
+              onClick={() => handlePageChange(nextPage)}
+              href={{
+                pathname: "./",
+                query: { page: nextPage },
+              }}
+            />
+          </PaginationItem>
+        )}
       </PaginationContent>
     </Pagination>
   );
