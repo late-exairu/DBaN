@@ -102,9 +102,9 @@ type ReactQueryResponse<T> = {
 };
 
 type ApiResponse<T> = {
-  count: number;
-  next: null;
-  previous: null;
+  count: number | null;
+  next: string | null;
+  previous: string | null;
   results: T[];
 };
 type ResponseData = ApiResponse<GameData>;
