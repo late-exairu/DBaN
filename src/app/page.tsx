@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
-import { getAboveRateGames } from "@/utils/apiUtils";
 import Cards from "@/components/Cards";
+import Pager from "@/components/Pager";
+import { getAboveRateGames } from "@/utils/apiUtils";
 import { type ResponseData } from "@/types";
-import Pager from "@/_components/Pager";
 
 export default function HomePage() {
   const searchParams = useSearchParams();

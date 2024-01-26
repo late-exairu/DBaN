@@ -1,11 +1,10 @@
 "use client";
 
 import React, { type ReactNode } from "react";
-
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-type TBreadCrumbProps = {
+type BreadCrumbProps = {
   id: number;
   gameName: string;
   homeElement: ReactNode;
@@ -23,7 +22,7 @@ const Breadcrumb = ({
   className,
   listClasses,
   activeClasses,
-}: TBreadCrumbProps) => {
+}: BreadCrumbProps) => {
   const paths = usePathname();
   const pathLinks = paths.split("/").filter((path) => path);
   const pathNames = pathLinks.map((path) => {
