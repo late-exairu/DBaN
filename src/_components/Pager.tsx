@@ -35,7 +35,7 @@ export default function Pager(props: PagerProps) {
 
   return (
     <Pagination className="mt-5">
-      <PaginationContent>
+      <PaginationContent className="flex-wrap">
         {/* prev page */}
         {currentPage - 1 > 0 && (
           <PaginationItem>
