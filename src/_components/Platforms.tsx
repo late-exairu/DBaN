@@ -120,6 +120,46 @@ const AndroidIcon = (props: IconProps) => {
     </svg>
   );
 };
+const WiiIcon = (props: IconProps) => {
+  const { className, title } = props;
+
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      stroke="currentColor"
+      strokeWidth={0}
+      viewBox="0 0 24 24"
+    >
+      {title && <title>{title}</title>}
+      <path
+        stroke="none"
+        d="M17.904 6.261a1.318 1.318 0 0 0-1.344 1.293v.018a1.325 1.325 0 0 0 1.344 1.305c.783 0 1.404-.579 1.404-1.305.001-.732-.62-1.311-1.404-1.311zm4.71 0c-.747 0-1.36.58-1.36 1.311 0 .711.613 1.305 1.361 1.305.767 0 1.385-.579 1.385-1.305 0-.732-.618-1.311-1.386-1.311zm-14.84.543c-.748 0-1.252.374-1.514 1.215-.242.857-1.794 6.822-1.794 6.822L2.43 6.897H0s2.334 8.464 2.652 9.456c.241.765.84 1.386 1.7 1.386 1.009 0 1.479-.732 1.684-1.386.225-.676 1.738-6.261 1.738-6.261s1.515 5.589 1.719 6.261c.225.653.69 1.386 1.682 1.386.879 0 1.456-.621 1.72-1.386.315-.99 2.657-9.456 2.657-9.456h-2.45l-2.021 7.944s-1.55-5.965-1.812-6.822c-.242-.844-.77-1.215-1.495-1.215zm9.008 3.363v7.495h2.322v-7.495h-2.322zm4.693 0v7.495h2.317v-7.495h-2.317z"
+      />
+    </svg>
+  );
+};
+const WiiUIcon = (props: IconProps) => {
+  const { className, title } = props;
+
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      stroke="currentColor"
+      strokeWidth={0}
+      viewBox="0 0 24 24"
+    >
+      {title && <title>{title}</title>}
+      <path
+        stroke="none"
+        d="M11.133 8.432a.819.819 0 0 0-.835.814.826.826 0 0 0 .835.812c.488 0 .873-.358.873-.81 0-.455-.385-.816-.873-.816zm2.93 0c-.465 0-.848.359-.848.814 0 .442.383.812.848.812.477 0 .861-.358.861-.81 0-.455-.385-.816-.861-.816zm3.655.011c-.53 0-.99.335-.99.858v3.315c0 .809.56 1.289 1.377 1.289h4.647c.689 0 1.248-.477 1.248-1.162V9.345c0-.412-.308-.86-.688-.86h-1.075v2.799c0 2.122-3.701 2.104-3.701.04v-2.88h-.818zm1.679 0v2.453c0 1.636 1.934 1.402 1.934.256V8.445h-1.934v-.002zM4.833 8.77c-.465 0-.776.232-.938.756-.152.533-1.116 4.242-1.116 4.242l-1.267-4.94H0s1.451 5.264 1.65 5.881c.15.476.521.86 1.058.86.627 0 .917-.454 1.045-.86.14-.421 1.08-3.895 1.08-3.895s.942 3.476 1.069 3.895c.14.406.431.86 1.047.86.547 0 .906-.385 1.07-.86.196-.617 1.65-5.881 1.65-5.881H8.148l-1.258 4.94s-.963-3.709-1.125-4.242c-.15-.526-.479-.756-.93-.756h-.002zm5.605 2.09v4.662h1.441V10.86h-1.441zm2.916 0v4.662h1.442V10.86h-1.442z"
+      />
+    </svg>
+  );
+};
 
 type PlatformsProps = {
   platforms: PlatformList[];
@@ -148,6 +188,8 @@ const platformIconsSet: IconsSet = {
   switch: SwitchIcon,
   macos: MacosIcon,
   android: AndroidIcon,
+  wii: WiiIcon,
+  "wii-u": WiiUIcon,
 };
 
 function Platform(props: IconsProps) {
@@ -184,16 +226,23 @@ export default function Platforms(props: PlatformsProps) {
           })
         : platform.platform.slug.includes("xbox")
           ? platformsMap.set("xbox", { title: "Xbox", icon: "xbox" })
-          : platform.platform.slug.includes("switch")
-            ? platformsMap.set("switch", { title: "Switch", icon: "switch" })
-            : platform.platform.slug.includes("macos")
-              ? platformsMap.set("macos", { title: "macOS", icon: "macos" })
-              : platform.platform.slug.includes("android")
-                ? platformsMap.set("android", {
-                    title: "Android",
-                    icon: "android",
+          : platform.platform.slug.includes("wii-u")
+            ? platformsMap.set("wii-u", { title: "Wii U", icon: "wii-u" })
+            : platform.platform.slug.includes("wii")
+              ? platformsMap.set("wii", { title: "Wii", icon: "wii" })
+              : platform.platform.slug.includes("switch")
+                ? platformsMap.set("switch", {
+                    title: "Switch",
+                    icon: "switch",
                   })
-                : null;
+                : platform.platform.slug.includes("macos")
+                  ? platformsMap.set("macos", { title: "macOS", icon: "macos" })
+                  : platform.platform.slug.includes("android")
+                    ? platformsMap.set("android", {
+                        title: "Android",
+                        icon: "android",
+                      })
+                    : null;
   }
 
   const platformsArray = Array.from(platformsMap);
