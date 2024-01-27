@@ -216,28 +216,39 @@ export default function Game(props: GameProps) {
         </div>
 
         <div className="min-w-[300px] flex-1">
-          <p className="lx:text-2xl mt-2 text-lg font-black md:mt-4 md:text-xl xl:mt-5">
-            Screenshots
-          </p>
+          {gameScreenshots.isSuccess &&
+            gameScreenshots.data?.results.length > 0 && (
+              <>
+                <p className="lx:text-2xl mt-2 text-lg font-black md:mt-4 md:text-xl xl:mt-5">
+                  Screenshots
+                </p>
 
-          <div className="mt-2">
-            {gameScreenshots.isSuccess ? (
-              <GameScreenshots screenshots={gameScreenshots.data?.results} />
-            ) : null}
-          </div>
+                <div className="mt-2">
+                  {gameScreenshots.isSuccess ? (
+                    <GameScreenshots
+                      screenshots={gameScreenshots.data?.results}
+                    />
+                  ) : null}
+                </div>
+              </>
+            )}
 
-          <p className="lx:text-2xl mt-2 text-lg font-black md:mt-4 md:text-xl xl:mt-5">
-            Stores
-          </p>
+          {gameStores.isSuccess && gameStores.data?.results.length > 0 && (
+            <>
+              <p className="lx:text-2xl mt-2 text-lg font-black md:mt-4 md:text-xl xl:mt-5">
+                Stores
+              </p>
 
-          <div className="mt-2">
-            {gameStores.isSuccess ? (
-              <GameStores
-                gameData={game.stores}
-                stores={gameStores.data?.results}
-              />
-            ) : null}
-          </div>
+              <div className="mt-2">
+                {gameStores.isSuccess ? (
+                  <GameStores
+                    gameData={game.stores}
+                    stores={gameStores.data?.results}
+                  />
+                ) : null}
+              </div>
+            </>
+          )}
 
           {gameSeries.isFetching ? (
             <Preloader />

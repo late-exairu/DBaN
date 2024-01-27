@@ -27,7 +27,7 @@ export default function GameBg(props: GameProps) {
     <div className="absolute inset-0 z-0 opacity-10">
       <Image
         className="inset-0 object-cover grayscale"
-        src={data.background_image}
+        src={data.background_image ?? "/game-image-placeholder.png"}
         fill={true}
         alt={data.name}
       />

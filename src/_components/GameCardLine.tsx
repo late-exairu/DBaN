@@ -29,7 +29,7 @@ export default function GameCard(props: GameData) {
         height={400}
         sizes="(max-width: 768px) 100vw, (max-width: 1280px) 70vw, 60vw"
         loading="lazy"
-        src={background_image}
+        src={background_image ?? "/game-image-placeholder.png"}
         alt={name}
       />
 

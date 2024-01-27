@@ -19,9 +19,11 @@ const getAboveRateGames = async (page: number) => {
     });
 };
 
-const getAllTimeTopGames = async () => {
+const getAllTimeTopGames = async (page: number) => {
   return axios
-    .get(`https://api.rawg.io/api/games?ordering=metacritic&key=${API_KEY}`)
+    .get(
+      `https://api.rawg.io/api/games?ordering=-metacritic${page ? "&page=" + page : null}&key=${API_KEY}`,
+    )
     .then((res) => {
       return res.data as ResponseData;
     });

@@ -4,7 +4,7 @@ import Image from "next/image";
 
 type MetacriticScoreProps = {
   className?: string;
-  score: number;
+  score: number | null;
 };
 
 type StaticImageData = {
@@ -20,7 +20,7 @@ export default function MetacriticScore({
   return (
     <div
       className={twMerge(
-        `flex w-12 items-center gap-1 rounded-sm bg-background px-1 text-center font-bold`,
+        `flex min-w-12 items-center gap-1 rounded-sm bg-background px-1 text-center font-bold`,
         className,
       )}
       title="Metacritic score"
@@ -30,7 +30,7 @@ export default function MetacriticScore({
         src={logoMetacritic as StaticImageData}
         alt="Metacritic"
       />
-      {score}
+      {score ?? "N/A"}
     </div>
   );
 }

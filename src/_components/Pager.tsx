@@ -1,7 +1,6 @@
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
@@ -37,30 +36,45 @@ export default function Pager(props: PagerProps) {
   return (
     <Pagination className="mt-5">
       <PaginationContent>
+        {/* prev page */}
         {currentPage - 1 > 0 && (
           <PaginationItem>
             <PaginationPrevious
+              className="h-8 w-auto min-w-8 px-2"
               onClick={() => handlePageChange(prevPage)}
               href={{
-                pathname: "./",
+                pathname: "",
                 query: { page: prevPage },
               }}
             />
           </PaginationItem>
         )}
 
+        {/* first page */}
         {currentPage - 2 > 1 && (
-          <PaginationItem>
-            <PaginationEllipsis />
+          <PaginationItem key={1}>
+            <PaginationLink
+              className="h-8 w-auto min-w-8 px-2"
+              onClick={() => handlePageChange(1)}
+              href={{
+                pathname: "",
+                query: { page: 1 },
+              }}
+            >
+              1
+            </PaginationLink>
           </PaginationItem>
         )}
+
+        {/* map all pages */}
         {pagesActualArray.map((page) => (
           <PaginationItem key={page}>
             <PaginationLink
+              className="h-8 w-auto min-w-8 px-2"
               isActive={page === currentPage}
               onClick={() => handlePageChange(page)}
               href={{
-                pathname: "./",
+                pathname: "",
                 query: { page: page },
               }}
             >
@@ -68,17 +82,31 @@ export default function Pager(props: PagerProps) {
             </PaginationLink>
           </PaginationItem>
         ))}
+
+        {/* last page */}
         {currentPage + 2 < pagesCount && (
           <PaginationItem>
-            <PaginationEllipsis />
+            <PaginationLink
+              className="h-8 w-auto min-w-8 px-2"
+              onClick={() => handlePageChange(pagesCount)}
+              href={{
+                pathname: "",
+                query: { page: pagesCount },
+              }}
+            >
+              {pagesCount}
+            </PaginationLink>
           </PaginationItem>
         )}
+
+        {/* next page */}
         {currentPage + 1 <= pagesCount && (
           <PaginationItem>
             <PaginationNext
+              className="h-8 w-auto min-w-8 px-2"
               onClick={() => handlePageChange(nextPage)}
               href={{
-                pathname: "./",
+                pathname: "",
                 query: { page: nextPage },
               }}
             />
