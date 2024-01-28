@@ -10,6 +10,7 @@ import { type ResponseData } from "@/types";
 
 function PageContent() {
   const searchParams = useSearchParams();
+  const [sortBy, setSortBy] = useState("-metacritic");
   const [page, setPage] = useState(
     Number.parseInt(searchParams.get("page") ?? "1"),
   );
@@ -18,9 +19,13 @@ function PageContent() {
     setPage(page);
   }
 
+  function handleSortByChange(sortBy: string) {
+    setSortBy(sortBy);
+  }
+
   const { data, isLoading, error } = useQuery<ResponseData>({
-    queryKey: ["allTimeTopGames", page],
-    queryFn: () => getAllTimeTopGames(page),
+    queryKey: ["allTimeTopGames", page, sortBy],
+    queryFn: () => getAllTimeTopGames(page, sortBy),
     placeholderData: keepPreviousData,
     staleTime: 600000, // 10 minutes
   });
@@ -31,7 +36,13 @@ function PageContent() {
         All time top games
       </h3>
 
-      <Cards data={data} isLoading={isLoading} error={error} />
+      <Cards
+        data={data}
+        isLoading={isLoading}
+        error={error}
+        sortBy={sortBy}
+        handleSortByChange={handleSortByChange}
+      />
 
       <Pager
         data={data}

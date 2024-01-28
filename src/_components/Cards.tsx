@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Preloader from "@/components/Preloader";
 import GameCard from "@/components/GameCard";
 import GameCardLine from "@/components/GameCardLine";
@@ -12,37 +11,27 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  type GameData,
-  type ResponseData,
-  type ReactQueryResponse,
-} from "@/types";
+import { type GameData, type ResponseData } from "@/types";
 
-export default function Cards(props: ReactQueryResponse<ResponseData>) {
-  const { isLoading, error, data } = props;
-  const [orderBy, setOrderBy] = useState("metacritic");
+type Props = {
+  data: ResponseData | undefined;
+  isLoading?: boolean;
+  isError?: boolean;
+  isSuccess?: boolean;
+  error?: { message: string } | null;
+  sortBy: string;
+  handleSortByChange: (value: string) => void;
+};
+
+export default function Cards(props: Props) {
+  const { isLoading, error, data, sortBy, handleSortByChange } = props;
 
   const handleOrderChange = (value: string) => {
-    setOrderBy(value);
-    games && sortGames(value, games);
+    handleSortByChange(value);
   };
 
   const handleCardStyleChange = (value: string) => {
     localStorage.setItem("cardStyle", value);
-  };
-
-  const sortGames = (order: string, games: GameData[]) => {
-    if (order === "date") {
-      return games.sort(
-        (a, b) => Date.parse(b.released) - Date.parse(a.released),
-      );
-    } else if (order === "name") {
-      return games.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (order === "metacritic") {
-      return games.sort((a, b) => b.metacritic - a.metacritic);
-    } else {
-      return games;
-    }
   };
 
   const cardStyle =
@@ -55,7 +44,6 @@ export default function Cards(props: ReactQueryResponse<ResponseData>) {
   if (!data) return <div>No games</div>;
 
   const games = data?.results;
-  games && sortGames(orderBy, games);
 
   return (
     <Tabs
@@ -64,13 +52,13 @@ export default function Cards(props: ReactQueryResponse<ResponseData>) {
       className="flex flex-col"
     >
       <div className="flex">
-        <Select onValueChange={handleOrderChange} defaultValue={orderBy}>
+        <Select onValueChange={handleOrderChange} defaultValue={sortBy}>
           <SelectTrigger className="w-[200px]">
             <SelectValue placeholder="Order by: Release date" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="metacritic">Order by: Metacritic</SelectItem>
-            <SelectItem value="date">Order by: Release date</SelectItem>
+            <SelectItem value="-metacritic">Order by: Metacritic</SelectItem>
+            <SelectItem value="-released">Order by: Release date</SelectItem>
             <SelectItem value="name">Order by: Name</SelectItem>
           </SelectContent>
         </Select>

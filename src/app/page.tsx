@@ -10,6 +10,7 @@ import { type ResponseData } from "@/types";
 
 function PageContent() {
   const searchParams = useSearchParams();
+  const [sortBy, setSortBy] = useState("-metacritic");
   const [page, setPage] = useState(
     Number.parseInt(searchParams.get("page") ?? "1"),
   );
@@ -18,9 +19,13 @@ function PageContent() {
     setPage(page);
   }
 
+  function handleSortByChange(sortBy: string) {
+    setSortBy(sortBy);
+  }
+
   const { data, isLoading, error } = useQuery<ResponseData>({
-    queryKey: ["aboveRateGames", page],
-    queryFn: () => getAboveRateGames(page),
+    queryKey: ["aboveRateGames", page, sortBy],
+    queryFn: () => getAboveRateGames(page, sortBy),
     placeholderData: keepPreviousData,
     staleTime: 600000, // 10 minutes
   });
@@ -30,7 +35,14 @@ function PageContent() {
       <h3 className="my-3 text-2xl font-black md:my-4 md:text-3xl xl:my-5 xl:text-4xl">
         Top Rated PC Games
       </h3>
-      <Cards data={data} isLoading={isLoading} error={error} />
+
+      <Cards
+        data={data}
+        isLoading={isLoading}
+        error={error}
+        sortBy={sortBy}
+        handleSortByChange={handleSortByChange}
+      />
 
       <Pager
         data={data}
