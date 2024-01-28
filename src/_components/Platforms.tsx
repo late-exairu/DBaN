@@ -217,32 +217,37 @@ export default function Platforms(props: PlatformsProps) {
   const platformsMap = new Map<string, IconsProps>();
 
   for (const platform of platforms) {
-    platform.platform.slug.includes("pc")
-      ? platformsMap.set("pc", { title: "Windows", icon: "windows" })
-      : platform.platform.slug.includes("playstation")
-        ? platformsMap.set("playstation", {
-            title: "Playstation",
-            icon: "playstation",
-          })
-        : platform.platform.slug.includes("xbox")
-          ? platformsMap.set("xbox", { title: "Xbox", icon: "xbox" })
-          : platform.platform.slug.includes("wii-u")
-            ? platformsMap.set("wii-u", { title: "Wii U", icon: "wii-u" })
-            : platform.platform.slug.includes("wii")
-              ? platformsMap.set("wii", { title: "Wii", icon: "wii" })
-              : platform.platform.slug.includes("switch")
-                ? platformsMap.set("switch", {
-                    title: "Switch",
-                    icon: "switch",
-                  })
-                : platform.platform.slug.includes("macos")
-                  ? platformsMap.set("macos", { title: "macOS", icon: "macos" })
-                  : platform.platform.slug.includes("android")
-                    ? platformsMap.set("android", {
-                        title: "Android",
-                        icon: "android",
-                      })
-                    : null;
+    switch (true) {
+      case platform.platform.slug.includes("pc"):
+        platformsMap.set("pc", { title: "Windows", icon: "windows" });
+        break;
+      case platform.platform.slug.includes("playstation"):
+        platformsMap.set("playstation", {
+          title: "Playstation",
+          icon: "playstation",
+        });
+        break;
+      case platform.platform.slug.includes("xbox"):
+        platformsMap.set("xbox", { title: "Xbox", icon: "xbox" });
+        break;
+      case platform.platform.slug.includes("wii-u"):
+        platformsMap.set("wii-u", { title: "Wii U", icon: "wii-u" });
+        break;
+      case platform.platform.slug.includes("wii"):
+        platformsMap.set("wii", { title: "Wii", icon: "wii" });
+        break;
+      case platform.platform.slug.includes("switch"):
+        platformsMap.set("switch", { title: "Switch", icon: "switch" });
+        break;
+      case platform.platform.slug.includes("macos"):
+        platformsMap.set("macos", { title: "macOS", icon: "macos" });
+        break;
+      case platform.platform.slug.includes("android"):
+        platformsMap.set("android", { title: "Android", icon: "android" });
+        break;
+      default:
+        break;
+    }
   }
 
   const platformsArray = Array.from(platformsMap);
