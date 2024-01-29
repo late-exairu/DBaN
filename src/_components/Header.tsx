@@ -1,6 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
+import Burger from "@/components/Burger";
 
 export default function Header() {
   return (
@@ -9,6 +10,7 @@ export default function Header() {
         <Logo />
         <Input type="text" placeholder="Search" />
         <Button variant="outline">Button</Button>
+        <Burger className="flex lg:hidden" />
       </div>
     </header>
   );
