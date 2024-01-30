@@ -85,20 +85,23 @@ export default function Game(props: GameProps) {
         >
           {formatDate(game.released)}
         </div>
+
         {game.metacritic && (
           <MetacriticScore
             className="border border-input"
             score={game.metacritic}
           />
         )}
+
         {game.platforms && (
           <Platforms size="large" platforms={game.platforms} />
         )}
-        {game.playtime && (
+
+        {game.playtime ? (
           <div>
             Average playtime: <span>{game.playtime}</span> hours
           </div>
-        )}
+        ) : null}
       </div>
 
       <h1 className="text-2xl font-black md:text-4xl xl:text-5xl">
