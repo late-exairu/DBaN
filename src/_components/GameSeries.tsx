@@ -20,7 +20,7 @@ const SeriesItem = forwardRef(
         <div className="relative size-16 shrink-0 md:size-20">
           <Image
             className="inset-0 rounded-md object-cover"
-            src={background_image}
+            src={background_image ?? "/game-image-placeholder.png"}
             alt={name}
             sizes="256px"
             fill={true}
