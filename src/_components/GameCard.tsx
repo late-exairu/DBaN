@@ -68,7 +68,7 @@ export default function GameCard(props: GameData) {
         className="relative mt-auto w-full text-white ease-in-out will-change-transform"
       >
         <Platforms className="mb-2" platforms={platforms} />
-        <h3 className="text-lg font-bold sm:text-xl">{name}</h3>
+        <h3 className="line-clamp-2 text-lg font-bold sm:text-xl">{name}</h3>
 
         <div
           ref={descriptionRef}
