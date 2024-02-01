@@ -1,38 +1,51 @@
 "use client";
 
+import { useState } from "react";
 import { Cross1Icon } from "@radix-ui/react-icons";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useStore } from "@/state/store";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import { getAboveRateGames } from "@/utils/apiUtils";
+import { getGameSearchResult } from "@/utils/apiUtils";
 import { type ResponseData } from "@/types";
 import Link from "next/link";
 import Image from "next/image";
 import formatDate from "@/utils/formatDate";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useDebouncedCallback } from "use-debounce";
 
 export default function Search() {
+  const [searchString, setSearchString] = useState("");
   const isSearchResultVisible = useStore(
     (state) => state.isSearchResultVisible,
   );
   const showSearchResult = useStore((state) => state.showSearchResult);
   const hideSearchResult = useStore((state) => state.hideSearchResult);
 
+  const debouncedHandleSearch = useDebouncedCallback(handleSearch, 500);
+
+  function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
+    // console.log(e.target.value);
+    if (e.target.value.length > 2) {
+      setSearchString(e.target.value);
+      showSearchResult();
+    }
+  }
+
   const { data, isLoading, error } = useQuery<ResponseData>({
-    queryKey: ["aboveRateGames", 1],
-    queryFn: () => getAboveRateGames(1),
+    queryKey: ["gameSearchResult", searchString],
+    queryFn: () => getGameSearchResult(searchString),
     placeholderData: keepPreviousData,
     staleTime: 600000, // 10 minutes
   });
 
-  console.log(isSearchResultVisible);
+  // console.log(isSearchResultVisible);
 
   return (
     <div className="w-full">
       <Input
-        onFocus={() => {
-          showSearchResult();
+        onChange={(e) => {
+          debouncedHandleSearch(e);
         }}
         type="text"
         placeholder="Search"
@@ -61,6 +74,7 @@ export default function Search() {
                 {data?.results.map((game) => (
                   <li key={game.id}>
                     <Link
+                      onClick={() => hideSearchResult()}
                       href={`/games/${game.id}`}
                       className="flex items-center gap-2 rounded-md text-xs font-medium transition-colors duration-300 ease-in-out hover:bg-accent"
                     >
