@@ -116,6 +116,7 @@ export type {
   ReactQueryResponse,
   ResponseData,
   GameData,
+  ApiResponse,
   PlatformList,
   Platform,
   GameScreenshotsRes,
