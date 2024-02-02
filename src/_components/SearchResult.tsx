@@ -1,22 +1,42 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect } from "react";
 import { Cross1Icon } from "@radix-ui/react-icons";
 import { useStore } from "@/state/store";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import formatDate from "@/utils/formatDate";
-import { type ReactQueryResponse, type ResponseData } from "@/types";
+import { useQuery, keepPreviousData } from "@tanstack/react-query";
+import { getGameSearchResult } from "@/utils/apiUtils";
+import { type ResponseData } from "@/types";
 
-export default function SearchResult(props: ReactQueryResponse<ResponseData>) {
-  const { data, isLoading, error } = props;
-
+export default function SearchResult() {
+  const searchString = useStore((state) => state.searchString);
   const hideSearchResult = useStore((state) => state.hideSearchResult);
   const isSearchResultVisible = useStore(
     (state) => state.isSearchResultVisible,
   );
 
+  useEffect(() => {
+    document.addEventListener("keydown", hideSearchResult);
+
+    return () => {
+      document.removeEventListener("keydown", hideSearchResult);
+    };
+  }, [hideSearchResult]);
+
+  const { data, isLoading, error } = useQuery<ResponseData>({
+    queryKey: ["gameSearchResult", searchString],
+    queryFn: () => getGameSearchResult(searchString),
+    placeholderData: keepPreviousData,
+    staleTime: 600000, // 10 minutes
+    enabled: searchString.length > 2,
+  });
+
   return (
     <div
+      role="dialog"
+      aria-modal="true"
       className={`${
         isSearchResultVisible ? "visible opacity-100" : "invisible opacity-0"
       } fixed bottom-0 left-0 right-0 top-[52px] border-t border-gray-200 bg-white transition-all`}
