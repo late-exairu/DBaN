@@ -9,6 +9,7 @@ import formatDate from "@/utils/formatDate";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { getGameSearchResult } from "@/utils/apiUtils";
 import { type ResponseData } from "@/types";
+import KeyboardKey from "@/components/KeyboardKey";
 
 export default function SearchResult() {
   // const [activeIndex, setActiveIndex] = useState(-1);
@@ -118,11 +119,7 @@ export default function SearchResult() {
 
         {!data && (
           <p className="text-sm md:text-base">
-            Use escape (
-            <kbd className="rounded-sm bg-muted px-1 text-muted-foreground">
-              Esc
-            </kbd>
-            ) to close search.
+            Use escape (<KeyboardKey>Esc</KeyboardKey>) to close search.
           </p>
         )}
 
