@@ -1,6 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
+import Image from "next/image";
 import SystemRequirements from "@/components/SystemRequirements";
 import Preloader from "@/components/Preloader";
 import GameStores from "@/components/GameStores";
@@ -110,6 +111,18 @@ export default function Game(props: GameProps) {
 
       <div className="flex flex-col gap-6 md:flex-row">
         <div className="">
+          {game.background_image && (
+            <div className="relative my-2 aspect-video h-auto w-full md:my-4">
+              <Image
+                className="block w-full rounded-md"
+                src={game.background_image ?? "/game-image-placeholder.png"}
+                fill={true}
+                sizes="100vw, 50vw"
+                alt={game.name}
+              />
+            </div>
+          )}
+
           <p className="lx:text-2xl mt-2 text-lg font-black md:mt-4 md:text-xl xl:mt-5">
             About
           </p>
@@ -222,11 +235,11 @@ export default function Game(props: GameProps) {
           {gameScreenshots.isSuccess &&
             gameScreenshots.data?.results.length > 0 && (
               <>
-                <p className="lx:text-2xl mt-2 text-lg font-black md:mt-4 md:text-xl xl:mt-5">
+                <p className="lx:text-2xl mt-2 text-lg font-black md:mt-4 md:hidden md:text-xl xl:mt-5">
                   Screenshots
                 </p>
 
-                <div className="mt-2">
+                <div className="mt-2 md:mt-4">
                   {gameScreenshots.isSuccess ? (
                     <GameScreenshots
                       screenshots={gameScreenshots.data?.results}
