@@ -110,11 +110,11 @@ export default function Game(props: GameProps) {
       </h1>
 
       <div className="flex flex-col gap-6 md:flex-row">
-        <div className="">
+        <div>
           {game.background_image && (
             <div className="relative my-2 aspect-video h-auto w-full md:my-4">
               <Image
-                className="block w-full rounded-md"
+                className="block rounded-md object-cover"
                 src={game.background_image ?? "/game-image-placeholder.png"}
                 fill={true}
                 sizes="100vw, 50vw"
