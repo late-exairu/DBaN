@@ -5,6 +5,7 @@ import {
   type GameScreenshotsRes,
   type GameSeriesRes,
   type GameStoresRes,
+  type GenresRes,
 } from "@/types";
 
 const API_KEY = process.env.NEXT_PUBLIC_RAWG_API_KEY;
@@ -77,6 +78,14 @@ const getGameStores = (id: number): Promise<GameStoresRes> => {
     });
 };
 
+const getGenres = (): Promise<GenresRes> => {
+  return axios
+    .get(`https://api.rawg.io/api/genres?key=${API_KEY}`)
+    .then((res) => {
+      return res.data as GenresRes;
+    });
+};
+
 export {
   getAboveRateGames,
   getAllTimeTopGames,
@@ -85,4 +94,5 @@ export {
   getGameScreenshots,
   getGameSeries,
   getGameStores,
+  getGenres,
 };

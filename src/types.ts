@@ -36,6 +36,7 @@ type Genre = {
   slug: string;
   games_count: number;
   image_background: string;
+  games?: GameData[];
 };
 
 type Store = {
@@ -111,6 +112,7 @@ type ResponseData = ApiResponse<GameData>;
 type GameScreenshotsRes = ApiResponse<Screenshot>;
 type GameStoresRes = ApiResponse<Store>;
 type GameSeriesRes = ApiResponse<GameData>;
+type GenresRes = ApiResponse<Genre>;
 
 export type {
   ReactQueryResponse,
@@ -124,4 +126,6 @@ export type {
   GameStoresRes,
   GameSeriesRes,
   Screenshot,
+  GenresRes,
+  Genre,
 };

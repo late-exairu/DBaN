@@ -20,6 +20,7 @@ export default function SideNav(props: SideNavProps) {
       <ul className="sticky top-[84px] my-5 flex flex-col gap-2 text-lg font-black lg:text-2xl">
         <Link href="/">Home</Link>
         <Link href="/all-time-top">All time top</Link>
+        <Link href="/genres">Genres</Link>
       </ul>
     </aside>
   );
