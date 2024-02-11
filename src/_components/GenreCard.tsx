@@ -15,17 +15,19 @@ export default function GenreCard({ genre }: { genre: Genre }) {
         src={genre.image_background ?? "/game-image-placeholder.png"}
         alt={genre.name}
       />
-      <div className="relative px-5 py-4 text-center text-sm">
-        <h3 className="z-10 my-10 text-2xl font-bold">{genre.name}</h3>
+      <div className="relative px-6 pb-6 pt-4 text-sm">
+        <h3 className="z-10 my-10 text-center text-2xl font-bold">
+          {genre.name}
+        </h3>
 
-        <p className="text-base font-bold">Popular titles:</p>
+        <p className="text-sm font-bold">Popular titles:</p>
 
         <div className="flex flex-col">
           {genre.games?.map((game) => (
             <Link
               key={game.id}
               href={`/games/${game.id}`}
-              className="mt-1 font-semibold hover:underline"
+              className="mt-1 font-medium hover:underline"
             >
               {game.name}
             </Link>
