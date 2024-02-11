@@ -21,6 +21,7 @@ export default function SideNav(props: SideNavProps) {
         <Link href="/">Home</Link>
         <Link href="/all-time-top">All time top</Link>
         <Link href="/genres">Genres</Link>
+        <Link href="/platforms">Platforms</Link>
       </ul>
     </aside>
   );

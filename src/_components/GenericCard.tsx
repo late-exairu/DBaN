@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { type Genre } from "@/types";
 import Link from "next/link";
+import { type GenericCard } from "@/types";
 
-export default function GenreCard({ genre }: { genre: Genre }) {
-  if (!genre) return null;
+export default function GenericCard({ generic }: { generic: GenericCard }) {
+  if (!generic) return null;
 
   return (
     <div className="relative overflow-hidden rounded-md text-white">
@@ -12,18 +12,18 @@ export default function GenreCard({ genre }: { genre: Genre }) {
         fill={true}
         sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
         loading="lazy"
-        src={genre.image_background ?? "/game-image-placeholder.png"}
-        alt={genre.name}
+        src={generic.image_background ?? "/game-image-placeholder.png"}
+        alt={generic.name}
       />
       <div className="relative px-6 pb-6 pt-4 text-sm">
         <h3 className="z-10 my-10 text-center text-2xl font-bold">
-          {genre.name}
+          {generic.name}
         </h3>
 
         <p className="text-sm font-bold">Popular titles:</p>
 
         <div className="flex flex-col">
-          {genre.games?.map((game) => (
+          {generic.games?.map((game) => (
             <Link
               key={game.id}
               href={`/games/${game.id}`}

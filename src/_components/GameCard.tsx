@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import MetacriticScore from "@/components/MetacriticScore";
-import Platforms from "@/components/Platforms";
+import GamePlatforms from "@/_components/GamePlatforms";
 import { type GameData } from "@/types";
 
 export default function GameCard(props: GameData) {
@@ -67,7 +67,7 @@ export default function GameCard(props: GameData) {
         ref={infoRef}
         className="relative mt-auto w-full text-white ease-in-out will-change-transform"
       >
-        <Platforms className="mb-2" platforms={platforms} />
+        <GamePlatforms className="mb-2" platforms={platforms} />
         <h3 className="line-clamp-2 text-lg font-bold sm:text-xl">{name}</h3>
 
         <div

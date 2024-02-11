@@ -9,7 +9,7 @@ import Breadcrumb from "@/components/Breadcrumbs";
 import GameScreenshots from "@/components/GameScreenshots";
 import MetacriticScore from "@/components/MetacriticScore";
 import GameSeries from "@/components/GameSeries";
-import Platforms from "@/components/Platforms";
+import GamePlatforms from "@/_components/GamePlatforms";
 import {
   getGameData,
   getGameScreenshots,
@@ -95,7 +95,7 @@ export default function Game(props: GameProps) {
         )}
 
         {game.platforms && (
-          <Platforms size="large" platforms={game.platforms} />
+          <GamePlatforms size="large" platforms={game.platforms} />
         )}
 
         {game.playtime ? (

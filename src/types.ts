@@ -36,7 +36,6 @@ type Genre = {
   slug: string;
   games_count: number;
   image_background: string;
-  games?: GameData[];
 };
 
 type Store = {
@@ -88,6 +87,14 @@ type GameData = {
   publishers: Publisher[];
 };
 
+type GenericCard = {
+  id: number;
+  name: string;
+  slug: string;
+  image_background?: string;
+  games?: GameData[];
+};
+
 type GameRequirements = {
   platforms: PlatformList[];
 };
@@ -113,6 +120,7 @@ type GameScreenshotsRes = ApiResponse<Screenshot>;
 type GameStoresRes = ApiResponse<Store>;
 type GameSeriesRes = ApiResponse<GameData>;
 type GenresRes = ApiResponse<Genre>;
+type PlatformsRes = ApiResponse<Platform>;
 
 export type {
   ReactQueryResponse,
@@ -128,4 +136,6 @@ export type {
   Screenshot,
   GenresRes,
   Genre,
+  PlatformsRes,
+  GenericCard,
 };

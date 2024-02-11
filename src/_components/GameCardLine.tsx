@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import MetacriticScore from "@/components/MetacriticScore";
-import Platforms from "@/components/Platforms";
+import GamePlatforms from "@/_components/GamePlatforms";
 import formatDate from "@/utils/formatDate";
 import { type GameData } from "@/types";
 
@@ -38,7 +38,7 @@ export default function GameCard(props: GameData) {
       <MetacriticScore className="absolute right-4 top-4" score={metacritic} />
 
       <div className="relative w-full text-white">
-        <Platforms
+        <GamePlatforms
           className="absolute bottom-1 right-0"
           platforms={platforms}
         />
