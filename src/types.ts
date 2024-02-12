@@ -51,6 +51,15 @@ type Store = {
   };
 };
 
+type StoreSingle = {
+  id: number;
+  name: string;
+  slug: string;
+  domain: string;
+  games_count: number;
+  image_background: string;
+};
+
 type Screenshot = {
   id: number;
   image: string;
@@ -138,4 +147,5 @@ export type {
   Genre,
   PlatformsRes,
   GenericCard,
+  StoreSingle,
 };

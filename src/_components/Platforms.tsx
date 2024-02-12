@@ -2,11 +2,11 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { getPlatforms } from "@/utils/apiUtils";
-import { type PlatformsRes } from "@/types";
+import { type ApiResponse, type Platform } from "@/types";
 import GenericCard from "@/components/GenericCard";
 
 export default function Platforms() {
-  const platformsData = useQuery<PlatformsRes>({
+  const platformsData = useQuery<ApiResponse<Platform>>({
     queryKey: ["platforms"],
     queryFn: getPlatforms,
     staleTime: 600000, // 10 minutes
