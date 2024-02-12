@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import formatDate from "@/utils/formatDate";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { getGameSearchResult } from "@/utils/apiUtils";
-import { type ResponseData } from "@/types";
+import { type ApiResponse, type GameData } from "@/types";
 import KeyboardKey from "@/components/KeyboardKey";
 
 export default function SearchResult() {
@@ -70,7 +70,7 @@ export default function SearchResult() {
     return listener && listener(e);
   };
 
-  const { data, isLoading, error } = useQuery<ResponseData>({
+  const { data, isLoading, error } = useQuery<ApiResponse<GameData>>({
     queryKey: ["gameSearchResult", searchString],
     queryFn: () => getGameSearchResult(searchString),
     placeholderData: keepPreviousData,

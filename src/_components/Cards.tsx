@@ -11,10 +11,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { type GameData, type ResponseData } from "@/types";
+import { type GameData, type ApiResponse } from "@/types";
 
 type Props = {
-  data: ResponseData | undefined;
+  data: ApiResponse<GameData> | undefined;
   isLoading?: boolean;
   isError?: boolean;
   isSuccess?: boolean;

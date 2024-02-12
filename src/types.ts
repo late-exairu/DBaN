@@ -124,28 +124,17 @@ type ApiResponse<T> = {
   previous: string | null;
   results: T[];
 };
-type ResponseData = ApiResponse<GameData>;
-type GameScreenshotsRes = ApiResponse<Screenshot>;
-type GameStoresRes = ApiResponse<Store>;
-type GameSeriesRes = ApiResponse<GameData>;
-type GenresRes = ApiResponse<Genre>;
-type PlatformsRes = ApiResponse<Platform>;
 
 export type {
   ReactQueryResponse,
-  ResponseData,
-  GameData,
   ApiResponse,
+  GameData,
   PlatformList,
   Platform,
-  GameScreenshotsRes,
   GameRequirements,
-  GameStoresRes,
-  GameSeriesRes,
   Screenshot,
-  GenresRes,
   Genre,
-  PlatformsRes,
+  Store,
   GenericCard,
   StoreSingle,
 };

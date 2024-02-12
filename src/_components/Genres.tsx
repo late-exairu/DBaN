@@ -3,11 +3,11 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { getGenres } from "@/utils/apiUtils";
-import { type GenresRes } from "@/types";
+import { type ApiResponse, type Genre } from "@/types";
 import GenericCard from "./GenericCard";
 
 export default function Genres() {
-  const genresData = useQuery<GenresRes>({
+  const genresData = useQuery<ApiResponse<Genre>>({
     queryKey: ["genres"],
     queryFn: getGenres,
     staleTime: 600000, // 10 minutes

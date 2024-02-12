@@ -7,10 +7,10 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-import { type ResponseData } from "@/types";
+import { type ApiResponse, type GameData } from "@/types";
 
 type PagerProps = {
-  data: ResponseData | undefined;
+  data: ApiResponse<GameData> | undefined;
   currentPage: number;
   handlePageChange: (page: number) => void;
 };

@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import Cards from "@/components/Cards";
 import Pager from "@/components/Pager";
 import { getAboveRateGames } from "@/utils/apiUtils";
-import { type ResponseData } from "@/types";
+import { type ApiResponse, type GameData } from "@/types";
 
 function PageContent() {
   const searchParams = useSearchParams();
@@ -23,7 +23,7 @@ function PageContent() {
     setSortBy(sortBy);
   }
 
-  const { data, isLoading, error } = useQuery<ResponseData>({
+  const { data, isLoading, error } = useQuery<ApiResponse<GameData>>({
     queryKey: ["aboveRateGames", page, sortBy],
     queryFn: () => getAboveRateGames(page, sortBy),
     placeholderData: keepPreviousData,

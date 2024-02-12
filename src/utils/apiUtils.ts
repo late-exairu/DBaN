@@ -1,14 +1,12 @@
 import axios from "axios";
 import {
-  type ResponseData,
   type GameData,
-  type GameScreenshotsRes,
-  type GameSeriesRes,
-  type GameStoresRes,
-  type GenresRes,
-  type PlatformsRes,
   type ApiResponse,
+  type Screenshot,
+  type Store,
+  type Platform,
   type StoreSingle,
+  type Genre,
 } from "@/types";
 
 const API_KEY = process.env.NEXT_PUBLIC_RAWG_API_KEY;
@@ -21,7 +19,7 @@ const getAboveRateGames = async (page: number, sortBy: string) => {
       }${page ? "&page=" + page : null}&key=${API_KEY}`,
     )
     .then((res) => {
-      return res.data as ResponseData;
+      return res.data as ApiResponse<GameData>;
     });
 };
 
@@ -33,7 +31,7 @@ const getAllTimeTopGames = async (page: number, sortBy: string) => {
       }&key=${API_KEY}`,
     )
     .then((res) => {
-      return res.data as ResponseData;
+      return res.data as ApiResponse<GameData>;
     });
 };
 
@@ -45,7 +43,7 @@ const getGameSearchResult = async (searchString: string) => {
       }&key=${API_KEY}`,
     )
     .then((res) => {
-      return res.data as ResponseData;
+      return res.data as ApiResponse<GameData>;
     });
 };
 
@@ -57,43 +55,43 @@ const getGameData = (id: number): Promise<GameData> => {
     });
 };
 
-const getGameScreenshots = (id: number): Promise<GameScreenshotsRes> => {
+const getGameScreenshots = (id: number): Promise<ApiResponse<Screenshot>> => {
   return axios
     .get(`https://api.rawg.io/api/games/${id}/screenshots?key=${API_KEY}`)
     .then((res) => {
-      return res.data as GameScreenshotsRes;
+      return res.data as ApiResponse<Screenshot>;
     });
 };
 
-const getGameSeries = (id: number): Promise<GameSeriesRes> => {
+const getGameSeries = (id: number): Promise<ApiResponse<GameData>> => {
   return axios
     .get(`https://api.rawg.io/api/games/${id}/game-series?key=${API_KEY}`)
     .then((res) => {
-      return res.data as GameSeriesRes;
+      return res.data as ApiResponse<GameData>;
     });
 };
 
-const getGameStores = (id: number): Promise<GameStoresRes> => {
+const getGameStores = (id: number): Promise<ApiResponse<Store>> => {
   return axios
     .get(`https://api.rawg.io/api/games/${id}/stores?key=${API_KEY}`)
     .then((res) => {
-      return res.data as GameStoresRes;
+      return res.data as ApiResponse<Store>;
     });
 };
 
-const getGenres = (): Promise<GenresRes> => {
+const getGenres = (): Promise<ApiResponse<Genre>> => {
   return axios
     .get(`https://api.rawg.io/api/genres?key=${API_KEY}`)
     .then((res) => {
-      return res.data as GenresRes;
+      return res.data as ApiResponse<Genre>;
     });
 };
 
-const getPlatforms = (): Promise<PlatformsRes> => {
+const getPlatforms = (): Promise<ApiResponse<Platform>> => {
   return axios
     .get(`https://api.rawg.io/api/platforms?key=${API_KEY}`)
     .then((res) => {
-      return res.data as PlatformsRes;
+      return res.data as ApiResponse<Platform>;
     });
 };
 

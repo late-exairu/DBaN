@@ -19,9 +19,9 @@ import {
 import formatDate from "@/utils/formatDate";
 import {
   type GameData,
-  type GameScreenshotsRes,
-  type GameStoresRes,
-  type GameSeriesRes,
+  type ApiResponse,
+  type Screenshot,
+  type Store,
 } from "@/types";
 
 type GameProps = {
@@ -37,19 +37,19 @@ export default function Game(props: GameProps) {
     staleTime: 600000, // 10 minutes
   });
 
-  const gameScreenshots = useQuery<GameScreenshotsRes>({
+  const gameScreenshots = useQuery<ApiResponse<Screenshot>>({
     queryKey: ["gameScreenshots", id],
     queryFn: () => getGameScreenshots(id),
     staleTime: 600000, // 10 minutes
   });
 
-  const gameStores = useQuery<GameStoresRes>({
+  const gameStores = useQuery<ApiResponse<Store>>({
     queryKey: ["gameStores", id],
     queryFn: () => getGameStores(id),
     staleTime: 600000, // 10 minutes
   });
 
-  const gameSeries = useQuery<GameSeriesRes>({
+  const gameSeries = useQuery<ApiResponse<GameData>>({
     queryKey: ["gameSeries", id],
     queryFn: () => getGameSeries(id),
     staleTime: 600000, // 10 minutes
