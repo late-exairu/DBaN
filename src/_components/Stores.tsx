@@ -2,11 +2,11 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { getStores } from "@/utils/apiUtils";
-import { type ApiResponse, type StoreSingle } from "@/types";
+import { type ApiResponse, type Store } from "@/types";
 import GenericCard from "@/components/GenericCard";
 
 export default function Stores() {
-  const storesData = useQuery<ApiResponse<StoreSingle>>({
+  const storesData = useQuery<ApiResponse<Store>>({
     queryKey: ["stores"],
     queryFn: getStores,
     staleTime: 600000, // 10 minutes
