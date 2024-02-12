@@ -38,20 +38,13 @@ type Genre = {
   image_background: string;
 };
 
-type Store = {
+type GameStore = {
   id: number;
   url: string;
-  store: {
-    id: number;
-    name: string;
-    slug: string;
-    domain: string;
-    games_count: number;
-    image_background: string;
-  };
+  store: Store;
 };
 
-type StoreSingle = {
+type Store = {
   id: number;
   name: string;
   slug: string;
@@ -89,7 +82,7 @@ type GameData = {
   playtime: number;
   released: string;
   platforms: PlatformList[];
-  stores: Store[];
+  stores: GameStore[];
   developers: Developer[];
   genres: Genre[];
   tags: Tag[];
@@ -134,7 +127,7 @@ export type {
   GameRequirements,
   Screenshot,
   Genre,
-  Store,
+  GameStore,
   GenericCard,
-  StoreSingle,
+  Store,
 };

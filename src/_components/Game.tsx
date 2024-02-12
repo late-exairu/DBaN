@@ -21,7 +21,7 @@ import {
   type GameData,
   type ApiResponse,
   type Screenshot,
-  type Store,
+  type GameStore,
 } from "@/types";
 
 type GameProps = {
@@ -43,7 +43,7 @@ export default function Game(props: GameProps) {
     staleTime: 600000, // 10 minutes
   });
 
-  const gameStores = useQuery<ApiResponse<Store>>({
+  const gameStores = useQuery<ApiResponse<GameStore>>({
     queryKey: ["gameStores", id],
     queryFn: () => getGameStores(id),
     staleTime: 600000, // 10 minutes

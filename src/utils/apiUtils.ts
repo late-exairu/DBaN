@@ -3,9 +3,9 @@ import {
   type GameData,
   type ApiResponse,
   type Screenshot,
-  type Store,
+  type GameStore,
   type Platform,
-  type StoreSingle,
+  type Store,
   type Genre,
 } from "@/types";
 
@@ -71,11 +71,11 @@ const getGameSeries = (id: number): Promise<ApiResponse<GameData>> => {
     });
 };
 
-const getGameStores = (id: number): Promise<ApiResponse<Store>> => {
+const getGameStores = (id: number): Promise<ApiResponse<GameStore>> => {
   return axios
     .get(`https://api.rawg.io/api/games/${id}/stores?key=${API_KEY}`)
     .then((res) => {
-      return res.data as ApiResponse<Store>;
+      return res.data as ApiResponse<GameStore>;
     });
 };
 
@@ -95,11 +95,11 @@ const getPlatforms = (): Promise<ApiResponse<Platform>> => {
     });
 };
 
-const getStores = (): Promise<ApiResponse<StoreSingle>> => {
+const getStores = (): Promise<ApiResponse<Store>> => {
   return axios
     .get(`https://api.rawg.io/api/stores?key=${API_KEY}`)
     .then((res) => {
-      return res.data as ApiResponse<StoreSingle>;
+      return res.data as ApiResponse<Store>;
     });
 };
 
