@@ -24,6 +24,8 @@ const menu = [
       { name: "Platforms", href: "/platforms" },
       { name: "Stores", href: "/stores" },
       { name: "Tags", href: "/tags" },
+      { name: "Developers", href: "/developers" },
+      { name: "Publishers", href: "/publishers" },
     ],
   },
 ];

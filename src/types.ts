@@ -131,4 +131,6 @@ export type {
   GenericCard,
   Store,
   Tag,
+  Developer,
+  Publisher,
 };

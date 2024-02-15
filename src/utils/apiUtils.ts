@@ -8,6 +8,8 @@ import {
   type Store,
   type Genre,
   type Tag,
+  type Developer,
+  type Publisher,
 } from "@/types";
 
 const API_KEY = process.env.NEXT_PUBLIC_RAWG_API_KEY;
@@ -112,6 +114,22 @@ const getTags = (): Promise<ApiResponse<Tag>> => {
     });
 };
 
+const getDevelopers = (): Promise<ApiResponse<Developer>> => {
+  return axios
+    .get(`https://api.rawg.io/api/developers?key=${API_KEY}`)
+    .then((res) => {
+      return res.data as ApiResponse<Developer>;
+    });
+};
+
+const getPublishers = (): Promise<ApiResponse<Publisher>> => {
+  return axios
+    .get(`https://api.rawg.io/api/publishets?key=${API_KEY}`)
+    .then((res) => {
+      return res.data as ApiResponse<Publisher>;
+    });
+};
+
 export {
   getAboveRateGames,
   getAllTimeTopGames,
@@ -124,4 +142,6 @@ export {
   getPlatforms,
   getStores,
   getTags,
+  getDevelopers,
+  getPublishers,
 };
