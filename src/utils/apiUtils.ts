@@ -124,7 +124,7 @@ const getDevelopers = (): Promise<ApiResponse<Developer>> => {
 
 const getPublishers = (): Promise<ApiResponse<Publisher>> => {
   return axios
-    .get(`https://api.rawg.io/api/publishets?key=${API_KEY}`)
+    .get(`https://api.rawg.io/api/publishers?key=${API_KEY}`)
     .then((res) => {
       return res.data as ApiResponse<Publisher>;
     });

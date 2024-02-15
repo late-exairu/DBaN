@@ -4,9 +4,10 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import { getStores } from "@/utils/apiUtils";
-import Stores from "@/components/Stores";
+import GenericCardsList from "@/components/GenericCardsList";
 
 export default async function page() {
+  const queryKey = "stores";
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -16,7 +17,7 @@ export default async function page() {
   });
 
   await queryClient.fetchQuery({
-    queryKey: ["stores"],
+    queryKey: [queryKey],
     queryFn: getStores,
   });
 
@@ -27,7 +28,7 @@ export default async function page() {
           Stores
         </h3>
 
-        <Stores />
+        <GenericCardsList queryKey={queryKey} />
       </main>
     </HydrationBoundary>
   );

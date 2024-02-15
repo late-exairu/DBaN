@@ -4,15 +4,10 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import { getPlatforms } from "@/utils/apiUtils";
-import Platforms from "@/components/Platforms";
-
-// export async function generateMetadata() {
-//   return {
-//     title: `Genres - DBaN`,
-//   };
-// }
+import GenericCardsList from "@/components/GenericCardsList";
 
 export default async function page() {
+  const queryKey = "platforms";
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -22,7 +17,7 @@ export default async function page() {
   });
 
   await queryClient.fetchQuery({
-    queryKey: ["platforms"],
+    queryKey: [queryKey],
     queryFn: getPlatforms,
   });
 
@@ -33,7 +28,7 @@ export default async function page() {
           Platforms
         </h3>
 
-        <Platforms />
+        <GenericCardsList queryKey={queryKey} />
       </main>
     </HydrationBoundary>
   );

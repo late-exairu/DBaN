@@ -1,5 +1,3 @@
-"use server";
-
 import {
   dehydrate,
   HydrationBoundary,
@@ -9,6 +7,7 @@ import { getDevelopers } from "@/utils/apiUtils";
 import GenericCardsList from "@/components/GenericCardsList";
 
 export default async function page() {
+  const queryKey = "developers";
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -18,7 +17,7 @@ export default async function page() {
   });
 
   await queryClient.fetchQuery({
-    queryKey: ["developers"],
+    queryKey: [queryKey],
     queryFn: getDevelopers,
   });
 
@@ -29,7 +28,7 @@ export default async function page() {
           Developers
         </h3>
 
-        <GenericCardsList queryKey={"developers"} />
+        <GenericCardsList queryKey={queryKey} />
       </main>
     </HydrationBoundary>
   );
