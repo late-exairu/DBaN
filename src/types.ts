@@ -130,4 +130,5 @@ export type {
   GameStore,
   GenericCard,
   Store,
+  Tag,
 };

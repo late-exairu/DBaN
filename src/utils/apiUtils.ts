@@ -7,6 +7,7 @@ import {
   type Platform,
   type Store,
   type Genre,
+  type Tag,
 } from "@/types";
 
 const API_KEY = process.env.NEXT_PUBLIC_RAWG_API_KEY;
@@ -103,6 +104,14 @@ const getStores = (): Promise<ApiResponse<Store>> => {
     });
 };
 
+const getTags = (): Promise<ApiResponse<Tag>> => {
+  return axios
+    .get(`https://api.rawg.io/api/tags?key=${API_KEY}`)
+    .then((res) => {
+      return res.data as ApiResponse<Tag>;
+    });
+};
+
 export {
   getAboveRateGames,
   getAllTimeTopGames,
@@ -114,4 +123,5 @@ export {
   getGenres,
   getPlatforms,
   getStores,
+  getTags,
 };

@@ -23,6 +23,7 @@ const menu = [
       { name: "Genres", href: "/genres" },
       { name: "Platforms", href: "/platforms" },
       { name: "Stores", href: "/stores" },
+      { name: "Tags", href: "/tags" },
     ],
   },
 ];
