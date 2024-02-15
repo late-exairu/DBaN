@@ -17,8 +17,9 @@ type PagerProps = {
 
 export default function Pager(props: PagerProps) {
   const { data, currentPage, handlePageChange } = props;
+  const pageSize = 24;
 
-  const pagesCount = Math.ceil((data?.count ?? 0) / 20);
+  const pagesCount = Math.ceil((data?.count ?? 0) / pageSize);
 
   const prevPage = currentPage - 1;
   const nextPage = currentPage + 1;
