@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { type BrowseCard } from "@/types";
 
-export default function BrowseCard({ generic }: { generic: BrowseCard }) {
-  if (!generic) return null;
+export default function BrowseCard({ browseCard }: { browseCard: BrowseCard }) {
+  if (!browseCard) return null;
 
   return (
     <div className="relative overflow-hidden rounded-md text-white">
@@ -12,18 +12,18 @@ export default function BrowseCard({ generic }: { generic: BrowseCard }) {
         fill={true}
         sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
         loading="lazy"
-        src={generic.image_background ?? "/game-image-placeholder.png"}
-        alt={generic.name}
+        src={browseCard.image_background ?? "/game-image-placeholder.png"}
+        alt={browseCard.name}
       />
       <div className="relative px-6 pb-6 pt-4 text-sm">
         <h3 className="z-10 my-10 text-center text-2xl font-bold">
-          {generic.name}
+          {browseCard.name}
         </h3>
 
         <p className="text-sm font-bold">Popular titles:</p>
 
         <div className="flex flex-col">
-          {generic.games?.map((game) => (
+          {browseCard.games?.map((game) => (
             <Link
               key={game.id}
               href={`/games/${game.id}`}

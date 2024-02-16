@@ -63,7 +63,7 @@ export default function BrowseList(props: Props) {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
       {genericList.map((item) => (
-        <BrowseCard key={item.id} generic={item} />
+        <BrowseCard key={item.id} browseCard={item} />
       ))}
     </div>
   );
