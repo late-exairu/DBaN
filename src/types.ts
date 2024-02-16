@@ -89,7 +89,7 @@ type GameData = {
   publishers: Publisher[];
 };
 
-type GenericCard = {
+type BrowseCard = {
   id: number;
   name: string;
   slug: string;
@@ -128,7 +128,7 @@ export type {
   Screenshot,
   Genre,
   GameStore,
-  GenericCard,
+  BrowseCard,
   Store,
   Tag,
   Developer,

@@ -9,7 +9,7 @@ import {
   getDevelopers,
   getPublishers,
 } from "@/utils/apiUtils";
-import GenericCard from "@/components/GenericCard";
+import BrowseCard from "@/components/BrowseCard";
 import {
   type ApiResponse,
   type Genre,
@@ -33,7 +33,7 @@ type Api = {
   publishers: () => Promise<ApiResponse<Publisher>>;
 };
 
-export default function GenericCardsList(props: Props) {
+export default function BrowseList(props: Props) {
   const { queryKey } = props;
 
   const fnList: Api = {
@@ -63,7 +63,7 @@ export default function GenericCardsList(props: Props) {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
       {genericList.map((item) => (
-        <GenericCard key={item.id} generic={item} />
+        <BrowseCard key={item.id} generic={item} />
       ))}
     </div>
   );

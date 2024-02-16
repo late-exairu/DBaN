@@ -4,7 +4,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import { getPublishers } from "@/utils/apiUtils";
-import GenericCardsList from "@/components/GenericCardsList";
+import BrowseList from "@/_components/BrowseList";
 
 export default async function page() {
   const queryKey = "publishers";
@@ -28,7 +28,7 @@ export default async function page() {
           Publishers
         </h3>
 
-        <GenericCardsList queryKey={queryKey} />
+        <BrowseList queryKey={queryKey} />
       </main>
     </HydrationBoundary>
   );

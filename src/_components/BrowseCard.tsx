@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { type GenericCard } from "@/types";
+import { type BrowseCard } from "@/types";
 
-export default function GenericCard({ generic }: { generic: GenericCard }) {
+export default function BrowseCard({ generic }: { generic: BrowseCard }) {
   if (!generic) return null;
 
   return (

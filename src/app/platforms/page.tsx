@@ -4,7 +4,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import { getPlatforms } from "@/utils/apiUtils";
-import GenericCardsList from "@/components/GenericCardsList";
+import BrowseList from "@/_components/BrowseList";
 
 export default async function page() {
   const queryKey = "platforms";
@@ -28,7 +28,7 @@ export default async function page() {
           Platforms
         </h3>
 
-        <GenericCardsList queryKey={queryKey} />
+        <BrowseList queryKey={queryKey} />
       </main>
     </HydrationBoundary>
   );
