@@ -7,19 +7,17 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-import { type ApiResponse, type GameData } from "@/types";
-
 type PagerProps = {
-  data: ApiResponse<GameData> | undefined;
+  itemsCount: number | undefined;
   currentPage: number;
+  pageSize?: number;
   handlePageChange: (page: number) => void;
 };
 
 export default function Pager(props: PagerProps) {
-  const { data, currentPage, handlePageChange } = props;
-  const pageSize = 24;
+  const { itemsCount, currentPage, handlePageChange, pageSize = 24 } = props;
 
-  const pagesCount = Math.ceil((data?.count ?? 0) / pageSize);
+  const pagesCount = Math.ceil((itemsCount ?? 0) / pageSize);
 
   const prevPage = currentPage - 1;
   const nextPage = currentPage + 1;
@@ -28,7 +26,7 @@ export default function Pager(props: PagerProps) {
     (page) => page >= currentPage - 2 && page <= currentPage + 2,
   );
 
-  if (!data) return null;
+  if (!itemsCount) return null;
 
   // console.log({ currentPage });
   // console.log({ pagesCount });

@@ -44,11 +44,13 @@ function PageContent() {
         handleSortByChange={handleSortByChange}
       />
 
-      <Pager
-        data={data}
-        currentPage={page}
-        handlePageChange={handlePageChange}
-      />
+      {data?.count && (
+        <Pager
+          itemsCount={data.count}
+          currentPage={page}
+          handlePageChange={handlePageChange}
+        />
+      )}
     </main>
   );
 }
