@@ -16,7 +16,7 @@ export default function BrowseCard({ browseCard }: { browseCard: BrowseCard }) {
         alt={browseCard.name}
       />
       <div className="relative px-6 pb-6 pt-4 text-sm">
-        <h3 className="z-10 my-10 text-center text-2xl font-bold">
+        <h3 className="z-10 mb-4 mt-2 flex min-h-20 items-center justify-center text-center text-2xl font-bold leading-tight">
           {browseCard.name}
         </h3>
 
