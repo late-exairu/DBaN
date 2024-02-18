@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import Pager from "@/components/Pager";
@@ -8,7 +8,7 @@ import { getPublishers } from "@/utils/apiUtils";
 import { type ApiResponse, type Publisher } from "@/types";
 import BrowseList from "@/_components/BrowseList";
 
-export default function Page() {
+function PageContent() {
   const searchParams = useSearchParams();
   const [page, setPage] = useState(
     Number.parseInt(searchParams.get("page") ?? "1"),
@@ -42,5 +42,13 @@ export default function Page() {
         />
       )}
     </main>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <PageContent />
+    </Suspense>
   );
 }
