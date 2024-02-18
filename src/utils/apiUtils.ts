@@ -82,49 +82,73 @@ const getGameStores = (id: number): Promise<ApiResponse<GameStore>> => {
     });
 };
 
-const getGenres = (): Promise<ApiResponse<Genre>> => {
+const getGenres = (page?: number): Promise<ApiResponse<Genre>> => {
   return axios
-    .get(`https://api.rawg.io/api/genres?page_size=12&key=${API_KEY}`)
+    .get(
+      `https://api.rawg.io/api/genres?page_size=12${
+        page ? "&page=" + page : ""
+      }&key=${API_KEY}`,
+    )
     .then((res) => {
       return res.data as ApiResponse<Genre>;
     });
 };
 
-const getPlatforms = (): Promise<ApiResponse<Platform>> => {
+const getPlatforms = (page?: number): Promise<ApiResponse<Platform>> => {
   return axios
-    .get(`https://api.rawg.io/api/platforms?page_size=12&key=${API_KEY}`)
+    .get(
+      `https://api.rawg.io/api/platforms?page_size=12${
+        page ? "&page=" + page : ""
+      }&key=${API_KEY}`,
+    )
     .then((res) => {
       return res.data as ApiResponse<Platform>;
     });
 };
 
-const getStores = (): Promise<ApiResponse<Store>> => {
+const getStores = (page?: number): Promise<ApiResponse<Store>> => {
   return axios
-    .get(`https://api.rawg.io/api/stores?page_size=12&key=${API_KEY}`)
+    .get(
+      `https://api.rawg.io/api/stores?page_size=12${
+        page ? "&page=" + page : ""
+      }&key=${API_KEY}`,
+    )
     .then((res) => {
       return res.data as ApiResponse<Store>;
     });
 };
 
-const getTags = (): Promise<ApiResponse<Tag>> => {
+const getTags = (page?: number): Promise<ApiResponse<Tag>> => {
   return axios
-    .get(`https://api.rawg.io/api/tags?page_size=12&key=${API_KEY}`)
+    .get(
+      `https://api.rawg.io/api/tags?page_size=12${
+        page ? "&page=" + page : ""
+      }&key=${API_KEY}`,
+    )
     .then((res) => {
       return res.data as ApiResponse<Tag>;
     });
 };
 
-const getDevelopers = (): Promise<ApiResponse<Developer>> => {
+const getDevelopers = (page?: number): Promise<ApiResponse<Developer>> => {
   return axios
-    .get(`https://api.rawg.io/api/developers?page_size=12&key=${API_KEY}`)
+    .get(
+      `https://api.rawg.io/api/developers?page_size=12${
+        page ? "&page=" + page : ""
+      }&key=${API_KEY}`,
+    )
     .then((res) => {
       return res.data as ApiResponse<Developer>;
     });
 };
 
-const getPublishers = (): Promise<ApiResponse<Publisher>> => {
+const getPublishers = (page?: number): Promise<ApiResponse<Publisher>> => {
   return axios
-    .get(`https://api.rawg.io/api/publishers?page_size=12&key=${API_KEY}`)
+    .get(
+      `https://api.rawg.io/api/publishers?page_size=12${
+        page ? "&page=" + page : ""
+      }&key=${API_KEY}`,
+    )
     .then((res) => {
       return res.data as ApiResponse<Publisher>;
     });

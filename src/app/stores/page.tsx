@@ -1,35 +1,46 @@
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from "@tanstack/react-query";
+"use client";
+
+import { useState } from "react";
+import { useQuery, keepPreviousData } from "@tanstack/react-query";
+import { useSearchParams } from "next/navigation";
+import Pager from "@/components/Pager";
 import { getStores } from "@/utils/apiUtils";
+import { type ApiResponse, type Store } from "@/types";
 import BrowseList from "@/_components/BrowseList";
 
-export default async function page() {
-  const queryKey = "stores";
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        staleTime: 600000, // 10 minutes
-      },
-    },
-  });
+export default function Page() {
+  const searchParams = useSearchParams();
+  const [page, setPage] = useState(
+    Number.parseInt(searchParams.get("page") ?? "1"),
+  );
 
-  await queryClient.fetchQuery({
-    queryKey: [queryKey],
-    queryFn: getStores,
+  function handlePageChange(page: number) {
+    setPage(page);
+  }
+
+  const { data, isLoading, error } = useQuery<ApiResponse<Store>>({
+    queryKey: ["stores", page],
+    queryFn: () => getStores(page),
+    placeholderData: keepPreviousData,
+    staleTime: 600000, // 10 minutes
   });
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <main className="relative flex w-full flex-col">
-        <h3 className="my-3 text-2xl font-black md:my-4 md:text-3xl xl:my-5 xl:text-4xl">
-          Stores
-        </h3>
+    <main className="relative flex w-full flex-col">
+      <h3 className="my-3 text-2xl font-black md:my-4 md:text-3xl xl:my-5 xl:text-4xl">
+        Stores
+      </h3>
 
-        <BrowseList queryKey={queryKey} />
-      </main>
-    </HydrationBoundary>
+      <BrowseList data={data} isLoading={isLoading} error={error} />
+
+      {data?.count && (
+        <Pager
+          itemsCount={data.count}
+          currentPage={page}
+          handlePageChange={handlePageChange}
+          pageSize={12}
+        />
+      )}
+    </main>
   );
 }
