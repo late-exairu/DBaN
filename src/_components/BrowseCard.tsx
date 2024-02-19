@@ -20,7 +20,12 @@ export default function BrowseCard({ browseCard }: { browseCard: BrowseCard }) {
           {browseCard.name}
         </h3>
 
-        <p className="text-sm font-bold">Popular titles:</p>
+        <p className="flex items-center justify-between border-b border-background/50 py-1 text-sm font-bold">
+          Popular titles:
+          {browseCard?.games_count && (
+            <span className="text-xs"> ({browseCard?.games_count})</span>
+          )}
+        </p>
 
         <div className="flex flex-col">
           {browseCard.games?.map((game) => (
