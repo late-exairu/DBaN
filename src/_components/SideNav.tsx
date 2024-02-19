@@ -34,6 +34,7 @@ export default function SideNav(props: SideNavProps) {
   const { className } = props;
   const isMenuOpen = useStore((state) => state.isMenuOpen);
   const checkActivePath = useActivePath();
+  const closeMenu = useStore((state) => state.closeMenu);
 
   return (
     <aside
@@ -47,6 +48,7 @@ export default function SideNav(props: SideNavProps) {
             <h3 className="text-xl font-black lg:text-2xl">
               <Link
                 href={group.href ?? ""}
+                onClick={() => closeMenu()}
                 className={`${
                   group.href &&
                   (checkActivePath(group.href)
@@ -64,6 +66,7 @@ export default function SideNav(props: SideNavProps) {
               {group.items?.map((item) => (
                 <Link
                   key={item.href}
+                  onClick={() => closeMenu()}
                   href={item.href}
                   className={`${
                     checkActivePath(item.href) ? "font-black" : ""
