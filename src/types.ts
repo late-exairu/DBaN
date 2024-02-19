@@ -95,6 +95,7 @@ type BrowseCard = {
   slug: string;
   image_background?: string;
   games?: GameData[];
+  games_count?: number;
 };
 
 type GameRequirements = {
