@@ -50,13 +50,19 @@ const getGameSearchResult = async (searchString: string) => {
     });
 };
 
-const getGames = async (page: number, sortBy: string, platforms: string) => {
+const getGames = async (
+  page: number,
+  sortBy?: string,
+  platforms?: string,
+  genres?: string,
+) => {
   return axios
     .get(
       `https://api.rawg.io/api/games?page_size=24${
         sortBy ? "&ordering=" + sortBy : ""
       }${page ? "&page=" + page : ""}
       ${platforms ? "&platforms=" + platforms : ""}
+      ${genres ? "&genres=" + genres : ""}
       &key=${API_KEY}`,
     )
     .then((res) => {
@@ -176,6 +182,14 @@ const getPlatformDetails = (id: string): Promise<Platform> => {
     });
 };
 
+const getGenreDetails = (id: string): Promise<Genre> => {
+  return axios
+    .get(`https://api.rawg.io/api/genres/${id}?key=${API_KEY}`)
+    .then((res) => {
+      return res.data as Genre;
+    });
+};
+
 export {
   getAboveRateGames,
   getAllTimeTopGames,
@@ -192,4 +206,5 @@ export {
   getDevelopers,
   getPublishers,
   getPlatformDetails,
+  getGenreDetails,
 };

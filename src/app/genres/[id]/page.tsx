@@ -5,15 +5,15 @@ import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import Cards from "@/components/Cards";
 import Pager from "@/components/Pager";
-import { getGames, getPlatformDetails } from "@/utils/apiUtils";
+import { getGames, getGenreDetails } from "@/utils/apiUtils";
 import { type ApiResponse, type GameData, type Platform } from "@/types";
 
 type Props = {
-  platforms: string;
+  genres: string;
 };
 
 function PageContent(props: Props) {
-  const { platforms } = props;
+  const { genres } = props;
   const searchParams = useSearchParams();
   const [sortBy, setSortBy] = useState("-metacritic");
   const [page, setPage] = useState(
@@ -29,15 +29,15 @@ function PageContent(props: Props) {
   }
 
   const { data, isLoading, error } = useQuery<ApiResponse<GameData>>({
-    queryKey: ["games", page, sortBy, platforms],
-    queryFn: () => getGames(page, sortBy, platforms),
+    queryKey: ["games", page, sortBy, genres],
+    queryFn: () => getGames(page, sortBy, genres),
     placeholderData: keepPreviousData,
     staleTime: 600000, // 10 minutes
   });
 
   const platformDetails = useQuery<Platform>({
-    queryKey: ["platformDetails", platforms],
-    queryFn: () => getPlatformDetails(platforms),
+    queryKey: ["genreDetails", genres],
+    queryFn: () => getGenreDetails(genres),
     placeholderData: keepPreviousData,
     staleTime: 600000, // 10 minutes
   });
@@ -48,7 +48,7 @@ function PageContent(props: Props) {
   return (
     <main className="flex flex-1 flex-col">
       <h3 className="my-3 text-2xl font-black md:my-4 md:text-3xl xl:my-5 xl:text-4xl">
-        Games for {platformDetails?.data?.name}
+        {platformDetails?.data?.name} Games
       </h3>
 
       {platformDetails?.data?.description && (
@@ -84,7 +84,7 @@ export default function Page({ params }: { params: { id: number } }) {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <PageContent platforms={id.toString()} />
+      <PageContent genres={id.toString()} />
     </Suspense>
   );
 }

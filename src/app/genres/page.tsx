@@ -31,7 +31,12 @@ function PageContent() {
         Genres
       </h3>
 
-      <BrowseList data={data} isLoading={isLoading} error={error} />
+      <BrowseList
+        data={data}
+        isLoading={isLoading}
+        error={error}
+        category={"genres"}
+      />
 
       {data?.count && (
         <Pager
