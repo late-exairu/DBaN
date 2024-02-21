@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import Pager from "@/components/Pager";
 import { getPlatforms } from "@/utils/apiUtils";
 import { type ApiResponse, type Platform } from "@/types";
-import BrowseList from "@/_components/BrowseList";
+import BrowseList from "@/components/BrowseList";
 
 function PageContent() {
   const searchParams = useSearchParams();
@@ -31,7 +31,12 @@ function PageContent() {
         Platforms
       </h3>
 
-      <BrowseList data={data} isLoading={isLoading} error={error} />
+      <BrowseList
+        data={data}
+        isLoading={isLoading}
+        error={error}
+        category={"platforms"}
+      />
 
       {data?.count && (
         <Pager

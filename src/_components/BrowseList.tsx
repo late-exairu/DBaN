@@ -20,10 +20,11 @@ type Props = {
   isError?: boolean;
   isSuccess?: boolean;
   error?: { message: string } | null;
+  category: string;
 };
 
 export default function BrowseList(props: Props) {
-  const { isLoading, error, data } = props;
+  const { isLoading, error, data, category } = props;
 
   if (isLoading) return <Preloader />;
   if (error) return <div>{`Error: ${error.message}`}</div>;
@@ -34,7 +35,7 @@ export default function BrowseList(props: Props) {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
       {browseList.map((item) => (
-        <BrowseCard key={item.id} browseCard={item} />
+        <BrowseCard key={item.id} browseCard={item} category={category} />
       ))}
     </div>
   );

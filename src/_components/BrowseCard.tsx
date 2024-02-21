@@ -2,7 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { type BrowseCard } from "@/types";
 
-export default function BrowseCard({ browseCard }: { browseCard: BrowseCard }) {
+export default function BrowseCard({
+  browseCard,
+  category,
+}: {
+  browseCard: BrowseCard;
+  category: string;
+}) {
   if (!browseCard) return null;
 
   return (
@@ -17,7 +23,12 @@ export default function BrowseCard({ browseCard }: { browseCard: BrowseCard }) {
       />
       <div className="relative px-6 pb-6 pt-4 text-sm">
         <h3 className="z-10 mb-4 mt-2 flex min-h-20 items-center justify-center text-center text-2xl font-bold leading-tight">
-          {browseCard.name}
+          <Link
+            href={`/${category}/${browseCard.id}`}
+            className="hover:underline"
+          >
+            {browseCard.name}
+          </Link>
         </h3>
 
         <p className="flex items-center justify-between border-b border-background/50 py-1 text-sm font-bold">
