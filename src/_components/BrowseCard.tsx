@@ -7,7 +7,7 @@ export default function BrowseCard({
   category,
 }: {
   browseCard: BrowseCard;
-  category: string;
+  category?: string;
 }) {
   if (!browseCard) return null;
 

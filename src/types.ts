@@ -97,7 +97,6 @@ type BrowseCard = {
   image_background?: string;
   games?: GameData[];
   games_count?: number;
-  category?: string;
 };
 
 type GameRequirements = {

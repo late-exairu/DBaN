@@ -20,7 +20,7 @@ type Props = {
   isError?: boolean;
   isSuccess?: boolean;
   error?: { message: string } | null;
-  category: string;
+  category?: string;
 };
 
 export default function BrowseList(props: Props) {
