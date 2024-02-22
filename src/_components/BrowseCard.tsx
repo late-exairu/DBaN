@@ -25,7 +25,7 @@ export default function BrowseCard({
         <h3 className="z-10 mb-4 mt-2 flex min-h-20 items-center justify-center text-center text-2xl font-bold leading-tight">
           <Link
             href={`/${category}/${browseCard.id}`}
-            className="hover:underline"
+            className="underline hover:no-underline"
           >
             {browseCard.name}
           </Link>
