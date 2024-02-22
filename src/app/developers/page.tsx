@@ -31,7 +31,12 @@ function PageContent() {
         Developers
       </h3>
 
-      <BrowseList data={data} isLoading={isLoading} error={error} />
+      <BrowseList
+        data={data}
+        isLoading={isLoading}
+        error={error}
+        category={"developers"}
+      />
 
       {data?.count && (
         <Pager

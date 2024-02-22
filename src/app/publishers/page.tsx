@@ -19,7 +19,7 @@ function PageContent() {
   }
 
   const { data, isLoading, error } = useQuery<ApiResponse<Publisher>>({
-    queryKey: ["publisher", page],
+    queryKey: ["publishers", page],
     queryFn: () => getPublishers(page),
     placeholderData: keepPreviousData,
     staleTime: 600000, // 10 minutes
@@ -31,7 +31,12 @@ function PageContent() {
         Publishers
       </h3>
 
-      <BrowseList data={data} isLoading={isLoading} error={error} />
+      <BrowseList
+        data={data}
+        isLoading={isLoading}
+        error={error}
+        category={"publishers"}
+      />
 
       {data?.count && (
         <Pager

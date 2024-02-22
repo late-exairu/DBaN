@@ -31,7 +31,12 @@ function PageContent() {
         Stores
       </h3>
 
-      <BrowseList data={data} isLoading={isLoading} error={error} />
+      <BrowseList
+        data={data}
+        isLoading={isLoading}
+        error={error}
+        category={"stores"}
+      />
 
       {data?.count && (
         <Pager

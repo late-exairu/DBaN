@@ -12,6 +12,7 @@ type Developer = {
   slug: string;
   games_count: number;
   image_background: string;
+  description?: string;
 };
 
 type Tag = {
@@ -21,6 +22,7 @@ type Tag = {
   language: string;
   games_count: number;
   image_background: string;
+  description?: string;
 };
 
 type Publisher = {
@@ -29,6 +31,7 @@ type Publisher = {
   slug: string;
   games_count: number;
   image_background: string;
+  description?: string;
 };
 
 type Genre = {
@@ -52,6 +55,7 @@ type Store = {
   domain: string;
   games_count: number;
   image_background: string;
+  description?: string;
 };
 
 type Screenshot = {

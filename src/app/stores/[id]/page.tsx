@@ -5,15 +5,15 @@ import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import Cards from "@/components/Cards";
 import Pager from "@/components/Pager";
-import { getGames, getGenreDetails } from "@/utils/apiUtils";
-import { type ApiResponse, type GameData, type Platform } from "@/types";
+import { getGames, getStoreDetails } from "@/utils/apiUtils";
+import { type ApiResponse, type GameData, type Store } from "@/types";
 
 type Props = {
-  genres: string;
+  stores: string;
 };
 
 function PageContent(props: Props) {
-  const { genres } = props;
+  const { stores } = props;
   const searchParams = useSearchParams();
   const [sortBy, setSortBy] = useState("-metacritic");
   const [page, setPage] = useState(
@@ -29,33 +29,33 @@ function PageContent(props: Props) {
   }
 
   const { data, isLoading, error } = useQuery<ApiResponse<GameData>>({
-    queryKey: ["games", page, sortBy, genres],
-    queryFn: () => getGames(page, sortBy, undefined, genres),
+    queryKey: ["games", page, sortBy, stores],
+    queryFn: () => getGames(page, sortBy, undefined, undefined, stores),
     placeholderData: keepPreviousData,
     staleTime: 600000, // 10 minutes
   });
 
-  const platformDetails = useQuery<Platform>({
-    queryKey: ["genreDetails", genres],
-    queryFn: () => getGenreDetails(genres),
+  const storeDetails = useQuery<Store>({
+    queryKey: ["storeDetails", stores],
+    queryFn: () => getStoreDetails(stores),
     placeholderData: keepPreviousData,
     staleTime: 600000, // 10 minutes
   });
 
-  platformDetails.error ? `Error: ${platformDetails?.error?.message}` : null;
-  platformDetails.isLoading ? "Loading..." : null;
+  storeDetails.error ? `Error: ${storeDetails?.error?.message}` : null;
+  storeDetails.isLoading ? "Loading..." : null;
 
   return (
     <main className="flex flex-1 flex-col">
       <h3 className="my-3 text-2xl font-black md:my-4 md:text-3xl xl:my-5 xl:text-4xl">
-        {platformDetails?.data?.name} Games
+        Games Available at {storeDetails?.data?.name}
       </h3>
 
-      {platformDetails?.data?.description && (
+      {storeDetails?.data?.description && (
         <div
           className="mb-3 text-sm md:mb-4"
           dangerouslySetInnerHTML={{
-            __html: platformDetails?.data?.description,
+            __html: storeDetails?.data?.description,
           }}
         />
       )}
@@ -84,7 +84,7 @@ export default function Page({ params }: { params: { id: number } }) {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <PageContent genres={id.toString()} />
+      <PageContent stores={id.toString()} />
     </Suspense>
   );
 }

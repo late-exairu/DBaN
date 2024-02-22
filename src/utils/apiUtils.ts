@@ -55,15 +55,22 @@ const getGames = async (
   sortBy?: string,
   platforms?: string,
   genres?: string,
+  stores?: string,
+  tags?: string,
+  publishers?: string,
+  developers?: string,
 ) => {
   return axios
     .get(
       `https://api.rawg.io/api/games?page_size=24${
         sortBy ? "&ordering=" + sortBy : ""
-      }${page ? "&page=" + page : ""}
-      ${platforms ? "&platforms=" + platforms : ""}
-      ${genres ? "&genres=" + genres : ""}
-      &key=${API_KEY}`,
+      }${page ? "&page=" + page : ""}${
+        platforms ? "&platforms=" + platforms : ""
+      }${genres ? "&genres=" + genres : ""}${
+        stores ? "&stores=" + stores : ""
+      }${tags ? "&tags=" + tags : ""}${
+        publishers ? "&publishers=" + publishers : ""
+      }${developers ? "&developers=" + developers : ""}&key=${API_KEY}`,
     )
     .then((res) => {
       return res.data as ApiResponse<GameData>;
@@ -190,6 +197,38 @@ const getGenreDetails = (id: string): Promise<Genre> => {
     });
 };
 
+const getStoreDetails = (id: string): Promise<Store> => {
+  return axios
+    .get(`https://api.rawg.io/api/stores/${id}?key=${API_KEY}`)
+    .then((res) => {
+      return res.data as Store;
+    });
+};
+
+const getTagDetails = (id: string): Promise<Tag> => {
+  return axios
+    .get(`https://api.rawg.io/api/tags/${id}?key=${API_KEY}`)
+    .then((res) => {
+      return res.data as Tag;
+    });
+};
+
+const getPublisherDetails = (id: string): Promise<Publisher> => {
+  return axios
+    .get(`https://api.rawg.io/api/publishers/${id}?key=${API_KEY}`)
+    .then((res) => {
+      return res.data as Publisher;
+    });
+};
+
+const getDeveloperDetails = (id: string): Promise<Developer> => {
+  return axios
+    .get(`https://api.rawg.io/api/developers/${id}?key=${API_KEY}`)
+    .then((res) => {
+      return res.data as Developer;
+    });
+};
+
 export {
   getAboveRateGames,
   getAllTimeTopGames,
@@ -207,4 +246,8 @@ export {
   getPublishers,
   getPlatformDetails,
   getGenreDetails,
+  getStoreDetails,
+  getTagDetails,
+  getPublisherDetails,
+  getDeveloperDetails,
 };
