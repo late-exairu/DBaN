@@ -70,7 +70,7 @@ export default function SideNav(props: SideNavProps) {
       } fixed inset-0 left-auto z-10 min-h-svh w-full min-w-44 bg-white px-5 shadow transition-transform sm:w-auto lg:relative lg:inset-auto lg:block lg:min-h-0 lg:translate-x-0 lg:bg-transparent lg:px-0 lg:shadow-none`}
     >
       <nav className="sticky top-[84px] my-5">
-        <ScrollArea className="h-[calc(100vh_-_84px)]">
+        <ScrollArea className="h-[calc(100dvh_-_84px)]">
           {menu.map((group) => (
             <div key={group.title} className="mb-5">
               <h3 className="text-xl font-black lg:text-2xl">
