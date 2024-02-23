@@ -51,7 +51,6 @@ const menu = [
       { name: "Strategy", href: "/genres/strategy" },
       { name: "Sports", href: "/genres/sports" },
       { name: "Puzzle", href: "/genres/puzzle" },
-      { name: "Horror", href: "/genres/horror" },
       { name: "Fighting", href: "/genres/fighting" },
       { name: "Racing", href: "/genres/racing" },
     ],
