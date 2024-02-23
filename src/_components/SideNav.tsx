@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useStore } from "@/state/store";
 import { useActivePath } from "@/utils/useActivePath";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 type SideNavProps = {
   className?: string;
@@ -39,6 +40,22 @@ const menu = [
       { name: "Android", href: "/platforms/android" },
     ],
   },
+  {
+    title: "Genres",
+    items: [
+      { name: "Action", href: "/genres/action" },
+      { name: "Adventure", href: "/genres/adventure" },
+      { name: "RPG", href: "/genres/role-playing-games-rpg" },
+      { name: "Shooter", href: "/genres/shooter" },
+      { name: "Simulation", href: "/genres/simulation" },
+      { name: "Strategy", href: "/genres/strategy" },
+      { name: "Sports", href: "/genres/sports" },
+      { name: "Puzzle", href: "/genres/puzzle" },
+      { name: "Horror", href: "/genres/horror" },
+      { name: "Fighting", href: "/genres/fighting" },
+      { name: "Racing", href: "/genres/racing" },
+    ],
+  },
 ];
 
 export default function SideNav(props: SideNavProps) {
@@ -54,44 +71,46 @@ export default function SideNav(props: SideNavProps) {
       } fixed inset-0 left-auto z-10 min-h-svh w-full min-w-44 bg-white px-5 shadow transition-transform sm:w-auto lg:relative lg:inset-auto lg:block lg:min-h-0 lg:translate-x-0 lg:bg-transparent lg:px-0 lg:shadow-none`}
     >
       <nav className="sticky top-[84px] my-5">
-        {menu.map((group) => (
-          <div key={group.title} className="mb-5">
-            <h3 className="text-xl font-black lg:text-2xl">
-              <Link
-                href={group.href ?? ""}
-                onClick={() => closeMenu()}
-                className={`${
-                  group.href &&
-                  (checkActivePath(group.href)
-                    ? "font-black hover:underline"
-                    : "")
-                } ${group.href ? "" : "cursor-text"} relative`}
-              >
-                {group.href && checkActivePath(group.href) ? (
-                  <span className="absolute inset-y-1 -left-2 w-1 bg-foreground" />
-                ) : null}
-                {group.title}
-              </Link>
-            </h3>
-            <ul className="flex flex-col text-lg font-bold lg:text-lg">
-              {group.items?.map((item) => (
+        <ScrollArea className="h-[calc(100vh_-_84px)]">
+          {menu.map((group) => (
+            <div key={group.title} className="mb-5">
+              <h3 className="text-xl font-black lg:text-2xl">
                 <Link
-                  key={item.href}
+                  href={group.href ?? ""}
                   onClick={() => closeMenu()}
-                  href={item.href}
                   className={`${
-                    checkActivePath(item.href) ? "font-black" : ""
-                  } relative mt-2 hover:underline`}
+                    group.href &&
+                    (checkActivePath(group.href)
+                      ? "font-black hover:underline"
+                      : "")
+                  } ${group.href ? "" : "cursor-text"} relative`}
                 >
-                  {checkActivePath(item.href) ? (
+                  {group.href && checkActivePath(group.href) ? (
                     <span className="absolute inset-y-1 -left-2 w-1 bg-foreground" />
                   ) : null}
-                  {item.name}
+                  {group.title}
                 </Link>
-              ))}
-            </ul>
-          </div>
-        ))}
+              </h3>
+              <ul className="flex flex-col text-lg font-bold lg:text-lg">
+                {group.items?.map((item) => (
+                  <Link
+                    key={item.href}
+                    onClick={() => closeMenu()}
+                    href={item.href}
+                    className={`${
+                      checkActivePath(item.href) ? "font-black" : ""
+                    } relative mt-2 hover:underline`}
+                  >
+                    {checkActivePath(item.href) ? (
+                      <span className="absolute inset-y-1 -left-2 w-1 bg-foreground" />
+                    ) : null}
+                    {item.name}
+                  </Link>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </ScrollArea>
       </nav>
     </aside>
   );
