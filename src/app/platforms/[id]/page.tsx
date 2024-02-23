@@ -28,16 +28,18 @@ function PageContent(props: Props) {
     setSortBy(sortBy);
   }
 
-  const { data, isLoading, error } = useQuery<ApiResponse<GameData>>({
-    queryKey: ["games", page, sortBy, platforms],
-    queryFn: () => getGames(page, sortBy, platforms),
+  const platformDetails = useQuery<Platform>({
+    queryKey: ["platformDetails", platforms],
+    queryFn: () => getPlatformDetails(platforms),
     placeholderData: keepPreviousData,
     staleTime: 600000, // 10 minutes
   });
 
-  const platformDetails = useQuery<Platform>({
-    queryKey: ["platformDetails", platforms],
-    queryFn: () => getPlatformDetails(platforms),
+  const categoryId = platformDetails?.data?.id.toString();
+
+  const { data, isLoading, error } = useQuery<ApiResponse<GameData>>({
+    queryKey: ["games", page, sortBy, categoryId],
+    queryFn: () => getGames(page, sortBy, categoryId),
     placeholderData: keepPreviousData,
     staleTime: 600000, // 10 minutes
   });

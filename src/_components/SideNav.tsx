@@ -28,6 +28,17 @@ const menu = [
       { name: "Publishers", href: "/publishers" },
     ],
   },
+  {
+    title: "Platforms",
+    items: [
+      { name: "PC", href: "/platforms/pc" },
+      { name: "PlayStation", href: "/platforms/playstation4" },
+      { name: "Xbox One", href: "/platforms/xbox-one" },
+      { name: "Nintendo Switch", href: "/platforms/nintendo-switch" },
+      { name: "iOS", href: "/platforms/ios" },
+      { name: "Android", href: "/platforms/android" },
+    ],
+  },
 ];
 
 export default function SideNav(props: SideNavProps) {
