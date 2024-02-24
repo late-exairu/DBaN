@@ -7,6 +7,7 @@ import Cards from "@/components/Cards";
 import Pager from "@/components/Pager";
 import { getGames, getPlatformDetails } from "@/utils/apiUtils";
 import { type ApiResponse, type GameData, type Platform } from "@/types";
+import PageBgImage from "@/components/PageBgImage";
 
 type Props = {
   platforms: string;
@@ -48,36 +49,39 @@ function PageContent(props: Props) {
   platformDetails.isLoading ? "Loading..." : null;
 
   return (
-    <main className="flex flex-1 flex-col">
-      <h3 className="my-3 text-2xl font-black md:my-4 md:text-3xl xl:my-5 xl:text-4xl">
-        Games for {platformDetails?.data?.name}
-      </h3>
+    <>
+      <PageBgImage background={platformDetails?.data?.image_background} />
+      <main className="flex flex-1 flex-col">
+        <h3 className="my-3 text-2xl font-black md:my-4 md:text-3xl xl:my-5 xl:text-4xl">
+          Games for {platformDetails?.data?.name}
+        </h3>
 
-      {platformDetails?.data?.description && (
-        <div
-          className="mb-3 text-sm md:mb-4"
-          dangerouslySetInnerHTML={{
-            __html: platformDetails?.data?.description,
-          }}
+        {platformDetails?.data?.description && (
+          <div
+            className="mb-3 text-sm md:mb-4"
+            dangerouslySetInnerHTML={{
+              __html: platformDetails?.data?.description,
+            }}
+          />
+        )}
+
+        <Cards
+          data={data}
+          isLoading={isLoading}
+          error={error}
+          sortBy={sortBy}
+          handleSortByChange={handleSortByChange}
         />
-      )}
 
-      <Cards
-        data={data}
-        isLoading={isLoading}
-        error={error}
-        sortBy={sortBy}
-        handleSortByChange={handleSortByChange}
-      />
-
-      {data?.count && (
-        <Pager
-          itemsCount={data.count}
-          currentPage={page}
-          handlePageChange={handlePageChange}
-        />
-      )}
-    </main>
+        {data?.count && (
+          <Pager
+            itemsCount={data.count}
+            currentPage={page}
+            handlePageChange={handlePageChange}
+          />
+        )}
+      </main>
+    </>
   );
 }
 

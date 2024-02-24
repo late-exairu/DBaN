@@ -3,6 +3,7 @@ type Platform = {
   id: number;
   slug: string;
   name: string;
+  image_background?: string;
   description?: string;
 };
 
@@ -11,7 +12,7 @@ type Developer = {
   name: string;
   slug: string;
   games_count: number;
-  image_background: string;
+  image_background?: string;
   description?: string;
 };
 
