@@ -5,6 +5,7 @@ import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import Cards from "@/components/Cards";
 import Pager from "@/components/Pager";
+import PageBgImage from "@/components/PageBgImage";
 import { getGames, getGenreDetails } from "@/utils/apiUtils";
 import { type ApiResponse, type GameData, type Platform } from "@/types";
 
@@ -35,47 +36,50 @@ function PageContent(props: Props) {
     staleTime: 600000, // 10 minutes
   });
 
-  const platformDetails = useQuery<Platform>({
+  const genreDetails = useQuery<Platform>({
     queryKey: ["genreDetails", genres],
     queryFn: () => getGenreDetails(genres),
     placeholderData: keepPreviousData,
     staleTime: 600000, // 10 minutes
   });
 
-  platformDetails.error ? `Error: ${platformDetails?.error?.message}` : null;
-  platformDetails.isLoading ? "Loading..." : null;
+  genreDetails.error ? `Error: ${genreDetails?.error?.message}` : null;
+  genreDetails.isLoading ? "Loading..." : null;
 
   return (
-    <main className="flex flex-1 flex-col">
-      <h3 className="my-3 text-2xl font-black md:my-4 md:text-3xl xl:my-5 xl:text-4xl">
-        {platformDetails?.data?.name} Games
-      </h3>
+    <>
+      <PageBgImage background={genreDetails?.data?.image_background} />
+      <main className="flex flex-1 flex-col">
+        <h3 className="my-3 text-2xl font-black md:my-4 md:text-3xl xl:my-5 xl:text-4xl">
+          {genreDetails?.data?.name} Games
+        </h3>
 
-      {platformDetails?.data?.description && (
-        <div
-          className="mb-3 text-sm md:mb-4"
-          dangerouslySetInnerHTML={{
-            __html: platformDetails?.data?.description,
-          }}
+        {genreDetails?.data?.description && (
+          <div
+            className="mb-3 text-sm md:mb-4"
+            dangerouslySetInnerHTML={{
+              __html: genreDetails?.data?.description,
+            }}
+          />
+        )}
+
+        <Cards
+          data={data}
+          isLoading={isLoading}
+          error={error}
+          sortBy={sortBy}
+          handleSortByChange={handleSortByChange}
         />
-      )}
 
-      <Cards
-        data={data}
-        isLoading={isLoading}
-        error={error}
-        sortBy={sortBy}
-        handleSortByChange={handleSortByChange}
-      />
-
-      {data?.count && (
-        <Pager
-          itemsCount={data.count}
-          currentPage={page}
-          handlePageChange={handlePageChange}
-        />
-      )}
-    </main>
+        {data?.count && (
+          <Pager
+            itemsCount={data.count}
+            currentPage={page}
+            handlePageChange={handlePageChange}
+          />
+        )}
+      </main>
+    </>
   );
 }
 

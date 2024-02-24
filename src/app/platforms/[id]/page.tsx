@@ -5,9 +5,9 @@ import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import Cards from "@/components/Cards";
 import Pager from "@/components/Pager";
+import PageBgImage from "@/components/PageBgImage";
 import { getGames, getPlatformDetails } from "@/utils/apiUtils";
 import { type ApiResponse, type GameData, type Platform } from "@/types";
-import PageBgImage from "@/components/PageBgImage";
 
 type Props = {
   platforms: string;

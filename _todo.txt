@@ -1,0 +1,6 @@
++ replace id's with slugs(if possible) in the url's
+- add bg image on browse pages
+- refactor getGame utils
+- add prerendering on browse pages
+- add icons for sideMenu
+- improve UX on genre and platform pages loading
