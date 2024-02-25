@@ -70,7 +70,7 @@ export default function Cards(props: Props) {
       </div>
 
       <TabsContent className="m-0" value="grid">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
           {games.map((game: GameData) => (
             <GameCard key={game.id} {...game} />
           ))}
