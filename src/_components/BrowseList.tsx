@@ -33,7 +33,7 @@ export default function BrowseList(props: Props) {
   const browseList = data?.results;
 
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
       {browseList.map((item) => (
         <BrowseCard key={item.id} browseCard={item} category={category} />
       ))}
