@@ -20,8 +20,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export async function PageContent(props: { genres: string }) {
-  const { genres } = props;
+export async function PageContent(props: { subcategory: string }) {
+  const { subcategory } = props;
 
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -32,18 +32,18 @@ export async function PageContent(props: { genres: string }) {
   });
 
   // await queryClient.prefetchQuery({
-  //   queryKey: ["games", page, sortBy, genres],
-  //   queryFn: () => getGames(page, sortBy, undefined, genres),
+  //   queryKey: ["games", page, sortBy, category],
+  //   queryFn: () => getGames(page, sortBy, undefined, category),
   // });
 
   await queryClient.prefetchQuery({
-    queryKey: ["genreDetails", genres],
-    queryFn: () => getGenreDetails(genres),
+    queryKey: ["genreDetails", subcategory],
+    queryFn: () => getGenreDetails(subcategory),
   });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <BrowsePage genres={genres} />
+      <BrowsePage category="genres" subcategory={subcategory} />
     </HydrationBoundary>
   );
 }
@@ -54,7 +54,7 @@ export default async function Page({ params }: { params: { id: number } }) {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <PageContent genres={id.toString()} />
+      <PageContent subcategory={id.toString()} />
     </Suspense>
   );
 }
