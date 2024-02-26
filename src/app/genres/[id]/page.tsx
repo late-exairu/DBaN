@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export async function Content(props: { subcategory: string }) {
+async function PageContent(props: { subcategory: string }) {
   const { subcategory } = props;
 
   const queryClient = new QueryClient({
@@ -54,7 +54,7 @@ export default async function Page({ params }: { params: { id: number } }) {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <Content subcategory={id.toString()} />
+      <PageContent subcategory={id.toString()} />
     </Suspense>
   );
 }
