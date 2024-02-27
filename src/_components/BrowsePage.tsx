@@ -52,31 +52,49 @@ export default function BrowsePage(props: Props) {
 
   const categories = {
     platforms: {
+      titleTemplate: (subcategoryValue: string) =>
+        `Games for ${subcategoryValue}`,
       detailsQueryKey: ["platformDetails", subcategory],
       detailsGetFn: getPlatformDetails,
-      subcategoryArrPosition: 2, // api query param position. 0 is page, 1 is sortBy. 2 is platform id. 3 is genre id. 4 is store id. 5 is tag id. 6 is publisher id. 7 is developer id.
+      subcategoryArrPosition: 2, // api query param position.
+      // 0 - page,
+      // 1 - sortBy,
+      // 2 - platform id,
+      // 3 - genre id,
+      // 4 - store id,
+      // 5 - tag id,
+      // 6 - publisher id,
+      // 7 - developer id.
     },
     genres: {
+      titleTemplate: (subcategoryValue: string) => `${subcategoryValue} Games`,
       detailsQueryKey: ["genreDetails", subcategory],
       detailsGetFn: getGenreDetails,
       subcategoryArrPosition: 3,
     },
     stores: {
+      titleTemplate: (subcategoryValue: string) =>
+        `Games Available at ${subcategoryValue}`,
       detailsQueryKey: ["storeDetails", subcategory],
       detailsGetFn: getStoreDetails,
       subcategoryArrPosition: 4,
     },
     tags: {
+      titleTemplate: (subcategoryValue: string) => `${subcategoryValue} Games`,
       detailsQueryKey: ["tagDetails", subcategory],
       detailsGetFn: getTagDetails,
       subcategoryArrPosition: 5,
     },
     publishers: {
+      titleTemplate: (subcategoryValue: string) =>
+        `Published by ${subcategoryValue}`,
       detailsQueryKey: ["publisherDetails", subcategory],
       detailsGetFn: getPublisherDetails,
       subcategoryArrPosition: 6,
     },
     developers: {
+      titleTemplate: (subcategoryValue: string) =>
+        `Developed by ${subcategoryValue}`,
       detailsQueryKey: ["developerDetails", subcategory],
       detailsGetFn: getDeveloperDetails,
       subcategoryArrPosition: 7,
@@ -117,9 +135,11 @@ export default function BrowsePage(props: Props) {
     <>
       <PageBgImage background={categoryDetails?.data?.image_background} />
       <main className="flex flex-1 flex-col">
-        <h3 className="my-3 text-2xl font-black md:my-4 md:text-3xl xl:my-5 xl:text-4xl">
-          {categoryDetails?.data?.name} Games
-        </h3>
+        {categoryDetails?.data?.name && (
+          <h3 className="my-3 text-2xl font-black md:my-4 md:text-3xl xl:my-5 xl:text-4xl">
+            {browseCategory.titleTemplate(categoryDetails?.data?.name)}
+          </h3>
+        )}
 
         {categoryDetails?.data?.description && (
           <div
