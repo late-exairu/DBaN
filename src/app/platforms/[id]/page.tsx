@@ -50,7 +50,6 @@ async function PageContent(props: { subcategory: string }) {
 
 export default async function Page({ params }: { params: { id: number } }) {
   const { id } = params;
-  console.log("id", id);
 
   return (
     <Suspense fallback={<div>Loading...</div>}>

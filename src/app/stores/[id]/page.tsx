@@ -1,92 +1,59 @@
-"use client";
-
-import { useState, Suspense } from "react";
-import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import { useSearchParams } from "next/navigation";
-import Cards from "@/components/Cards";
-import Pager from "@/components/Pager";
-import { getGames, getStoreDetails } from "@/utils/apiUtils";
-import { type ApiResponse, type GameData, type Store } from "@/types";
+import { Suspense } from "react";
+import { type Metadata } from "next";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+import { getStoreDetails } from "@/utils/apiUtils";
+import BrowsePage from "@/components/BrowsePage";
 
 type Props = {
-  stores: string;
+  params: { id: string; name: string };
 };
 
-function PageContent(props: Props) {
-  const { stores } = props;
-  const searchParams = useSearchParams();
-  const [sortBy, setSortBy] = useState("-metacritic");
-  const [page, setPage] = useState(
-    Number.parseInt(searchParams.get("page") ?? "1"),
-  );
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const data = await getStoreDetails(params.id);
 
-  function handlePageChange(page: number) {
-    setPage(page);
-  }
+  return {
+    title: `DBaN - ${data.name}`,
+  };
+}
 
-  function handleSortByChange(sortBy: string) {
-    setSortBy(sortBy);
-  }
+async function PageContent(props: { subcategory: string }) {
+  const { subcategory } = props;
 
-  const storeDetails = useQuery<Store>({
-    queryKey: ["storeDetails", stores],
-    queryFn: () => getStoreDetails(stores),
-    placeholderData: keepPreviousData,
-    staleTime: 600000, // 10 minutes
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 600000, // 10 minutes
+      },
+    },
   });
 
-  const categoryId = storeDetails?.data?.id.toString();
+  // await queryClient.prefetchQuery({
+  //   queryKey: ["games", page, sortBy, category],
+  //   queryFn: () => getGames(page, sortBy, undefined, category),
+  // });
 
-  const { data, isLoading, error } = useQuery<ApiResponse<GameData>>({
-    queryKey: ["games", page, sortBy, stores],
-    queryFn: () => getGames(page, sortBy, undefined, undefined, categoryId),
-    placeholderData: keepPreviousData,
-    staleTime: 600000, // 10 minutes
+  await queryClient.prefetchQuery({
+    queryKey: ["storeDetails", subcategory],
+    queryFn: () => getStoreDetails(subcategory),
   });
-
-  storeDetails.error ? `Error: ${storeDetails?.error?.message}` : null;
-  storeDetails.isLoading ? "Loading..." : null;
 
   return (
-    <main className="flex flex-1 flex-col">
-      <h3 className="my-3 text-2xl font-black md:my-4 md:text-3xl xl:my-5 xl:text-4xl">
-        Games Available at {storeDetails?.data?.name}
-      </h3>
-
-      {storeDetails?.data?.description && (
-        <div
-          className="mb-3 text-sm md:mb-4"
-          dangerouslySetInnerHTML={{
-            __html: storeDetails?.data?.description,
-          }}
-        />
-      )}
-
-      <Cards
-        data={data}
-        isLoading={isLoading}
-        error={error}
-        sortBy={sortBy}
-        handleSortByChange={handleSortByChange}
-      />
-
-      {data?.count && (
-        <Pager
-          itemsCount={data.count}
-          currentPage={page}
-          handlePageChange={handlePageChange}
-        />
-      )}
-    </main>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <BrowsePage category="stores" subcategory={subcategory} />
+    </HydrationBoundary>
   );
 }
 
-export default function Page({ params }: { params: { id: number } }) {
+export default async function Page({ params }: { params: { id: number } }) {
   const { id } = params;
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <PageContent stores={id.toString()} />
+      <PageContent subcategory={id.toString()} />
     </Suspense>
   );
 }

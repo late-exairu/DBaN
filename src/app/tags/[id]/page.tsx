@@ -1,91 +1,59 @@
-"use client";
-
-import { useState, Suspense } from "react";
-import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import { useSearchParams } from "next/navigation";
-import Cards from "@/components/Cards";
-import Pager from "@/components/Pager";
-import { getGames, getTagDetails } from "@/utils/apiUtils";
-import { type ApiResponse, type GameData, type Platform } from "@/types";
+import { Suspense } from "react";
+import { type Metadata } from "next";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+import { getTagDetails } from "@/utils/apiUtils";
+import BrowsePage from "@/components/BrowsePage";
 
 type Props = {
-  tags: string;
+  params: { id: string; name: string };
 };
 
-function PageContent(props: Props) {
-  const { tags } = props;
-  const searchParams = useSearchParams();
-  const [sortBy, setSortBy] = useState("-metacritic");
-  const [page, setPage] = useState(
-    Number.parseInt(searchParams.get("page") ?? "1"),
-  );
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const data = await getTagDetails(params.id);
 
-  function handlePageChange(page: number) {
-    setPage(page);
-  }
+  return {
+    title: `DBaN - ${data.name}`,
+  };
+}
 
-  function handleSortByChange(sortBy: string) {
-    setSortBy(sortBy);
-  }
+async function PageContent(props: { subcategory: string }) {
+  const { subcategory } = props;
 
-  const { data, isLoading, error } = useQuery<ApiResponse<GameData>>({
-    queryKey: ["games", page, sortBy, tags],
-    queryFn: () =>
-      getGames(page, sortBy, undefined, undefined, undefined, tags),
-    placeholderData: keepPreviousData,
-    staleTime: 600000, // 10 minutes
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 600000, // 10 minutes
+      },
+    },
   });
 
-  const tagDetails = useQuery<Platform>({
-    queryKey: ["tagsDetails", tags],
-    queryFn: () => getTagDetails(tags),
-    placeholderData: keepPreviousData,
-    staleTime: 600000, // 10 minutes
-  });
+  // await queryClient.prefetchQuery({
+  //   queryKey: ["games", page, sortBy, category],
+  //   queryFn: () => getGames(page, sortBy, undefined, category),
+  // });
 
-  tagDetails.error ? `Error: ${tagDetails?.error?.message}` : null;
-  tagDetails.isLoading ? "Loading..." : null;
+  await queryClient.prefetchQuery({
+    queryKey: ["tagDetails", subcategory],
+    queryFn: () => getTagDetails(subcategory),
+  });
 
   return (
-    <main className="flex flex-1 flex-col">
-      <h3 className="my-3 text-2xl font-black md:my-4 md:text-3xl xl:my-5 xl:text-4xl">
-        {tagDetails?.data?.name} Games
-      </h3>
-
-      {tagDetails?.data?.description && (
-        <div
-          className="mb-3 text-sm md:mb-4"
-          dangerouslySetInnerHTML={{
-            __html: tagDetails?.data?.description,
-          }}
-        />
-      )}
-
-      <Cards
-        data={data}
-        isLoading={isLoading}
-        error={error}
-        sortBy={sortBy}
-        handleSortByChange={handleSortByChange}
-      />
-
-      {data?.count && (
-        <Pager
-          itemsCount={data.count}
-          currentPage={page}
-          handlePageChange={handlePageChange}
-        />
-      )}
-    </main>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <BrowsePage category="tags" subcategory={subcategory} />
+    </HydrationBoundary>
   );
 }
 
-export default function Page({ params }: { params: { id: number } }) {
+export default async function Page({ params }: { params: { id: number } }) {
   const { id } = params;
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <PageContent tags={id.toString()} />
+      <PageContent subcategory={id.toString()} />
     </Suspense>
   );
 }

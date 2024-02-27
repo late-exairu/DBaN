@@ -10,11 +10,21 @@ import {
   getGames,
   getGenreDetails,
   getPlatformDetails,
+  getTagDetails,
+  getStoreDetails,
+  getPublisherDetails,
+  getDeveloperDetails,
 } from "@/utils/apiUtils";
 import { type ApiResponse, type GameData, type Platform } from "@/types";
 
 type Props = {
-  category: "genres" | "platforms";
+  category:
+    | "genres"
+    | "platforms"
+    | "stores"
+    | "tags"
+    | "publishers"
+    | "developers";
   subcategory: string;
 };
 
@@ -41,30 +51,39 @@ export default function BrowsePage(props: Props) {
   }
 
   const categories = {
-    genres: {
-      title: "genre",
-      titles: "genres",
-      detailsQueryKey: ["genreDetails", subcategory],
-      detailsGetFn: getGenreDetails,
-      detailsFnParams: category,
-      gamesQueryKey: ["games", page, sortBy, subcategory],
-      gamesFnParams: [page, sortBy, undefined, subcategory],
-      subcategoryArrPosition: 3,
-    },
     platforms: {
-      title: "platform",
-      titles: "platforms",
       detailsQueryKey: ["platformDetails", subcategory],
       detailsGetFn: getPlatformDetails,
-      detailsFnParams: category,
-      gamesQueryKey: ["games", page, sortBy, subcategory],
-      gamesFnParams: [page, sortBy, subcategory],
-      subcategoryArrPosition: 2,
+      subcategoryArrPosition: 2, // api query param position. 0 is page, 1 is sortBy. 2 is platform id. 3 is genre id. 4 is store id. 5 is tag id. 6 is publisher id. 7 is developer id.
+    },
+    genres: {
+      detailsQueryKey: ["genreDetails", subcategory],
+      detailsGetFn: getGenreDetails,
+      subcategoryArrPosition: 3,
+    },
+    stores: {
+      detailsQueryKey: ["storeDetails", subcategory],
+      detailsGetFn: getStoreDetails,
+      subcategoryArrPosition: 4,
+    },
+    tags: {
+      detailsQueryKey: ["tagDetails", subcategory],
+      detailsGetFn: getTagDetails,
+      subcategoryArrPosition: 5,
+    },
+    publishers: {
+      detailsQueryKey: ["publisherDetails", subcategory],
+      detailsGetFn: getPublisherDetails,
+      subcategoryArrPosition: 6,
+    },
+    developers: {
+      detailsQueryKey: ["developerDetails", subcategory],
+      detailsGetFn: getDeveloperDetails,
+      subcategoryArrPosition: 7,
     },
   };
 
   const browseCategory = categories[category];
-  console.log("browseCategory", browseCategory);
 
   function handlePageChange(page: number) {
     setPage(page);
