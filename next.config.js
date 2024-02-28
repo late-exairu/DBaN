@@ -14,6 +14,12 @@ const config = {
         hostname: "media.rawg.io",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+        port: "",
+        pathname: "/a/**",
+      },
     ],
   },
 };
