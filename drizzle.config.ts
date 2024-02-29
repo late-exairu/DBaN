@@ -1,4 +1,8 @@
+import { cwd } from "node:process";
 import type { Config } from "drizzle-kit";
+import { loadEnvConfig } from "@next/env";
+
+loadEnvConfig(cwd());
 
 export default {
   schema: "./src/db/schema.ts",
@@ -7,6 +11,6 @@ export default {
   dbCredentials: {
     connectionString:
       process.env.DATABASE_URL ??
-      "postgres://postgres.dizkqkzahdkunwpjlyst:5QWW33VUfhIar1sP@aws-0-us-west-1.pooler.supabase.com:5432/postgres",
+      "postgres://postgres:postgres@localhost:5432/postgres",
   },
 } satisfies Config;
