@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Burger from "@/components/Burger";
 import { Button } from "@/components/ui/button";
-import { auth, signIn, signOut } from "@/auth";
+import { auth, signOut } from "@/auth";
 import {
   Popover,
   PopoverContent,
