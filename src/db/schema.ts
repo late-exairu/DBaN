@@ -71,12 +71,17 @@ export const forms = pgTable("forms", {
 });
 
 export const usersRelations = relations(users, ({ one }) => ({
-  profiles: one(profiles),
+  profiles: one(profiles, {
+    fields: [users.id],
+    references: [profiles.userId],
+  }),
 }));
 
 export const profiles = pgTable("profile", {
   id: serial("id").primaryKey(),
   name: text("name"),
   bio: text("bio"),
-  userId: text("user_id").references(() => users.id),
+  userId: text("user_id")
+    .notNull()
+    .references(() => users.id),
 });
