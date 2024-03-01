@@ -4,7 +4,10 @@ import {
   text,
   primaryKey,
   integer,
+  serial,
+  boolean,
 } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
 import type { AdapterAccount } from "@auth/core/adapters";
 
 export const users = pgTable("user", {
@@ -58,3 +61,22 @@ export const verificationTokens = pgTable(
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
   }),
 );
+
+export const forms = pgTable("forms", {
+  id: serial("id").primaryKey(),
+  name: text("name"),
+  description: text("description"),
+  userId: text("user_id"),
+  published: boolean("published"),
+});
+
+export const usersRelations = relations(users, ({ one }) => ({
+  profiles: one(profiles),
+}));
+
+export const profiles = pgTable("profile", {
+  id: serial("id").primaryKey(),
+  name: text("name"),
+  bio: text("bio"),
+  userId: text("user_id").references(() => users.id),
+});

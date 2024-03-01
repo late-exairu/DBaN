@@ -27,6 +27,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
+      "@/db": ["./src/db"],
       "@/types": ["./src/types"],
       "@/public/*": ["./public/*"],
       "@/styles/*": ["./src/styles/*"],
