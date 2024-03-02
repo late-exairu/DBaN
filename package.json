@@ -7,7 +7,9 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "generate": "drizzle-kit generate:pg",
+    "push-db": "drizzle-kit push:pg"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^0.7.0",

@@ -3,6 +3,8 @@ import { eq } from "drizzle-orm";
 import { auth } from "@/auth";
 import { users } from "@/db/schema";
 import { db } from "@/db";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 export default async function Page() {
   const session = await auth();
@@ -21,10 +23,25 @@ export default async function Page() {
           <TabsTrigger value="account">Account</TabsTrigger>
           <TabsTrigger value="password">Password</TabsTrigger>
         </TabsList>
-        <TabsContent value="account">
-          <p className="">{result?.name}</p>
-          <p className="">{result?.email}</p>
+
+        <TabsContent className="flex flex-col gap-4" value="account">
+          <div className="col-span-2 flex gap-4">
+            <div>
+              <label className="text-sm">Name</label>
+              <Input type="text" placeholder={result?.name ?? ""} readOnly />
+            </div>
+            <div>
+              <label className="text-sm">Email</label>
+              <Input type="text" placeholder={result?.email} readOnly />
+            </div>
+          </div>
+
+          <div className="col-span-2">
+            <label className="text-sm">Bio</label>
+            <Textarea />
+          </div>
         </TabsContent>
+
         <TabsContent value="password">Change your password here.</TabsContent>
       </Tabs>
     </main>
