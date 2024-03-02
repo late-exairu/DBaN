@@ -1,10 +1,11 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { eq } from "drizzle-orm";
+import Image from "next/image";
 import { auth } from "@/auth";
 import { users } from "@/db/schema";
 import { db } from "@/db";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default async function Page() {
   const session = await auth();
@@ -18,13 +19,23 @@ export default async function Page() {
       <h1 className="my-3 text-2xl font-black md:my-4 md:text-3xl xl:my-5 xl:text-4xl">
         Profile
       </h1>
-      <Tabs defaultValue="account" className="w-[400px]">
+      <Tabs defaultValue="account" className="max-w-[600px]">
         <TabsList>
           <TabsTrigger value="account">Account</TabsTrigger>
           <TabsTrigger value="password">Password</TabsTrigger>
         </TabsList>
 
-        <TabsContent className="flex flex-col gap-4" value="account">
+        <TabsContent className="mt-6 flex flex-col gap-4" value="account">
+          <div className="col-span-2">
+            <Image
+              src={result?.image ?? "/game-image-placeholder.png"}
+              alt={result?.name ?? "User Image Placeholder"}
+              width={64}
+              height={64}
+              className="block rounded-md"
+            />
+          </div>
+
           <div className="col-span-2 flex gap-4">
             <div>
               <label className="text-sm">Name</label>
