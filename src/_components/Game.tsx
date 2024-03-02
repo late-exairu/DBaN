@@ -9,7 +9,7 @@ import Breadcrumb from "@/components/Breadcrumbs";
 import GameScreenshots from "@/components/GameScreenshots";
 import MetacriticScore from "@/components/MetacriticScore";
 import GameSeries from "@/components/GameSeries";
-import GamePlatforms from "@/_components/GamePlatforms";
+import GamePlatforms from "@/components/GamePlatforms";
 import {
   getGameData,
   getGameScreenshots,

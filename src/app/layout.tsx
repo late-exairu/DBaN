@@ -1,5 +1,5 @@
 import "@/styles/globals.css";
-import Header from "@/_components/Header";
+import Header from "@/components/Header";
 import Providers from "@/utils/providers";
 import SideNav from "@/components/SideNav";
 import Footer from "@/components/Footer";

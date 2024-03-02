@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import Pager from "@/components/Pager";
 import { getDevelopers } from "@/utils/apiUtils";
 import { type ApiResponse, type Developer } from "@/types";
-import BrowseList from "@/_components/BrowseList";
+import BrowseList from "@/components/BrowseList";
 
 function PageContent() {
   const searchParams = useSearchParams();

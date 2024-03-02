@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import MetacriticScore from "@/components/MetacriticScore";
-import GamePlatforms from "@/_components/GamePlatforms";
+import GamePlatforms from "@/components/GamePlatforms";
 import { type GameData } from "@/types";
 
 export default function GameCard(props: GameData) {
