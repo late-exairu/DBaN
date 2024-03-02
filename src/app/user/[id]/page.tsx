@@ -13,7 +13,9 @@ export default async function Page() {
 
   return (
     <main className="relative flex flex-col">
-      <h1 className="text-2xl font-black md:text-4xl xl:text-5xl">Profile</h1>
+      <h1 className="my-3 text-2xl font-black md:my-4 md:text-3xl xl:my-5 xl:text-4xl">
+        Profile
+      </h1>
       <Tabs defaultValue="account" className="w-[400px]">
         <TabsList>
           <TabsTrigger value="account">Account</TabsTrigger>
