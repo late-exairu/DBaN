@@ -30,8 +30,8 @@ export default async function Page() {
             <Image
               src={result?.image ?? "/game-image-placeholder.png"}
               alt={result?.name ?? "User Image Placeholder"}
-              width={64}
-              height={64}
+              width={96}
+              height={96}
               className="block rounded-md"
             />
           </div>
