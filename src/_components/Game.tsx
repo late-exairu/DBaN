@@ -10,6 +10,7 @@ import GameScreenshots from "@/components/GameScreenshots";
 import MetacriticScore from "@/components/MetacriticScore";
 import GameSeries from "@/components/GameSeries";
 import GamePlatforms from "@/components/GamePlatforms";
+import GameTag from "@/components/GameTag";
 import {
   getGameData,
   getGameScreenshots,
@@ -103,6 +104,12 @@ export default function Game(props: GameProps) {
             Average playtime: <span>{game.playtime}</span> hours
           </div>
         ) : null}
+
+        {game.tags && (
+          <div className="flex flex-wrap gap-0.5">
+            {game.tags?.map((tag) => <GameTag key={tag.id} {...tag} />)}
+          </div>
+        )}
       </div>
 
       <h1 className="text-2xl font-black md:text-4xl xl:text-5xl">
