@@ -104,12 +104,6 @@ export default function Game(props: GameProps) {
             Average playtime: <span>{game.playtime}</span> hours
           </div>
         ) : null}
-
-        {game.tags && (
-          <div className="flex flex-wrap gap-0.5">
-            {game.tags?.map((tag) => <GameTag key={tag.id} {...tag} />)}
-          </div>
-        )}
       </div>
 
       <h1 className="text-2xl font-black md:text-4xl xl:text-5xl">
@@ -215,17 +209,16 @@ export default function Game(props: GameProps) {
               <p className="">{formatDate(game.released)}</p>
             </div>
 
-            <div className="col-span-2">
-              <p className="text-sm font-bold text-slate-600">Tags</p>
-              <ul className="">
-                {game.tags.map((tag) => (
-                  <li key={tag.id} className="inline-block">
-                    {tag.name}
-                    {tag !== game.tags[game.tags.length - 1] ? ", " : null}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {game.tags && game.tags.length > 0 && (
+              <div className="">
+                <p className="text-sm font-bold text-slate-600">Tags</p>
+                <div className="flex flex-wrap gap-0.5">
+                  {game.tags.map((tag) => (
+                    <GameTag key={tag.id} {...tag} />
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {!isRequirementsEmpty ? (

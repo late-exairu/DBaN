@@ -6,7 +6,7 @@ export default function GameTag(props: Tag) {
 
   return (
     <Link
-      className="rounded-sm border border-secondary px-1 text-xs normal-case text-foreground transition-colors duration-100 hover:bg-background "
+      className="rounded-sm border border-secondary px-1 text-xs font-medium normal-case text-foreground transition-colors duration-100 hover:bg-secondary"
       href={`/tags/${slug}`}
     >
       {name}
