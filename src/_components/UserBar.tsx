@@ -49,7 +49,10 @@ export default async function UserBar() {
             <div className="">{session.user.name}</div>
             <div className="text-xs text-foreground">{session.user.email}</div>
 
-            <ul className="mt-3">
+            <ul className="mt-3 flex flex-col gap-2">
+              <li className="text-sm">
+                <Link href={`/user/${session.user.name}`}>Profile</Link>
+              </li>
               <li>
                 <SignOut />
               </li>
