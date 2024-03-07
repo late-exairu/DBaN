@@ -6,6 +6,7 @@ import { db } from "@/db";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
 
 export default async function Page() {
   const session = await auth();
@@ -13,6 +14,17 @@ export default async function Page() {
   const result = await db.query.users.findFirst({
     where: eq(users.id, session?.user?.id ?? ""),
   });
+
+  async function handleSave(formData: FormData) {
+    "use server";
+
+    await db
+      .update(users)
+      .set({ bio: formData.get("bio") as string })
+      .where(eq(users.id, session?.user?.id ?? ""));
+
+    console.log("Save");
+  }
 
   return (
     <main className="relative flex flex-col">
@@ -47,10 +59,16 @@ export default async function Page() {
             </div>
           </div>
 
-          <div className="col-span-2">
-            <label className="text-sm">Bio</label>
-            <Textarea />
-          </div>
+          <form action={handleSave}>
+            <div className="col-span-2">
+              <label className="text-sm">Bio</label>
+              <Textarea name="bio" defaultValue={result?.bio ?? ""} />
+            </div>
+
+            <Button className="mt-4" type="submit">
+              Save
+            </Button>
+          </form>
         </TabsContent>
 
         <TabsContent value="password">Change your password here.</TabsContent>
