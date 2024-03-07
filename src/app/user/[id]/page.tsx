@@ -20,7 +20,10 @@ export default async function Page() {
 
     await db
       .update(users)
-      .set({ bio: formData.get("bio") as string })
+      .set({
+        name: formData.get("name") as string,
+        bio: formData.get("bio") as string,
+      })
       .where(eq(users.id, session?.user?.id ?? ""));
 
     console.log("Save");
@@ -37,29 +40,32 @@ export default async function Page() {
           <TabsTrigger value="password">Password</TabsTrigger>
         </TabsList>
 
-        <TabsContent className="mt-6 flex flex-col gap-4" value="account">
-          <div className="col-span-2">
-            <Image
-              src={result?.image ?? "/game-image-placeholder.png"}
-              alt={result?.name ?? "User Image Placeholder"}
-              width={96}
-              height={96}
-              className="block rounded-md"
-            />
-          </div>
-
-          <div className="col-span-2 flex gap-4">
-            <div>
-              <label className="text-sm">Name</label>
-              <Input type="text" placeholder={result?.name ?? ""} readOnly />
+        <TabsContent className="mt-6" value="account">
+          <form action={handleSave} className="flex flex-col gap-4">
+            <div className="col-span-2">
+              <Image
+                src={result?.image ?? "/game-image-placeholder.png"}
+                alt={result?.name ?? "User Image Placeholder"}
+                width={96}
+                height={96}
+                className="block rounded-md"
+              />
             </div>
-            <div>
-              <label className="text-sm">Email</label>
-              <Input type="text" placeholder={result?.email} readOnly />
-            </div>
-          </div>
 
-          <form action={handleSave}>
+            <div className="col-span-2 flex gap-4">
+              <div>
+                <label className="text-sm">Name</label>
+                <Input
+                  type="text"
+                  name="name"
+                  defaultValue={result?.name ?? ""}
+                />
+              </div>
+              <div>
+                <label className="text-sm">Email</label>
+                <Input type="text" placeholder={result?.email} readOnly />
+              </div>
+            </div>
             <div className="col-span-2">
               <label className="text-sm">Bio</label>
               <Textarea name="bio" defaultValue={result?.bio ?? ""} />
