@@ -63,25 +63,39 @@ export default async function Profile(props: ProfileProps) {
             <div className="col-span-2 flex gap-4">
               <div>
                 <label className="text-sm">Name</label>
-                <Input
-                  type="text"
-                  name="name"
-                  defaultValue={user?.name ?? ""}
-                />
+                {personal ? (
+                  <Input
+                    type="text"
+                    name="name"
+                    defaultValue={user?.name ?? ""}
+                  />
+                ) : (
+                  <p className="flex h-9 w-full min-w-52 py-2 text-sm">
+                    {user?.name}
+                  </p>
+                )}
               </div>
               <div>
                 <label className="text-sm">Email</label>
-                <Input type="text" placeholder={user?.email} readOnly />
+                <Input type="text" placeholder={user?.email} />
               </div>
             </div>
             <div className="col-span-2">
               <label className="text-sm">Bio</label>
-              <Textarea name="bio" defaultValue={user?.bio ?? ""} />
+              {personal ? (
+                <Textarea name="bio" defaultValue={user?.bio ?? ""} />
+              ) : (
+                <p className="flex h-9 w-full min-w-52 py-2 text-sm">
+                  {user?.bio}
+                </p>
+              )}
             </div>
 
-            <Button className="mt-4" type="submit">
-              Save
-            </Button>
+            {personal ? (
+              <Button className="" type="submit">
+                Save
+              </Button>
+            ) : null}
           </form>
         </TabsContent>
 

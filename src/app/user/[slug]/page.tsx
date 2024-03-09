@@ -14,15 +14,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
   });
 
   if (!session) {
-    return <div>Unauthorized</div>;
+    return <div className="mt-4">Unauthorized. Please login.</div>;
   }
 
   if (!result) {
     return <div>User not found</div>;
-  }
-
-  if (slug !== session?.user?.name) {
-    return <div>Other user profile</div>;
   }
 
   const user = {
@@ -32,6 +28,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
     bio: result.bio ?? "",
     image: result.image ?? "",
   };
+
+  if (slug !== session?.user?.name) {
+    return <Profile user={user} />;
+  }
 
   return <Profile user={user} personal />;
 }
