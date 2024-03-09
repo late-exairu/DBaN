@@ -8,8 +8,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 
-export default async function Page() {
+type Props = {
+  slug: string;
+};
+
+export default async function Page(props: Props) {
+  const { slug } = props;
   const session = await auth();
+  console.log(slug);
 
   const result = await db.query.users.findFirst({
     where: eq(users.id, session?.user?.id ?? ""),
