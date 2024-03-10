@@ -40,7 +40,7 @@ export default async function Profile(props: ProfileProps) {
   return (
     <main className="relative flex flex-col">
       <h1 className="my-3 text-2xl font-black md:my-4 md:text-3xl xl:my-5 xl:text-4xl">
-        Profile
+        {user?.name}
       </h1>
       <Tabs defaultValue="account" className="max-w-[600px]">
         <TabsList>
