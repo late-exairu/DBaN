@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
+import Link from "next/link";
 import SystemRequirements from "@/components/SystemRequirements";
 import Preloader from "@/components/Preloader";
 import GameStores from "@/components/GameStores";
@@ -138,8 +139,16 @@ export default function Game(props: GameProps) {
               <p className="text-sm font-bold text-slate-600">Platforms</p>
               <ul className="">
                 {game.platforms.map((platform) => (
-                  <li key={platform.platform.id} className="inline-block">
-                    {platform.platform.name}
+                  <li
+                    key={platform.platform.id}
+                    className="inline-block whitespace-pre-wrap"
+                  >
+                    <Link
+                      className="underline hover:no-underline"
+                      href={`/platforms/${platform.platform.slug}`}
+                    >
+                      {platform.platform.name}
+                    </Link>
                     {platform !== game.platforms[game.platforms.length - 1]
                       ? ", "
                       : null}
@@ -152,8 +161,16 @@ export default function Game(props: GameProps) {
               <p className="text-sm font-bold text-slate-600">Genres</p>
               <ul className="">
                 {game.genres.map((genre) => (
-                  <li key={genre.id} className="inline-block">
-                    {genre.name}
+                  <li
+                    key={genre.id}
+                    className="inline-block whitespace-pre-wrap"
+                  >
+                    <Link
+                      className="underline hover:no-underline"
+                      href={`/genres/${genre.slug}`}
+                    >
+                      {genre.name}
+                    </Link>
                     {genre !== game.genres[game.genres.length - 1]
                       ? ", "
                       : null}
@@ -166,8 +183,16 @@ export default function Game(props: GameProps) {
               <p className="text-sm font-bold text-slate-600">Developers</p>
               <ul className="">
                 {game.developers.map((developer) => (
-                  <li key={developer.id} className="inline-block">
-                    {developer.name}
+                  <li
+                    key={developer.id}
+                    className="inline-block whitespace-pre-wrap"
+                  >
+                    <Link
+                      className="underline hover:no-underline"
+                      href={`/developers/${developer.slug}`}
+                    >
+                      {developer.name}
+                    </Link>
                     {developer !== game.developers[game.developers.length - 1]
                       ? ", "
                       : null}
@@ -180,8 +205,16 @@ export default function Game(props: GameProps) {
               <p className="text-sm font-bold text-slate-600">Publishers</p>
               <ul className="">
                 {game.publishers.map((publisher) => (
-                  <li key={publisher.id} className="inline-block">
-                    {publisher.name}
+                  <li
+                    key={publisher.id}
+                    className="inline-block whitespace-pre-wrap"
+                  >
+                    <Link
+                      className="underline hover:no-underline"
+                      href={`/publishers/${publisher.slug}`}
+                    >
+                      {publisher.name}
+                    </Link>
                     {publisher !== game.publishers[game.publishers.length - 1]
                       ? ", "
                       : null}
@@ -194,8 +227,16 @@ export default function Game(props: GameProps) {
               <p className="text-sm font-bold text-slate-600">Stores</p>
               <ul className="">
                 {game.stores.map((store) => (
-                  <li key={store.store.id} className="inline-block">
-                    {store.store.name}
+                  <li
+                    key={store.store.id}
+                    className="inline-block whitespace-pre-wrap"
+                  >
+                    <Link
+                      className="underline hover:no-underline"
+                      href={`/stores/${store.store.slug}`}
+                    >
+                      {store.store.name}
+                    </Link>
                     {store !== game.stores[game.stores.length - 1]
                       ? ", "
                       : null}
