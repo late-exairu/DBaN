@@ -12,10 +12,13 @@ export default function SystemRequirements(props: GameRequirements) {
       id: game.platform.id,
       name: game.platform.name,
       slug: game.platform.slug,
-      minimum: game.requirements.minimum,
-      recommended: game.requirements.recommended ?? null,
+      minimum: game.requirements.minimum?.replace(/Minimum:\n/g, ""),
+      recommended:
+        game.requirements.recommended?.replace(/Recommended:\n/g, "") ?? null,
     }))
     .sort((a, b) => a.id - b.id);
+
+  platformsArray.map((platform) => console.log(platform));
 
   return (
     <Tabs defaultValue={platformsArray[0]?.slug} className="my-4">
