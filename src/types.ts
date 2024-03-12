@@ -83,6 +83,7 @@ type GameData = {
   name: string;
   body: string;
   background_image: string;
+  background_image_additional?: string;
   metacritic: number;
   id: number;
   playtime: number;

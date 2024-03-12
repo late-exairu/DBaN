@@ -21,8 +21,6 @@ export default function SystemRequirements(props: GameRequirements) {
     }))
     .sort((a, b) => a.id - b.id);
 
-  platformsArray.map((platform) => console.log(platform));
-
   return (
     <Tabs defaultValue={platformsArray[0]?.slug} className="my-4">
       <TabsList className="mb-2">

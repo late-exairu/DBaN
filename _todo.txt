@@ -4,3 +4,6 @@
 + improve UX on genre and platform pages loading
 - refactor getGame utils
 - add icons for sideMenu
+- add official website link on game page
+- add reddit_url on game page
+- add metacritic_url on game page
