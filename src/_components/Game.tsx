@@ -251,7 +251,7 @@ export default function Game(props: GameProps) {
             </div>
 
             {game.tags && game.tags.length > 0 && (
-              <div className="">
+              <div className="col-span-2">
                 <p className="text-sm font-bold text-slate-600">Tags</p>
                 <div className="flex flex-wrap gap-0.5">
                   {game.tags.map((tag) => (
