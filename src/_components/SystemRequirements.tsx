@@ -12,9 +12,12 @@ export default function SystemRequirements(props: GameRequirements) {
       id: game.platform.id,
       name: game.platform.name,
       slug: game.platform.slug,
-      minimum: game.requirements.minimum?.replace(/Minimum:\n/g, ""),
+      minimum: game.requirements.minimum?.replace(/Minimum:\n|Minimum:/g, ""),
       recommended:
-        game.requirements.recommended?.replace(/Recommended:\n/g, "") ?? null,
+        game.requirements.recommended?.replace(
+          /Recommended:\n|Recommended:/g,
+          "",
+        ) ?? null,
     }))
     .sort((a, b) => a.id - b.id);
 
