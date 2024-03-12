@@ -35,10 +35,10 @@ export default function SystemRequirements(props: GameRequirements) {
           <TabsContent key={platform.id} value={platform.slug}>
             <div className="grid grid-cols-2 gap-4">
               {platform.minimum ? (
-                <div className="col-span-2">
+                <div className="col-span-2 xl:col-span-1">
                   <p className="text-sm font-bold text-slate-600">Minimum</p>
                   <div
-                    className="prose mt-2 max-w-none text-sm leading-relaxed"
+                    className="prose mt-2 max-w-none whitespace-pre-wrap text-sm leading-relaxed"
                     dangerouslySetInnerHTML={{
                       __html: platform.minimum,
                     }}
@@ -47,12 +47,12 @@ export default function SystemRequirements(props: GameRequirements) {
               ) : null}
 
               {platform.recommended ? (
-                <div className="col-span-2">
+                <div className="col-span-2 xl:col-span-1">
                   <p className="text-sm font-bold text-slate-600">
                     Recommended
                   </p>
                   <div
-                    className="prose mt-2 max-w-none text-sm leading-relaxed"
+                    className="prose mt-2 max-w-none whitespace-pre-wrap text-sm leading-relaxed"
                     dangerouslySetInnerHTML={{
                       __html: platform.recommended,
                     }}
