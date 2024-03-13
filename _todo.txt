@@ -2,9 +2,9 @@
 + add bg image on browse pages
 + add prefetch on browse pages
 + improve UX on genre and platform pages loading
++ add official website link on game page
++ add esrb rating on game page
 - refactor getGame utils
 - add icons for sideMenu
-- add official website link on game page
 - add reddit_url on game page
 - add metacritic_url on game page
-- add esrb rating on game page
