@@ -7,3 +7,4 @@
 - add official website link on game page
 - add reddit_url on game page
 - add metacritic_url on game page
+- add esrb rating on game page

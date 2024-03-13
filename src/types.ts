@@ -86,6 +86,8 @@ type GameData = {
   background_image_additional?: string;
   metacritic: number;
   id: number;
+  website: string;
+  esrb_rating: EsrbRating;
   playtime: number;
   released: string;
   platforms: PlatformList[];
@@ -103,6 +105,12 @@ type BrowseCard = {
   image_background?: string;
   games?: GameData[];
   games_count?: number;
+};
+
+type EsrbRating = {
+  id: number;
+  name: string;
+  slug: string;
 };
 
 type GameRequirements = {

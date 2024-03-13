@@ -250,6 +250,27 @@ export default function Game(props: GameProps) {
               <p className="">{formatDate(game.released)}</p>
             </div>
 
+            {game.website && (
+              <div className="">
+                <p className="text-sm font-bold text-slate-600">Website</p>
+                <Link
+                  className="underline hover:no-underline"
+                  href={game.website}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {game.website}
+                </Link>
+              </div>
+            )}
+
+            {game.esrb_rating && (
+              <div className="">
+                <p className="text-sm font-bold text-slate-600">ESRB Rating</p>
+                <p className="">{game.esrb_rating.name}</p>
+              </div>
+            )}
+
             {game.tags && game.tags.length > 0 && (
               <div className="col-span-2">
                 <p className="text-sm font-bold text-slate-600">Tags</p>
