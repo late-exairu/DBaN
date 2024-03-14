@@ -271,6 +271,20 @@ export default function Game(props: GameProps) {
               </div>
             )}
 
+            {game.reddit_url && (
+              <div className="">
+                <p className="text-sm font-bold text-slate-600">Reddit</p>
+                <Link
+                  className="underline hover:no-underline"
+                  href={game.reddit_url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {game.reddit_url}
+                </Link>
+              </div>
+            )}
+
             {game.tags && game.tags.length > 0 && (
               <div className="col-span-2">
                 <p className="text-sm font-bold text-slate-600">Tags</p>

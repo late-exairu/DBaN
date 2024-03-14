@@ -82,6 +82,7 @@ type GameData = {
   slug: string;
   name: string;
   body: string;
+  reddit_url: string;
   background_image: string;
   background_image_additional?: string;
   metacritic: number;
