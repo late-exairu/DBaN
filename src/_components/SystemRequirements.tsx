@@ -12,10 +12,13 @@ export default function SystemRequirements(props: GameRequirements) {
       id: game.platform.id,
       name: game.platform.name,
       slug: game.platform.slug,
-      minimum: game.requirements.minimum?.replace(/Minimum:\n|Minimum: /g, ""),
+      minimum: game.requirements.minimum?.replace(
+        /Minimum:\n|Minimum: |Minimum:/g,
+        "",
+      ),
       recommended:
         game.requirements.recommended?.replace(
-          /Recommended:\n|Recommended:/g,
+          /Recommended:\n|Recommended: |Recommended:/g,
           "",
         ) ?? null,
     }))
