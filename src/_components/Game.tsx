@@ -12,6 +12,7 @@ import MetacriticScore from "@/components/MetacriticScore";
 import GameSeries from "@/components/GameSeries";
 import GamePlatforms from "@/components/GamePlatforms";
 import GameTag from "@/components/GameTag";
+import FavoriteBtn from "@/components/FavoriteBtn";
 import {
   getGameData,
   getGameScreenshots,
@@ -107,8 +108,9 @@ export default function Game(props: GameProps) {
         ) : null}
       </div>
 
-      <h1 className="text-2xl font-black md:text-4xl xl:text-5xl">
+      <h1 className="flex justify-between text-2xl font-black md:text-4xl xl:text-5xl">
         {game.name}
+        <FavoriteBtn id={id} />
       </h1>
 
       <div className="flex flex-col gap-6 md:flex-row">
@@ -307,7 +309,7 @@ export default function Game(props: GameProps) {
           ) : null}
         </div>
 
-        <div className="min-w-[300px] flex-1">
+        <div className="sticky min-w-[300px] flex-1">
           {gameScreenshots.isSuccess &&
             gameScreenshots.data?.results.length > 0 && (
               <>
