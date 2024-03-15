@@ -24,7 +24,7 @@ export default function GameBg(props: GameProps) {
   if (!data) return <div>No game</div>;
 
   return (
-    <div className="absolute inset-0 z-0 opacity-10">
+    <div className="absolute inset-0 z-0 opacity-20">
       <Image
         className="inset-0 object-cover grayscale"
         src={

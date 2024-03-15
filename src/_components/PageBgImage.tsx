@@ -10,7 +10,7 @@ export default function PageBgImage(props: PageBgProps) {
   const { background } = props;
 
   return (
-    <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-dvh opacity-10">
+    <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-dvh opacity-20">
       <Image
         className="absolute inset-0 object-cover grayscale"
         src={background ?? "/game-image-placeholder.png"}

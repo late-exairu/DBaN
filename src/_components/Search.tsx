@@ -20,6 +20,7 @@ export default function Search() {
   return (
     <div className="w-full">
       <Input
+        className="bg-background"
         onChange={(e) => {
           debouncedHandleSearch(e);
         }}

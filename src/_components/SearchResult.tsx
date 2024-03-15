@@ -101,7 +101,7 @@ export default function SearchResult() {
       aria-modal="true"
       className={`${
         isSearchResultVisible ? "visible opacity-100" : "invisible opacity-0"
-      } fixed bottom-0 left-0 right-0 top-[52px] border-t border-gray-200 bg-white transition-all`}
+      } fixed bottom-0 left-0 right-0 top-[52px] border-t border-gray-200 bg-background/80 backdrop-blur transition-all`}
     >
       <div className="container relative">
         <p className="mt-3 text-sm md:text-base">
@@ -127,13 +127,13 @@ export default function SearchResult() {
         {error && <p>Error: {error.message}</p>}
         {data && data?.results.length >= 0 && (
           <ScrollArea className="h-[calc(100dvh_-_88px)] pr-4">
-            <ul className="flex flex-col gap-2 py-2" ref={ref}>
+            <ul className="-ml-1 flex flex-col py-2" ref={ref}>
               {data?.results.map((game) => (
                 <li key={game.id}>
                   <Link
                     onClick={() => hideSearchResult()}
                     href={`/games/${game.id}`}
-                    className="flex items-center gap-2 rounded-md text-xs font-medium transition-colors duration-300 ease-in-out hover:bg-accent"
+                    className="flex items-center gap-2 rounded-md p-1 text-xs font-medium transition-colors duration-300 ease-in-out hover:bg-accent"
                   >
                     <div className="relative size-16 shrink-0 md:size-20">
                       <Image
