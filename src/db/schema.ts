@@ -87,3 +87,21 @@ export const profiles = pgTable("profile", {
     .notNull()
     .references(() => users.id),
 });
+
+export const favoritesGames = pgTable("favoritesGames", {
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  game: text("game"),
+  gameId: text("gameId"),
+  gameImg: text("gameImg"),
+  formId: integer("formId").notNull(),
+  createdAt: timestamp("createdAt", { mode: "date" }).notNull(),
+});
+
+export const favoritesGamesRelations = relations(favoritesGames, ({ one }) => ({
+  form: one(forms, {
+    fields: [favoritesGames.formId],
+    references: [forms.id],
+  }),
+}));
