@@ -1,30 +1,49 @@
+"use client";
+
+// import { eq } from "drizzle-orm";
+// import { users } from "@/db/schema";
+// import { db } from "@/db";
+// import { auth } from "@/auth";
+import { useState } from "react";
+
 type FavoriteBtnProps = {
   id: number;
   className?: string;
 };
 
 export default function FavoriteBtn(props: FavoriteBtnProps) {
+  const [isFavorite, setIsFavorite] = useState(false);
   const {} = props;
 
-  const handleClick = () => {
+  function handleClick() {
+    setIsFavorite(!isFavorite);
     console.log("clicked");
-  };
+  }
 
   return (
     <button
       onClick={handleClick}
-      className="ml-auto mt-1 inline-flex size-6 shrink-0 md:size-8 lg:size-10"
+      className="group flex shrink-0 items-center whitespace-nowrap rounded-md px-1 uppercase text-foreground ring-1 ring-foreground transition-colors duration-100 ease-in-out hover:bg-foreground hover:text-background"
     >
+      {isFavorite ? "Add to favorites" : "In favorites"}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlSpace="preserve"
         viewBox="0 0 24 24"
+        className="ml-1 size-4 fill-current text-foreground duration-100 group-hover:text-background"
       >
         <path d="M0 0h24v24H0V0z" style={{ fill: "none" }} />
-        <path
-          d="M16.5 3c-1.7 0-3.4.8-4.5 2.1C10.9 3.8 9.2 3 7.5 3 4.4 3 2 5.4 2 8.5c0 3.8 3.4 6.9 8.6 11.5l1.4 1.3 1.4-1.3c5.2-4.7 8.6-7.8 8.6-11.5C22 5.4 19.6 3 16.5 3zm-4.4 15.5-.1.1-.1-.1C7.1 14.2 4 11.4 4 8.5 4 6.5 5.5 5 7.5 5c1.5 0 3 1 3.6 2.4H13C13.5 6 15 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.9-3.1 5.7-7.9 10z"
-          style={{ fill: "#010202" }}
-        />
+        {isFavorite ? (
+          <path
+            stroke="none"
+            d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"
+          />
+        ) : (
+          <path
+            stroke="none"
+            d="m12 21.35-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+          />
+        )}
       </svg>
     </button>
   );

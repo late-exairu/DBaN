@@ -106,11 +106,12 @@ export default function Game(props: GameProps) {
             Average playtime: <span>{game.playtime}</span> hours
           </div>
         ) : null}
+
+        <FavoriteBtn id={id} />
       </div>
 
       <h1 className="flex justify-between text-2xl font-black md:text-4xl xl:text-5xl">
         {game.name}
-        <FavoriteBtn id={id} />
       </h1>
 
       <div className="flex flex-col gap-6 md:flex-row">
