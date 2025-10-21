@@ -45,7 +45,7 @@
   "devDependencies": {
     "@types/eslint": "^8.44.7",
     "@types/fslightbox-react": "^1.7.7",
-    "@types/node": "^20.10.6",
+    "@types/node": "^24.9.1",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
@@ -59,6 +59,9 @@
     "prettier-plugin-tailwindcss": "^0.5.7",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.1.6"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   },
   "ct3aMetadata": {
     "initVersion": "7.25.1"
