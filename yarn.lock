@@ -1547,7 +1547,7 @@ doctrine@^3.0.0:
 
 drizzle-kit@^0.31.5:
   version "0.31.5"
-  resolved "https://registry.npmjs.org/drizzle-kit/-/drizzle-kit-0.31.5.tgz"
+  resolved "https://registry.yarnpkg.com/drizzle-kit/-/drizzle-kit-0.31.5.tgz#a875f053e759fcc03adc0e09b96af7fbef325c91"
   integrity sha512-+CHgPFzuoTQTt7cOYCV6MOw2w8vqEn/ap1yv4bpZOWL03u7rlVRQhUY0WYT3rHsgVTXwYQDZaSUJSQrMBUKuWg==
   dependencies:
     "@drizzle-team/brocli" "^0.10.2"
@@ -1555,10 +1555,10 @@ drizzle-kit@^0.31.5:
     esbuild "^0.25.4"
     esbuild-register "^3.5.0"
 
-drizzle-orm@^0.30.1:
-  version "0.30.1"
-  resolved "https://registry.npmjs.org/drizzle-orm/-/drizzle-orm-0.30.1.tgz"
-  integrity sha512-5P6CXl4XyWtDDiYOX/jYOJp1HTUmBlXRAwaq+muUOgaSykMEy5sJesCxceMT0oCGvxeWkKfSXo5owLnfKwCIdw==
+drizzle-orm@^0.44.6:
+  version "0.44.6"
+  resolved "https://registry.yarnpkg.com/drizzle-orm/-/drizzle-orm-0.44.6.tgz#04b2c2852ce63687647eab40c26a6152011a5412"
+  integrity sha512-uy6uarrrEOc9K1u5/uhBFJbdF5VJ5xQ/Yzbecw3eAYOunv5FDeYkR2m8iitocdHBOHbvorviKOW5GVw0U1j4LQ==
 
 dunder-proto@^1.0.1:
   version "1.0.1"

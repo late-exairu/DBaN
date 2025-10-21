@@ -1,16 +1,16 @@
 import { cwd } from "node:process";
-import type { Config } from "drizzle-kit";
+import { defineConfig } from "drizzle-kit";
 import { loadEnvConfig } from "@next/env";
 
 loadEnvConfig(cwd());
 
-export default {
+export default defineConfig({
   schema: "./src/db/schema.ts",
   out: "./drizzle",
-  driver: "pg",
+  dialect: "postgresql",
   dbCredentials: {
-    connectionString:
+    url:
       process.env.DATABASE_URL ??
       "postgres://postgres:postgres@localhost:5432/postgres",
   },
-} satisfies Config;
+});
