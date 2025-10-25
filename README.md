@@ -1,6 +1,7 @@
 # DBaN
 
-This is a React project built with TypeScript and styled with Tailwind CSS. It uses Next.js for server-side rendering and Yarn as the package manager.
+**DBaN** is a modern React application built with **TypeScript** and styled with **Tailwind CSS**.
+The project is built on **Next.js** for server-side rendering (SSR) and uses **Yarn** as a package manager.
 
 ## Getting Started
 
@@ -37,18 +38,18 @@ The application should now be running at http://localhost:3000.
 
 ## Project Structure
 
-- `src/`: This directory contains all the TypeScript and React code.
-  - `_components/`: This directory contains all the React components.
-  - `app/`: This directory contains the main application logic.
-  - `lib/`: This directory contains utility functions and helper code.
-  - `state/`: This directory contains state management code.
-  - `styles/`: This directory contains all the styles for the application.
-  - `types.ts`: This file contains TypeScript type definitions.
-  - `utils/`: This directory contains utility functions and helper code.
-- `public/`: This directory contains static files like images.
-- `README.md`: This file contains information about the project and how to use it.
-- `package.json`: This file contains the list of project dependencies and scripts.
-- `tsconfig.json`: This file contains TypeScript compiler options.
+- `src/`: TypeScript and React code.
+  - `_components/`: React components.
+  - `app/`: Main application logic.
+  - `lib/`: Utility functions and helper code.
+  - `state/`: State management code.
+  - `styles/`: Styles for the application.
+  - `types.ts`: TypeScript type definitions.
+  - `utils/`: Utility functions and helper code.
+- `public/`: Static files like images.
+- `README.md`: Information about the project and how to use it.
+- `package.json`: List of project dependencies and scripts.
+- `tsconfig.json`: TypeScript compiler options.
 
 ## Built With
 
