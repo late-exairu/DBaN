@@ -41,11 +41,7 @@ export default function BrowsePage(props: Props) {
     sortBy: string,
     categoryId: string,
   ): [number, string, string] {
-    const queryFnParams: [number, string, string] = [
-      page,
-      sortBy,
-      "" ?? undefined,
-    ];
+    const queryFnParams: [number, string, string] = [page, sortBy, ""];
     queryFnParams[browseCategory.subcategoryArrPosition] = categoryId;
     return queryFnParams;
   }
