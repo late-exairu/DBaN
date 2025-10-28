@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import FsLightbox from "fslightbox-react";
+import dynamic from "next/dynamic";
 import { type Screenshot } from "@/types";
+
+// Dynamically import FsLightbox to avoid SSR issues and type conflicts
+const FsLightbox = dynamic(() => import("fslightbox-react"), {
+  ssr: false,
+});
 
 export default function GameScreenshots(props: { screenshots: Screenshot[] }) {
   const { screenshots } = props;
