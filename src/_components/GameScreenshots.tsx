@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import dynamic from "next/dynamic";
+import FsLightbox from "fslightbox-react";
 import { type Screenshot } from "@/types";
 
-// Dynamically import FsLightbox to avoid SSR issues and type conflicts
-const FsLightbox = dynamic(() => import("fslightbox-react"), {
-  ssr: false,
-});
+// Type assertion to fix FsLightbox TypeScript issues
+const LightboxComponent = FsLightbox as React.ComponentType<{
+  toggler: boolean;
+  type: string;
+  sources: string[];
+  slide: number;
+}>;
 
 export default function GameScreenshots(props: { screenshots: Screenshot[] }) {
   const { screenshots } = props;
@@ -40,7 +43,7 @@ export default function GameScreenshots(props: { screenshots: Screenshot[] }) {
         </button>
       ))}
 
-      <FsLightbox
+      <LightboxComponent
         toggler={lightboxController.toggler}
         type="image"
         sources={screenshots.map((screenshot) => screenshot.image)}

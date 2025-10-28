@@ -7,9 +7,13 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
     "start": "next start",
     "generate": "drizzle-kit generate",
-    "push-db": "drizzle-kit push"
+    "push-db": "drizzle-kit push",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "tsc --noEmit --watch",
+    "check-all": "yarn type-check && yarn lint"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.11.0",
