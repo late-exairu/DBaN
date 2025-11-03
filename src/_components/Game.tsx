@@ -137,7 +137,7 @@ export default function Game(props: GameProps) {
             dangerouslySetInnerHTML={{ __html: game.description }}
           />
 
-          <div className="my-5 grid grid-cols-2 gap-x-4 gap-y-5 text-sm leading-relaxed">
+          <div className="my-8 grid  grid-cols-2 gap-x-4 gap-y-5 text-sm leading-relaxed md:my-12">
             <div className="">
               <p className="text-sm font-bold text-slate-600">Platforms</p>
               <ul className="">
@@ -268,14 +268,14 @@ export default function Game(props: GameProps) {
             )}
 
             {game.esrb_rating && (
-              <div className="">
+              <div className="col-span-2 md:col-span-1">
                 <p className="text-sm font-bold text-slate-600">ESRB Rating</p>
                 <p className="">{game.esrb_rating.name}</p>
               </div>
             )}
 
             {game.reddit_url && (
-              <div className="">
+              <div className="col-span-2 md:col-span-1">
                 <p className="text-sm font-bold text-slate-600">Reddit</p>
                 <Link
                   className="underline hover:no-underline"
