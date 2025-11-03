@@ -7,12 +7,12 @@ type State = {
 };
 
 type Action = {
-  toggleMenuOpen(): void;
-  openMenu(): void;
-  closeMenu(): void;
-  showSearchResult(): void;
-  hideSearchResult(): void;
-  setSearchString(searchString: State["searchString"]): void;
+  toggleMenuOpen: () => void;
+  openMenu: () => void;
+  closeMenu: () => void;
+  showSearchResult: () => void;
+  hideSearchResult: () => void;
+  setSearchString: (searchString: State["searchString"]) => void;
 };
 
 export const useStore = create<State & Action>((set) => ({
