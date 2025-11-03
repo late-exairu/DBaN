@@ -26,7 +26,15 @@ git clone https://github.com/late-exairu/DBaN.git
 yarn install
 ```
 
-2. Copy the .env.example file to a new file named .env and fill in the necessary environment variables.
+2. Copy the **.env.example** file to a new file named **.env** and fill in the necessary environment variables.
+
+```js
+#NEXT_PUBLIC_RAWG_API_KEY=
+#AUTH_GOOGLE_ID=
+#AUTH_GOOGLE_SECRET=
+#AUTH_SECRET=
+#DATABASE_URL=
+```
 
 3. Start the development server:
 
