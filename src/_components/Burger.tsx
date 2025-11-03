@@ -16,7 +16,7 @@ export default function Burger(props: BurgerProps) {
 
   return (
     <Button
-      onClick={() => toggleMenuOpen(isMenuOpen)}
+      onClick={() => toggleMenuOpen()}
       variant="outline"
       size="icon"
       className={twMerge(`shrink-0`, className)}

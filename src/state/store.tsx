@@ -7,7 +7,8 @@ type State = {
 };
 
 type Action = {
-  toggleMenuOpen: (isMenuOpen: State["isMenuOpen"]) => void;
+  toggleMenuOpen: () => void;
+  openMenu: () => void;
   closeMenu: () => void;
   showSearchResult: () => void;
   hideSearchResult: () => void;
@@ -20,7 +21,8 @@ export const useStore = create<State & Action>((set) => ({
   searchString: "",
 
   // Actions
-  toggleMenuOpen: (isMenuOpen) => set(() => ({ isMenuOpen: !isMenuOpen })),
+  toggleMenuOpen: () => set((state) => ({ isMenuOpen: !state.isMenuOpen })),
+  openMenu: () => set(() => ({ isMenuOpen: true })),
   closeMenu: () => set(() => ({ isMenuOpen: false })),
   showSearchResult: () => set(() => ({ isSearchResultVisible: true })),
   hideSearchResult: () => set(() => ({ isSearchResultVisible: false })),
