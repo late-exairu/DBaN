@@ -15,6 +15,13 @@
       "when": 1710610012118,
       "tag": "0001_workable_norrin_radd",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791735746440,
+      "tag": "0002_dizzy_red_wolf",
+      "breakpoints": true
     }
   ]
 }

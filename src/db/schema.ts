@@ -6,6 +6,7 @@ import {
   integer,
   serial,
   boolean,
+  uniqueIndex,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 import type { AdapterAccount } from "@auth/core/adapters";
@@ -37,11 +38,11 @@ export const accounts = pgTable(
     id_token: text("id_token"),
     session_state: text("session_state"),
   },
-  (account) => ({
-    compoundKey: primaryKey({
+  (account) => [
+    primaryKey({
       columns: [account.provider, account.providerAccountId],
     }),
-  }),
+  ],
 );
 
 export const sessions = pgTable("session", {
@@ -59,9 +60,7 @@ export const verificationTokens = pgTable(
     token: text("token").notNull(),
     expires: timestamp("expires", { mode: "date" }).notNull(),
   },
-  (vt) => ({
-    compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
-  }),
+  (vt) => [primaryKey({ columns: [vt.identifier, vt.token] })],
 );
 
 export const forms = pgTable("forms", {
@@ -72,36 +71,83 @@ export const forms = pgTable("forms", {
   published: boolean("published"),
 });
 
-export const usersRelations = relations(users, ({ one }) => ({
-  profiles: one(profiles, {
+export const profiles = pgTable(
+  "profile",
+  {
+    id: serial("id").primaryKey(),
+    name: text("name"),
+    bio: text("bio"),
+    userId: text("user_id")
+      .notNull()
+      .references(() => users.id),
+  },
+  (profile) => [uniqueIndex("profile_user_id_unique").on(profile.userId)],
+);
+
+export const favoritesGames = pgTable(
+  "userFavorite",
+  {
+    userId: text("userId")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    game: text("game"),
+    gameId: text("gameId").notNull(),
+    gameImg: text("gameImg"),
+    formId: integer("formId")
+      .notNull()
+      .references(() => forms.id),
+    createdAt: timestamp("createdAt", { mode: "date" }).notNull(),
+  },
+  (favorite) => [
+    uniqueIndex("userFavorite_userId_gameId_unique").on(
+      favorite.userId,
+      favorite.gameId,
+    ),
+  ],
+);
+
+export const usersRelations = relations(users, ({ many, one }) => ({
+  accounts: many(accounts),
+  favoritesGames: many(favoritesGames),
+  profile: one(profiles, {
     fields: [users.id],
     references: [profiles.userId],
   }),
+  sessions: many(sessions),
 }));
 
-export const profiles = pgTable("profile", {
-  id: serial("id").primaryKey(),
-  name: text("name"),
-  bio: text("bio"),
-  userId: text("user_id")
-    .notNull()
-    .references(() => users.id),
-});
+export const accountsRelations = relations(accounts, ({ one }) => ({
+  user: one(users, {
+    fields: [accounts.userId],
+    references: [users.id],
+  }),
+}));
 
-export const favoritesGames = pgTable("favoritesGames", {
-  userId: text("userId")
-    .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),
-  game: text("game"),
-  gameId: text("gameId"),
-  gameImg: text("gameImg"),
-  formId: integer("formId").notNull(),
-  createdAt: timestamp("createdAt", { mode: "date" }).notNull(),
-});
+export const sessionsRelations = relations(sessions, ({ one }) => ({
+  user: one(users, {
+    fields: [sessions.userId],
+    references: [users.id],
+  }),
+}));
+
+export const profilesRelations = relations(profiles, ({ one }) => ({
+  user: one(users, {
+    fields: [profiles.userId],
+    references: [users.id],
+  }),
+}));
+
+export const formsRelations = relations(forms, ({ many }) => ({
+  favoritesGames: many(favoritesGames),
+}));
 
 export const favoritesGamesRelations = relations(favoritesGames, ({ one }) => ({
   form: one(forms, {
     fields: [favoritesGames.formId],
     references: [forms.id],
+  }),
+  user: one(users, {
+    fields: [favoritesGames.userId],
+    references: [users.id],
   }),
 }));
