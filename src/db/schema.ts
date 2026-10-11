@@ -63,13 +63,21 @@ export const verificationTokens = pgTable(
   (vt) => [primaryKey({ columns: [vt.identifier, vt.token] })],
 );
 
-export const forms = pgTable("forms", {
-  id: serial("id").primaryKey(),
-  name: text("name"),
-  description: text("description"),
-  userId: text("user_id"),
-  published: boolean("published"),
-});
+export const forms = pgTable(
+  "forms",
+  {
+    id: serial("id").primaryKey(),
+    name: text("name"),
+    description: text("description"),
+    userId: text("user_id").references(() => users.id, {
+      onDelete: "cascade",
+    }),
+    published: boolean("published"),
+  },
+  (form) => [
+    uniqueIndex("forms_user_id_name_unique").on(form.userId, form.name),
+  ],
+);
 
 export const profiles = pgTable(
   "profile",

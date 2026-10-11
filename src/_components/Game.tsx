@@ -107,7 +107,7 @@ export default function Game(props: GameProps) {
           </div>
         ) : null}
 
-        <FavoriteBtn id={id} />
+        <FavoriteBtn id={id} name={game.name} image={game.background_image} />
       </div>
 
       <h1 className="flex justify-between text-2xl font-black md:text-4xl xl:text-5xl">
